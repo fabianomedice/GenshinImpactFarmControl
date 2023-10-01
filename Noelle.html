@@ -1,0 +1,882 @@
+<!DOCTYPE html> 
+
+<html lang="en" style="scroll-behavior: smooth;">
+	<head>
+		<!-- Titulo da aba-->
+		<title> 
+			Genshin Impact Farm Helper
+		</title>
+		<!-- Metadados -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="Fabiano Médice">
+		<meta name="description" content="Controle de Informações de farm de Genshin Impact">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="JS/banco_de_dados.js"></script>
+        <script src="JS/chars.js"></script>
+        <script src="JS/login.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <!-- bootstrap 3.0 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <style>
+                /* 
+                Conserta o link levar para embaixo do nav
+                Solução do site http://nicolasgallagher.com/jump-links-and-viewport-positioning/
+                */
+                #Albedo::before, #Amber::before, #Barbara::before, #Beidou::before, #Bennett::before, #Chongyun::before, #Diluc::before, #Diona::before, #Fischl::before, #Ganyu::before, #Jean::before, #Kaeya::before, #Keqing::before, #Klee::before, #Lisa::before, #Mona::before, #Ningguang::before, #Noelle::before, #Qiqi::before, #Razor::before, #Sucrose::before, #Tartaglia::before, #Traveler::before, #Venti::before, #Xiangling::before, #Xingqiu::before
+                {
+                    content: "";
+                    display: block;
+                    height: 180px;
+                    margin: -180px 0 0;
+                }
+                /*CSS responsível para diferentes tamanhos de tela*/
+                /*Aparece para adicionar um vazio embaixo da foto*/
+                @media screen and (max-width: 1196px) 
+                {
+                    .DivArrumadora
+                    {
+                        display: inline;
+                    }
+                }
+                /*Some pois a foto ocupa esse vazio*/
+                @media screen and (min-width: 1197px) 
+                {
+                    .DivArrumadora
+                    {
+                        display: none;
+                    }
+                }
+        </style>
+	</head>
+	<body>
+		<header style="position:sticky; top:0; z-index:1">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li><a href="backpack.html">Backpack</a></li>
+              <li class="active"><a href="chars.html">Characters</a></li>
+              <!--<li><a href="weapons.html">Weapons</a></li>-->
+              <li><a href="farm.html">Complete Farm Sheet</a></li>
+              <li><a href="index.html">About</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a>Please help us maintain this site</a></li>
+              <li><a href="https://streamlabs.com/mrbadgerbr/tip" style="padding:0px"><img src="Image/PayPal.png" style="height:50px" alt="PayPal"></a></li>
+              <li><a><br></a></li>
+              <li><a href="https://pag.ae/7WB124EQp" style="padding:0px"><img src="Image/PagSeguro.png" style="height:50px" alt="PagSeguro"></a></li>
+              <li><a><br></a></li>
+              <li id="LoginOption"><a onclick=AbreLogin()><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              <li id="LoginUser" style="display: none;"> <form id="FormLogin" method="POST" action="PHP/register.php"><input type="text" placeholder="Enter Email" name="email" id="LoginEmail" > <br> <input type="password" placeholder="Enter Password" name="password" id="LoginPassword" ></form></li>
+              <li id="LoginButton" style="display: none;"><button onclick=FazLogin() style="width:70px"> Log in </button><br><input type="submit" value="Register" form="FormLogin" style="width:70px"></li>
+              <li id="ForgetPasswordButton" style="display: none;"><span style="width: 3px;height: 21px; display: inline-block;"></span> <input type="checkbox" id="RememberMe" onclick=LembrarLogin()> <b style="color: white;">Remember me</b> <br><button onclick='location.href="PHP/resetpassword.php"'> Reset Password </button></li>
+              <li id="RegisterUser" style="display: none;"></li>
+              <li id="LogoutButton" style="display: none;"><a style="color: black;"><button onclick=DesfazLogin() style="width:70px"> Log out </button></a></li>
+            </ul>
+          </div>
+        </div>
+        <div style="background-color:#080808;color:#fff"> 
+          <div class="container text-center">
+            <h1>Characters - Noelle</h1>      
+          </div>
+        </div>
+          <!-- Navegador para os chars-->
+          <nav>
+            <ul class=" navbar-nav" style="list-style-type:none;">
+                <li><a href="Albedo.html"><img src="Image/Albedo.png" style="width:50px" alt="Albedo"></a></li>
+                <li><a href="Amber.html"><img src="Image/Amber.png" style="width:50px" alt="Amber"></a></li>
+                <li><a href="Barbara.html"><img src="Image/Barbara.png" style="width:50px" alt="Barbara"></a></li>
+                <li><a href="Beidou.html"><img src="Image/Beidou.png" style="width:50px" alt="Beidou"></a></li>
+                <li><a href="Bennett.html"><img src="Image/Bennett.png" style="width:50px" alt="Bennett"></a></li>
+                <li><a href="Chongyun.html"><img src="Image/Chongyun.png" style="width:50px" alt="Chongyun"></a></li>
+                <li><a href="Diluc.html"><img src="Image/Diluc.png" style="width:50px" alt="Diluc"></a></li>
+                <li><a href="Diona.html"><img src="Image/Diona.png" style="width:50px" alt="Diona"></a></li>
+                <li><a href="Fischl.html"><img src="Image/Fischl.png" style="width:50px" alt="Fischl"></a></li>
+                <li><a href="Ganyu.html"><img src="Image/Ganyu.png" style="width:50px" alt="Ganyu"></a></li>
+                <li><a href="Jean.html"><img src="Image/Jean.png" style="width:50px" alt="Jean"></a></li>
+                <li><a href="Kaeya.html"><img src="Image/Kaeya.png" style="width:50px" alt="Kaeya"></a></li>
+                <li><a href="Keqing.html"><img src="Image/Keqing.png" style="width:50px" alt="Keqing"></a></li>
+                <li><a href="Klee.html"><img src="Image/Klee.png" style="width:50px" alt="Klee"></a></li>
+                <li><a href="Lisa.html"><img src="Image/Lisa.png" style="width:50px" alt="Lisa"></a></li>
+                <li><a href="Mona.html"><img src="Image/Mona.png" style="width:50px" alt="Mona"></a></li>
+                <li><a href="Ningguang.html"><img src="Image/Ningguang.png" style="width:50px" alt="Ningguang"></a></li>
+                <li><a href="Noelle.html"><img src="Image/Noelle.png" style="width:50px" alt="Noelle"></a></li>
+                <li><a href="Qiqi.html"><img src="Image/Qiqi.png" style="width:50px" alt="Qiqi"></a></li>
+                <li><a href="Razor.html"><img src="Image/Razor.png" style="width:50px" alt="Razor"></a></li>
+                <li><a href="Sucrose.html"><img src="Image/Sucrose.png" style="width:50px" alt="Sucrose"></a></li>
+                <li><a href="Tartaglia.html"><img src="Image/Tartaglia.png" style="width:50px" alt="Tartaglia"></a></li>
+                <li><a href="Traveler.html"><img src="Image/Traveler(Anemo).png" style="width:50px" alt="Traveler"></a></li>
+                <li><a href="Venti.html"><img src="Image/Venti.png" style="width:50px" alt="Venti"></a></li>
+                <li><a href="Xiangling.html"><img src="Image/Xiangling.png" style="width:50px" alt="Xiangling"></a></li>
+                <li><a href="Xingqiu.html"><img src="Image/Xingqiu.png" style="width:50px" alt="Xingqiu"></a></li>
+                <li><a href="Xinyan.html"><img src="Image/Xinyan.png" style="width:50px" alt="Xinyan"></a></li>
+                <li><a href="Zhongli.html"><img src="Image/Zhongli.png" style="width:50px" alt="Zhongli"></a></li>
+            </ul>
+          </nav>
+      </nav>
+    </header>    
+		<br>
+		<section >
+      <form id="chars"> 
+        <!-- Criado o formulario-->
+      </form>
+
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row" id="Noelle">
+            <div class="col-sm-3" >
+                <img src="Image/Noelle_Card.jpg" class="img-responsive img-thumbnail mx-auto" style="max-height: 800px;" alt="Noelle">
+            </div>
+            <div class="col-sm-9" >
+
+                <div class="row" >
+                    <div class="col-sm-2" >
+                        <input type="checkbox" id="NoelleOwn" name="Noelle_Own" value=True form="chars" onchange="Confirma_Personagem('Noelle')">
+                        <label for="NoelleOwn">I have this char</label>
+                    </div>
+                    <div class="col-sm-3" >
+                        <b>Ascension Level</b><br>
+                        <input type="radio" form="chars" id="NoelleAscension0" name="NoelleAscension" value=0 onchange="Atualiza_char_Ascension_Level('Noelle',0)">
+                        <label for="NoelleAscension0">0 </label>
+                        <input type="radio" form="chars" id="NoelleAscension1" name="NoelleAscension" value=1 onchange="Atualiza_char_Ascension_Level('Noelle',1)">
+                        <label for="NoelleAscension1">1 </label>
+                        <input type="radio" form="chars" id="NoelleAscension2" name="NoelleAscension" value=2 onchange="Atualiza_char_Ascension_Level('Noelle',2)">
+                        <label for="NoelleAscension2">2 </label>
+                        <input type="radio" form="chars" id="NoelleAscension3" name="NoelleAscension" value=3 onchange="Atualiza_char_Ascension_Level('Noelle',3)">
+                        <label for="NoelleAscension3">3 </label>
+                        <input type="radio" form="chars" id="NoelleAscension4" name="NoelleAscension" value=4 onchange="Atualiza_char_Ascension_Level('Noelle',4)">
+                        <label for="NoelleAscension4">4 </label>
+                        <input type="radio" form="chars" id="NoelleAscension5" name="NoelleAscension" value=5 onchange="Atualiza_char_Ascension_Level('Noelle',5)">
+                        <label for="NoelleAscension5">5 </label>
+                        <input type="radio" form="chars" id="NoelleAscension6" name="NoelleAscension" value=6 onchange="Atualiza_char_Ascension_Level('Noelle',6)">
+                        <label for="NoelleAscension6">6 </label>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Attack</b><br>
+                        <select id="NoelleTalentAtk" form="chars" name="Noelle_TalentAtk" onchange="Atualiza_talento('Noelle','Atk')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Elemental Skill</b><br>
+                        <select id="NoelleTalentElementalSkill" form="chars" name="Noelle_TalentElementalSkill" onchange="Atualiza_talento('Noelle','ElementalSkill')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Elemental Burst</b><br>
+                        <select id="NoelleTalentElementalBurst" form="chars" name="Noelle_ElementalBurst" onchange="Atualiza_talento('Noelle','ElementalBurst')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row" >
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Geo2.png" style="width:35px" alt="Geo2"> <span id="NoelleElement2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Geo3.png" style="width:35px" alt="Geo3"> <span id="NoelleElement3"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Geo4.png" style="width:35px" alt="Geo4"> <span id="NoelleElement4"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Geo5.png" style="width:35px" alt="Geo5"> <span id="NoelleElement5"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/BossGeo.png" style="width:35px" alt="BossGeo"> <span id="NoelleBoss"></span><br>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2" >
+                            <b>Own/Need</b>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Valberry.png" style="width:35px" alt="Valberry"> <span id="NoelleLocal_Specialty"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/HilichurlMasks1.png" style="width:35px" alt="HilichurlMasks1"> <span id="NoelleComum_Item1"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/HilichurlMasks2.png" style="width:35px" alt="HilichurlMasks2"> <span id="NoelleComum_Item2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/HilichurlMasks3.png" style="width:35px" alt="HilichurlMasks3"> <span id="NoelleComum_Item3"></span><br>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Resistance2.png" style="width:35px" alt="Resistance2"> <span id="NoelleTalent2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Resistance3.png" style="width:35px" alt="Resistance3"> <span id="NoelleTalent3"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Resistance4.png" style="width:35px" alt="Resistance4"> <span id="NoelleTalent4"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/DvalinsClaw.png" style="width:35px" alt="Dvalin's Claw"> <span id="NoelleBossTalent"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/CrownofInsight.png" style="width:35px" alt="Crown of Insight"> <span id="NoelleCrownofInsight"></span>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row" >
+                    <div class="col-sm-2" id="NoelleAscension1Div">
+                        <b>Ascension 1</b><br>
+                        <img src="Image/Geo2.png" style="width:50px" alt="Geo2"> x01<br>
+                        <img src="Image/Valberry.png" style="width:50px" alt="Valberry"> x03 <br>
+                        <img src="Image/HilichurlMasks1.png" style="width:50px" alt="HilichurlMasks1"> x03
+                    </div>
+                    <div class="col-sm-2" id="NoelleAscension2Div">
+                        <b>Ascension 2</b><br>
+                        <img src="Image/Geo3.png" style="width:50px" alt="Geo3"> x03<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x02<br>
+                        <img src="Image/Valberry.png" style="width:50px" alt="Valberry"> x10 <br>
+                        <img src="Image/HilichurlMasks1.png" style="width:50px" alt="HilichurlMasks1"> x15
+                    </div>
+                    <div class="col-sm-2" id="NoelleAscension3Div">
+                        <b>Ascension 3</b><br>
+                        <img src="Image/Geo3.png" style="width:50px" alt="Geo3"> x06<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x04<br>
+                        <img src="Image/Valberry.png" style="width:50px" alt="Valberry"> x20 <br>
+                        <img src="Image/HilichurlMasks2.png" style="width:50px" alt="HilichurlMasks2"> x12
+                    </div>
+                    <div class="col-sm-2" id="NoelleAscension4Div">
+                        <b>Ascension 4</b><br>
+                        <img src="Image/Geo4.png" style="width:50px" alt="Geo4"> x03<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x08<br>
+                        <img src="Image/Valberry.png" style="width:50px" alt="Valberry"> x30 <br>
+                        <img src="Image/HilichurlMasks2.png" style="width:50px" alt="HilichurlMasks2"> x18
+                    </div>
+                    <div class="col-sm-2" id="NoelleAscension5Div">
+                        <b>Ascension 5</b><br>
+                        <img src="Image/Geo4.png" style="width:50px" alt="Geo4"> x06<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x12<br>
+                        <img src="Image/Valberry.png" style="width:50px" alt="Valberry"> x45 <br>
+                        <img src="Image/HilichurlMasks3.png" style="width:50px" alt="HilichurlMasks3"> x12
+                    </div>
+                    <div class="col-sm-2" id="NoelleAscension6Div">
+                        <b>Ascension 6</b><br>
+                        <img src="Image/Geo5.png" style="width:50px" alt="Geo5"> x06<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x20<br>
+                        <img src="Image/Valberry.png" style="width:50px" alt="Valberry"> x60 <br>
+                        <img src="Image/HilichurlMasks3.png" style="width:50px" alt="HilichurlMasks3"> x24
+                    </div>
+                </div>
+                <br>
+                <div class="row" ><br></div>
+            </div>
+            <div class="col-sm-3 DivArrumadora" >
+                <!--Div Arrumadora de padrão-->
+            </div>
+            <div class="col-sm-1" id="NoelleTalent2Div">
+                <b>Talent Lv 2</b><br>
+                <img src="Image/Resistance2.png" style="width:50px" alt="Resistance2"> x3 / Talent <br>
+                <img src="Image/HilichurlMasks1.png" style="width:50px" alt="HilichurlMasks1"> x6 / Talent
+            </div>
+            <div class="col-sm-1" id="NoelleTalent3Div">
+                <b>Talent Lv 3</b><br>
+                <img src="Image/Resistance3.png" style="width:50px" alt="Resistance3"> x2 / Talent <br>
+                <img src="Image/HilichurlMasks2.png" style="width:50px" alt="HilichurlMasks2"> x3 / Talent
+            </div>
+            <div class="col-sm-1" id="NoelleTalent4Div">
+                <b>Talent Lv 4</b><br>
+                <img src="Image/Resistance3.png" style="width:50px" alt="Resistance3"> x4 / Talent <br>
+                <img src="Image/HilichurlMasks2.png" style="width:50px" alt="HilichurlMasks2"> x4 / Talent
+            </div>
+            <div class="col-sm-1" id="NoelleTalent5Div">
+                <b>Talent Lv 5</b><br>
+                <img src="Image/Resistance3.png" style="width:50px" alt="Resistance3"> x6 / Talent <br>
+                <img src="Image/HilichurlMasks2.png" style="width:50px" alt="HilichurlMasks2"> x6 / Talent
+            </div>
+            <div class="col-sm-1" id="NoelleTalent6Div">
+                <b>Talent Lv 6</b><br>
+                <img src="Image/Resistance3.png" style="width:50px" alt="Resistance3"> x9 / Talent <br>
+                <img src="Image/HilichurlMasks2.png" style="width:50px" alt="HilichurlMasks2"> x9 / Talent
+            </div>
+            <div class="col-sm-1" id="NoelleTalent7Div">
+                <b>Talent Lv 7</b><br>
+                <img src="Image/Resistance4.png" style="width:50px" alt="Resistance4"> x4 / Talent <br>
+                <img src="Image/HilichurlMasks3.png" style="width:50px" alt="HilichurlMasks3"> x4 / Talent<br>
+                <img src="Image/DvalinsClaw.png" style="width:50px" alt="DvalinsClaw"> x1 / Talent
+            </div>
+            <div class="col-sm-1" id="NoelleTalent8Div">
+                <b>Talent Lv 8</b><br>
+                <img src="Image/Resistance4.png" style="width:50px" alt="Resistance4"> x6 / Talent <br>
+                <img src="Image/HilichurlMasks3.png" style="width:50px" alt="HilichurlMasks3"> x6 / Talent <br>
+                <img src="Image/DvalinsClaw.png" style="width:50px" alt="DvalinsClaw"> x1 / Talent
+            </div>
+            <div class="col-sm-1" id="NoelleTalent9Div">
+                <b>Talent Lv 9</b><br>
+                <img src="Image/Resistance4.png" style="width:50px" alt="Resistance4"> x12 / Talent <br>
+                <img src="Image/HilichurlMasks3.png" style="width:50px" alt="HilichurlMasks3"> x09 / Talent <br>
+                <img src="Image/DvalinsClaw.png" style="width:50px" alt="DvalinsClaw"> x02 / Talent
+            </div>
+            <div class="col-sm-1" id="NoelleTalent10Div">
+                <b>Talent Lv 10</b><br>
+                <img src="Image/Resistance4.png" style="width:50px" alt="Resistance4"> x16 / Talent <br>
+                <img src="Image/HilichurlMasks3.png" style="width:50px" alt="HilichurlMasks3"> x12 / Talent <br>
+                <img src="Image/DvalinsClaw.png" style="width:50px" alt="DvalinsClaw"> x02 / Talent<br>
+                <img src="Image/CrownofInsight.png" style="width:50px" alt="Crown of Insight"> x01 / Talent<br>
+            </div>
+
+            <div class="col-sm-3" >
+                <!--Div Arrumadora de padrão-->
+            </div>
+            <div class="col-sm-9" >
+                <div class="col-sm-2" >
+                    <label for="NoelleWeapon">Choose a weapon (Claymores):</label>
+                    <select id="NoelleWeapon" form="chars" name="Noelle_Weapon" onchange="Atualiza_weapon('Noelle')">
+                        <option value="NoneClaymore">None</option>
+                        <option value="BlackcliffSlasher">Blackcliff Slasher</option>
+                        <option value="BloodtaintedGreatsword">Bloodtainted Greatsword</option>
+                        <option value="DebateClub">Debate Club</option>
+                        <option value="FavoniusGreatsword">Favonius Greatsword</option>
+                        <option value="FerrousShadow">Ferrous Shadow</option>
+                        <!--<option value="LithicBlade">Lithic Blade</option>-->
+                        <option value="PrototypeArchaic">Prototype Archaic</option>
+                        <!--<option value="Quartz">Quartz</option>-->
+                        <option value="Rainslasher">Rainslasher</option>
+                        <option value="RoyalGreatsword">Royal Greatsword</option>
+                        <option value="SacrificialGreatsword">Sacrificial Greatsword</option>
+                        <option value="SerpentSpine">Serpent Spine</option>
+                        <option value="SkyriderGreatsword">Skyrider Greatsword</option>
+                        <option value="SkywardPride">Skyward Pride</option>
+                        <option value="SnowTombedStarSilver">Snow-Tombed Star Silver</option>
+                        <option value="TheBell">The Bell</option>
+                        <option value="TheUnforged">The Unforged</option>
+                        <option value="WhiteIronGreatsword">White Iron Greatsword</option>
+                        <option value="Whiteblind">Whiteblind</option>
+                        <option value="WolfsGravestone">Wolf's Gravestone</option>
+                    </select>
+                    <br>
+                    <b>Weapon Ascension Level</b><br>
+                    <input type="radio" form="chars" id="NoelleWeaponAscension0" name="NoelleWeaponAscension" value=0 onchange="Atualiza_weapon_Ascension_Level('Noelle',0)">
+                    <label for="NoelleWeaponAscension0">0 </label>
+                    <input type="radio" form="chars" id="NoelleWeaponAscension1" name="NoelleWeaponAscension" value=1 onchange="Atualiza_weapon_Ascension_Level('Noelle',1)">
+                    <label for="NoelleWeaponAscension1">1 </label>
+                    <input type="radio" form="chars" id="NoelleWeaponAscension2" name="NoelleWeaponAscension" value=2 onchange="Atualiza_weapon_Ascension_Level('Noelle',2)">
+                    <label for="NoelleWeaponAscension2">2 </label>
+                    <input type="radio" form="chars" id="NoelleWeaponAscension3" name="NoelleWeaponAscension" value=3 onchange="Atualiza_weapon_Ascension_Level('Noelle',3)">
+                    <label for="NoelleWeaponAscension3">3 </label>
+                    <input type="radio" form="chars" id="NoelleWeaponAscension4" name="NoelleWeaponAscension" value=4 onchange="Atualiza_weapon_Ascension_Level('Noelle',4)">
+                    <label for="NoelleWeaponAscension4">4 </label>
+                    <input type="radio" form="chars" id="NoelleWeaponAscension5" name="NoelleWeaponAscension" value=5 onchange="Atualiza_weapon_Ascension_Level('Noelle',5)">
+                    <label for="NoelleWeaponAscension5">5 </label>
+                    <input type="radio" form="chars" id="NoelleWeaponAscension6" name="NoelleWeaponAscension" value=6 onchange="Atualiza_weapon_Ascension_Level('Noelle',6)">
+                    <label for="NoelleWeaponAscension6">6 </label>
+                    <br>
+                    <img src="Image/NoneClaymore.png" class="img-responsive img-thumbnail mx-auto" style="width:130px" alt="NoneClaymore" id="NoelleWeaponImage">
+                    <br>
+                </div>
+                <div class="col-sm-10" >
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneClaymore.png" style="width:35px" alt="Dominio_2" id="NoelleWeaponDominio_2"> <span id="NoelleWeaponDominio_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneClaymore.png" style="width:35px" alt="Dominio_3" id="NoelleWeaponDominio_3"> <span id="NoelleWeaponDominio_3_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneClaymore.png" style="width:35px" alt="Dominio_4" id="NoelleWeaponDominio_4"> <span id="NoelleWeaponDominio_4_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneClaymore.png" style="width:35px" alt="Dominio_5" id="NoelleWeaponDominio_5"> <span id="NoelleWeaponDominio_5_Quant"></span><br></div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneClaymore.png" style="width:35px" alt="Comum_Item_2a4_2" id="NoelleWeaponComum_Item_2a4_2"> <span id="NoelleWeaponComum_Item_2a4_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneClaymore.png" style="width:35px" alt="Comum_Item_2a4_3" id="NoelleWeaponComum_Item_2a4_3"> <span id="NoelleWeaponComum_Item_2a4_3_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneClaymore.png" style="width:35px" alt="Comum_Item_2a4_4" id="NoelleWeaponComum_Item_2a4_4"> <span id="NoelleWeaponComum_Item_2a4_4_Quant"></span></div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <b>Own/Need</b><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneClaymore.png" style="width:35px" alt="Comum_Item_1a3_1" id="NoelleWeaponComum_Item_1a3_1"> <span id="NoelleWeaponComum_Item_1a3_1_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneClaymore.png" style="width:35px" alt="Comum_Item_1a3_2" id="NoelleWeaponComum_Item_1a3_2"> <span id="NoelleWeaponComum_Item_1a3_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneClaymore.png" style="width:35px" alt="Comum_Item_1a3_3" id="NoelleWeaponComum_Item_1a3_3"> <span id="NoelleWeaponComum_Item_1a3_3_Quant"></span><br></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <div class="row" >
+            <hr>
+            <h1>Builds</h1>
+            <hr>
+            <h4>This is Noelle Base Stats</h4>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr repeat(8, 2fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Ascension</div>
+                <div style="border: solid black 1px;">0</div>
+                <div style="border: solid black 1px;">1</div>
+                <div style="border: solid black 1px;">2</div>
+                <div style="border: solid black 1px;">3</div>
+                <div style="border: solid black 1px;">4</div>
+                <div style="border: solid black 1px;">5</div>
+                <div style="border: solid black 1px;">6</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Level</div>
+                <div style="border: solid black 1px;">1</div>
+                <div style="border: solid black 1px;">20</div>
+                <div style="border: solid black 1px;">20</div>
+                <div style="border: solid black 1px;">40</div>
+                <div style="border: solid black 1px;">40</div>
+                <div style="border: solid black 1px;">50</div>
+                <div style="border: solid black 1px;">50</div>
+                <div style="border: solid black 1px;">60</div>
+                <div style="border: solid black 1px;">60</div>
+                <div style="border: solid black 1px;">70</div>
+                <div style="border: solid black 1px;">70</div>
+                <div style="border: solid black 1px;">80</div>
+                <div style="border: solid black 1px;">80</div>
+                <div style="border: solid black 1px;">90</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">HP</div>
+                <div style="border: solid black 1px;">1012</div>
+                <div style="border: solid black 1px;">2600</div>
+                <div style="border: solid black 1px;">3356</div>
+                <div style="border: solid black 1px;">5027</div>
+                <div style="border: solid black 1px;">5564</div>
+                <div style="border: solid black 1px;">6400</div>
+                <div style="border: solid black 1px;">7117</div>
+                <div style="border: solid black 1px;">7953</div>
+                <div style="border: solid black 1px;">8490</div>
+                <div style="border: solid black 1px;">9325</div>
+                <div style="border: solid black 1px;">9862</div>
+                <div style="border: solid black 1px;">10698</div>
+                <div style="border: solid black 1px;">11235</div>
+                <div style="border: solid black 1px;">12071</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">ATK</div>
+                <div style="border: solid black 1px;">16</div>
+                <div style="border: solid black 1px;">41</div>
+                <div style="border: solid black 1px;">53</div>
+                <div style="border: solid black 1px;">80</div>
+                <div style="border: solid black 1px;">88</div>
+                <div style="border: solid black 1px;">102</div>
+                <div style="border: solid black 1px;">113</div>
+                <div style="border: solid black 1px;">126</div>
+                <div style="border: solid black 1px;">135</div>
+                <div style="border: solid black 1px;">148</div>
+                <div style="border: solid black 1px;">156</div>
+                <div style="border: solid black 1px;">170</div>
+                <div style="border: solid black 1px;">178</div>
+                <div style="border: solid black 1px;">191</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">DEF</div>
+                <div style="border: solid black 1px;">67</div>
+                <div style="border: solid black 1px;">172</div>
+                <div style="border: solid black 1px;">222</div>
+                <div style="border: solid black 1px;">333</div>
+                <div style="border: solid black 1px;">368</div>
+                <div style="border: solid black 1px;">423</div>
+                <div style="border: solid black 1px;">471</div>
+                <div style="border: solid black 1px;">526</div>
+                <div style="border: solid black 1px;">562</div>
+                <div style="border: solid black 1px;">617</div>
+                <div style="border: solid black 1px;">652</div>
+                <div style="border: solid black 1px;">708</div>
+                <div style="border: solid black 1px;">743</div>
+                <div style="border: solid black 1px;">799</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">DEF%</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">7.5%</div>
+                <div style="border: solid black 1px;">7.5%</div>
+                <div style="border: solid black 1px;">15%</div>
+                <div style="border: solid black 1px;">15%</div>
+                <div style="border: solid black 1px;">15%</div>
+                <div style="border: solid black 1px;">15%</div>
+                <div style="border: solid black 1px;">22.5%</div>
+                <div style="border: solid black 1px;">22.5%</div>
+                <div style="border: solid black 1px;">30%</div>
+                <div style="border: solid black 1px;">30%</div>
+            </div>
+        </div>
+        <br>
+        <div class="row" >
+            <h4>This is Noelle Normal Attack Stats</h4>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Attack Speed</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">Lv 1</div>
+                <div style="border: solid black 1px;">Lv 2</div>
+                <div style="border: solid black 1px;">Lv 3</div>
+                <div style="border: solid black 1px;">Lv 4</div>
+                <div style="border: solid black 1px;">Lv 5</div>
+                <div style="border: solid black 1px;">Lv 6</div>
+                <div style="border: solid black 1px;">Lv 7</div>
+                <div style="border: solid black 1px;">Lv 8</div>
+                <div style="border: solid black 1px;">Lv 9</div>
+                <div style="border: solid black 1px;">Lv 10</div>
+                <div style="border: solid black 1px;">Lv 11</div>
+                <div style="border: solid black 1px;">Lv 12</div>
+                <div style="border: solid black 1px;">Lv 13</div>
+                <div style="border: solid black 1px;">Lv 14</div>
+                <div style="border: solid black 1px;">Lv 15</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">1-Hit Damage</div>
+                <div style="border: solid black 1px;">0.58s (35/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">79.1%</div>
+                <div style="border: solid black 1px;">85.6%</div>
+                <div style="border: solid black 1px;">92%</div>
+                <div style="border: solid black 1px;">101%</div>
+                <div style="border: solid black 1px;">108%</div>
+                <div style="border: solid black 1px;">115%</div>
+                <div style="border: solid black 1px;">125%</div>
+                <div style="border: solid black 1px;">135%</div>
+                <div style="border: solid black 1px;">145%</div>
+                <div style="border: solid black 1px;">156%</div>
+                <div style="border: solid black 1px;">167%</div>
+                <div style="border: solid black 1px;">?</div>
+                <div style="border: solid black 1px;">?</div>
+                <div style="border: solid black 1px;">?</div>
+                <div style="border: solid black 1px;">?</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">2-Hit Damage</div>
+                <div style="border: solid black 1px;">0.75s (45/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">73.4%</div>
+                <div style="border: solid black 1px;">79.3%</div>
+                <div style="border: solid black 1px;">85.3%</div>
+                <div style="border: solid black 1px;">93.8%</div>
+                <div style="border: solid black 1px;">99.8%</div>
+                <div style="border: solid black 1px;">107%</div>
+                <div style="border: solid black 1px;">116%</div>
+                <div style="border: solid black 1px;">125%</div>
+                <div style="border: solid black 1px;">135%</div>
+                <div style="border: solid black 1px;">145%</div>
+                <div style="border: solid black 1px;">155%</div>
+                <div style="border: solid black 1px;">?</div>
+                <div style="border: solid black 1px;">?</div>
+                <div style="border: solid black 1px;">?</div>
+                <div style="border: solid black 1px;">?</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">3-Hit Damage</div>
+                <div style="border: solid black 1px;">0.42s (25/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">86.3%</div>
+                <div style="border: solid black 1px;">93.3%</div>
+                <div style="border: solid black 1px;">100%</div>
+                <div style="border: solid black 1px;">110%</div>
+                <div style="border: solid black 1px;">117%</div>
+                <div style="border: solid black 1px;">125%</div>
+                <div style="border: solid black 1px;">136%</div>
+                <div style="border: solid black 1px;">147%</div>
+                <div style="border: solid black 1px;">158%</div>
+                <div style="border: solid black 1px;">171%</div>
+                <div style="border: solid black 1px;">183%</div>
+                <div style="border: solid black 1px;">?</div>
+                <div style="border: solid black 1px;">?</div>
+                <div style="border: solid black 1px;">?</div>
+                <div style="border: solid black 1px;">?</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">4-Hit Damage</div>
+                <div style="border: solid black 1px;">1.5s (90/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">113%</div>
+                <div style="border: solid black 1px;">123%</div>
+                <div style="border: solid black 1px;">132%</div>
+                <div style="border: solid black 1px;">145%</div>
+                <div style="border: solid black 1px;">154%</div>
+                <div style="border: solid black 1px;">165%</div>
+                <div style="border: solid black 1px;">179%</div>
+                <div style="border: solid black 1px;">194%</div>
+                <div style="border: solid black 1px;">208%</div>
+                <div style="border: solid black 1px;">224%</div>
+                <div style="border: solid black 1px;">240%</div>
+                <div style="border: solid black 1px;">?</div>
+                <div style="border: solid black 1px;">?</div>
+                <div style="border: solid black 1px;">?</div>
+                <div style="border: solid black 1px;">?</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Total</div>
+                <div style="border: solid black 1px;">3.25s (190/60 fps)</div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 6fr 8fr 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div >
+                    <h4>Elemental Skill</h4>
+                    <div style="grid-template-columns: repeat(2, 3fr); display: grid;">
+                        <div>
+                            Cooldown:<br>
+                            Duration:<br>
+                            Particles:<br>
+                            Energy Recharge:<br>
+
+                        </div>
+                        <div>
+                            24s (Press)<br>
+                            12s <br>
+                            No Particles (Press)<br>
+                            0 (on field) 0 (out field)
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4>Elemental Burst</h4>
+                    <div style="grid-template-columns: 1fr 1fr; display: grid;">
+                        <div>
+                            Cooldown: 15s<br>
+                            Energy Cost: 60<br>
+                            Duration: 15s <br><br>
+                        </div>
+                        <div class="text-left">
+                            Modifiers to get Energy<br>
+                            - No modifiers.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <h4><b> Role</b></h4>
+            <div style="grid-template-columns: 1fr 10fr 1fr 10fr 1fr 10fr 1fr 10fr 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Description:</b><br>
+                    
+                    
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>This build has 3 variations:</b><br>
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Flower:</b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <br>
+                    1) HP (always)<br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Feather:</b><br>
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <br>
+                    1) ATK (always)<br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Hourglass:</b><br>
+                    <img src="Image/Set_Hourglass_.png" style="width:50px">
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Goblet:</b><br>
+                    <img src="Image/Set_Goblet_.png" style="width:50px">
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Crown:</b><br>
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) 
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Weapons:</b><br>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <h4><b>Other builds, videos or links below</b></h4>
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/jbpbih/quick_tldr_healer_and_support_guidebuild_for/">Noelle Guide by 2Board_ from Reddit <br>Version 1.0<br><img src="Image/Noelle.png" style="width:100px"></a>
+            <a href="https://youtu.be/y9NHP1bxEo8?t=750">COMPLETE SUPPORT GUIDE FOR EVERY CHARACTER by Zy0x from Youtube <br>Version 1.2<br><img src="https://i.ytimg.com/vi/y9NHP1bxEo8/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDsZZekgCZllXSBK7JTd0n_a-1NCA"></a>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://docs.google.com/document/d/1trRf3ttEbz8yHz6XgrDjDTAynCqt1B-6AMcMIzmpIRM/edit#">Noelle Build AR45+ by Gobelyn from Google Docs <br>Version 1.2<br><img src="https://upload-os-bbs.mihoyo.com/upload/2021/01/30/63355475/072273bbf93c515c80238f74ca796220_7058001202501810698.png?x-oss-process=image/resize,s_740/quality,q_80/auto-orient,0/interlace,1/format,jpg" width="100%"></a>
+        </div>
+            
+        <br>
+        <br>
+        
+              
+		</section>
+		<footer class="container-fluid text-center" style="background-color:#333;color:#fff">
+			<b>Made by Fabiano Médice<br>2020</b>
+    </footer>
+
+    <script>
+      ConfereUsuario()
+      Ler_BancoDeDadosQuantidades()
+      Ler_BancoDeDadosChar()
+      Atualiza_Valores_Char("Noelle",1);
+    </script>
+
+	</body>
+</html>

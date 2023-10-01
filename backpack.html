@@ -1,0 +1,1808 @@
+<!DOCTYPE html> 
+
+<html lang="en" style="scroll-behavior: smooth;">
+	<head>
+		<!-- Titulo da aba-->
+		<title> 
+			Genshin Impact Farm Helper
+		</title>
+		<!-- Metadados -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="Fabiano Médice">
+		<meta name="description" content="Controle de Informações de farm de Genshin Impact">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="JS/banco_de_dados.js"></script>
+    <script src="JS/backpack.js"></script>
+    <script src="JS/login.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <!-- bootstrap 3.0 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<header>
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="backpack.html">Backpack</a></li>
+              <li><a href="chars.html">Characters</a></li>
+              <!--<li><a href="weapons.html">Weapons</a></li>-->
+              <li><a href="farm.html">Complete Farm Sheet</a></li>
+              <li><a href="index.html">About</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a>Please help us maintain this site</a></li>
+              <li><a href="https://streamlabs.com/mrbadgerbr/tip" style="padding:0px"><img src="Image/PayPal.png" style="height:50px" alt="PayPal"></a></li>
+              <li><a><br></a></li>
+              <li><a href="https://pag.ae/7WB124EQp" style="padding:0px"><img src="Image/PagSeguro.png" style="height:50px" alt="PagSeguro"></a></li>
+              <li><a><br></a></li>
+              <li id="LoginOption"><a onclick=AbreLogin()><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              <li id="LoginUser" style="display: none;"> <form id="FormLogin" method="POST" action="PHP/register.php"><input type="text" placeholder="Enter Email" name="email" id="LoginEmail" > <br> <input type="password" placeholder="Enter Password" name="password" id="LoginPassword" ></form></li>
+              <li id="LoginButton" style="display: none;"><button onclick=FazLogin() style="width:70px"> Log in </button><br><input type="submit" value="Register" form="FormLogin" style="width:70px"></li>
+              <li id="ForgetPasswordButton" style="display: none;"><span style="width: 3px;height: 21px; display: inline-block;"></span> <input type="checkbox" id="RememberMe" onclick=LembrarLogin()> <b style="color: white;">Remember me</b> <br><button onclick='location.href="PHP/resetpassword.php"'> Reset Password </button></li>
+              <li id="RegisterUser" style="display: none;"></li>
+              <li id="LogoutButton" style="display: none;"><a style="color: black;"><button onclick=DesfazLogin() style="width:70px"> Log out </button></a></li>
+            </ul>
+          </div>
+        </div>
+        <div style="background-color:#080808;color:#fff"> 
+          <div class="container text-center">
+            <h1>Backpack</h1>      
+          </div>
+        </div>
+        <br>
+      </nav>
+		</header>
+		
+		<section >
+      <form id="backpack"> 
+        <!-- Criado o formulario-->
+      </form>
+
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row">
+          <div class="col-sm-1" >
+            <div class="row ajustaimagem">
+              <img src="Image/Slime3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Slime3">
+              <br>Slime Concentrate
+            </div>
+            <div class="row">
+              Own:<br>From 2&#9733 Craft:<span id="Slime2-3"></span><br>From 1&#9733 Craft:<span id="Slime1-3"></span><br>
+              <input type="number" form="backpack" id="Slime3Quantity" name="Slime3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Slime3')"><br>
+              Total:<span id="Slime3Total"></span>
+              <br>Need:<span id="Slime3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Slime2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Slime2">
+              <br>Slime Secretions
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 1&#9733 Craft:<span id="Slime1-2"></span><br>
+              <input type="number" form="backpack" id="Slime2Quantity" name="Slime2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Slime2')"><br>
+              Total:<span id="Slime2Total"></span>
+              <br>Need:<span id="Slime2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Slime1.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Slime1">
+              <br>Slime Condensate
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="Slime1Quantity" name="Slime1_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Slime1')"><br>
+              Total:<span id="Slime1Total"></span>
+              <br>Need:<span id="Slime1_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/HilichurlMasks3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="HilichurlMasks3">
+              <br>Ominous Mask
+            </div>
+            <div class="row">
+              Own:<br>From 2&#9733 Craft:<span id="HilichurlMasks2-3"></span><br>From 1&#9733 Craft:<span id="HilichurlMasks1-3"></span><br>
+              <input type="number" form="backpack" id="HilichurlMasks3Quantity" name="HilichurlMasks3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('HilichurlMasks3')"><br>
+              Total:<span id="HilichurlMasks3Total"></span>
+              <br>Need:<span id="HilichurlMasks3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/HilichurlMasks2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="HilichurlMasks2">
+              <br>Stained Mask
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 1&#9733 Craft:<span id="HilichurlMasks1-2"></span><br>
+              <input type="number" form="backpack" id="HilichurlMasks2Quantity" name="HilichurlMasks2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('HilichurlMasks2')"><br>
+              Total:<span id="HilichurlMasks2Total"></span>
+              <br>Need:<span id="HilichurlMasks2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/HilichurlMasks1.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="HilichurlMasks1">
+              <br>Damaged Mask
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="HilichurlMasks1Quantity" name="HilichurlMasks1_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('HilichurlMasks1')"><br>
+              Total:<span id="HilichurlMasks1Total"></span>
+              <br>Need:<span id="HilichurlMasks1_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/SamachurlScrolls3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="SamachurlScrolls3">
+              <br>Forbidden Curse Scroll
+            </div>
+            <div class="row">
+              Own:<br>From 2&#9733 Craft:<span id="SamachurlScrolls2-3"></span><br>From 1&#9733 Craft:<span id="SamachurlScrolls1-3"></span><br>
+              <input type="number" form="backpack" id="SamachurlScrolls3Quantity" name="SamachurlScrolls3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('SamachurlScrolls3')"><br>
+              Total:<span id="SamachurlScrolls3Total"></span>
+              <br>Need:<span id="SamachurlScrolls3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/SamachurlScrolls2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="SamachurlScrolls2">
+              <br>Sealed Scroll
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 1&#9733 Craft:<span id="SamachurlScrolls1-2"></span><br>
+              <input type="number" form="backpack" id="SamachurlScrolls2Quantity" name="SamachurlScrolls2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('SamachurlScrolls2')"><br>
+              Total:<span id="SamachurlScrolls2Total"></span>
+              <br>Need:<span id="SamachurlScrolls2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/SamachurlScrolls1.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="SamachurlScrolls1">
+              <br>Divining Scroll
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="SamachurlScrolls1Quantity" name="SamachurlScrolls1_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('SamachurlScrolls1')"><br>
+              Total:<span id="SamachurlScrolls1Total"></span>
+              <br>Need:<span id="SamachurlScrolls1_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/HilichurlArrowheads3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="HilichurlArrowheads3">
+              <br>Weathered Arrowhead
+            </div>
+            <div class="row">
+              Own:<br>From 2&#9733 Craft:<span id="HilichurlArrowheads2-3"></span><br>From 1&#9733 Craft:<span id="HilichurlArrowheads1-3"></span><br>
+              <input type="number" form="backpack" id="HilichurlArrowheads3Quantity" name="HilichurlArrowheads3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('HilichurlArrowheads3')"><br>
+              Total:<span id="HilichurlArrowheads3Total"></span>
+              <br>Need:<span id="HilichurlArrowheads3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/HilichurlArrowheads2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="HilichurlArrowheads2">
+              <br>Sharp Arrowhead:
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 1&#9733 Craft:<span id="HilichurlArrowheads1-2"></span><br>
+              <input type="number" form="backpack" id="HilichurlArrowheads2Quantity" name="HilichurlArrowheads2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('HilichurlArrowheads2')"><br>
+              Total:<span id="HilichurlArrowheads2Total"></span>
+              <br>Need:<span id="HilichurlArrowheads2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/HilichurlArrowheads1.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="HilichurlArrowheads1">
+              <br>Firm Arrowhead
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="HilichurlArrowheads1Quantity" name="HilichurlArrowheads1_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('HilichurlArrowheads1')"><br>
+              Total:<span id="HilichurlArrowheads1Total"></span>
+              <br>Need:<span id="HilichurlArrowheads1_Need"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row">
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/HilichurlHorns4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="HilichurlHorns4">
+              <br>Black Crystal Horn
+            </div>
+            <div class="row">
+              Own:<br>From 3&#9733 Craft:<span id="HilichurlHorns3-4"></span><br>From 2&#9733 Craft:<span id="HilichurlHorns2-4"></span><br>
+              <input type="number" form="backpack" id="HilichurlHorns4Quantity" name="HilichurlHorns4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('HilichurlHorns4')"><br>
+              Total:<span id="HilichurlHorns4Total"></span>
+              <br>Need:<span id="HilichurlHorns4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/HilichurlHorns3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="HilichurlHorns3">
+              <br>Black Copper Horn
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 2&#9733 Craft:<span id="HilichurlHorns2-3"></span><br>
+              <input type="number" form="backpack" id="HilichurlHorns3Quantity" name="HilichurlHorns3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('HilichurlHorns3')"><br>
+              Total:<span id="HilichurlHorns3Total"></span>
+              <br>Need:<span id="HilichurlHorns3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/HilichurlHorns2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="HilichurlHorns2">
+              <br>Heavy Horn
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="HilichurlHorns2Quantity" name="HilichurlHorns2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('HilichurlHorns2')"><br>
+              Total:<span id="HilichurlHorns2Total"></span>
+              <br>Need:<span id="HilichurlHorns2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/LeyLine4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="LeyLine4">
+              <br>Ley Line Sprouts
+            </div>
+            <div class="row">
+              Own:<br>From 3&#9733 Craft:<span id="LeyLine3-4"></span><br>From 2&#9733 Craft:<span id="LeyLine2-4"></span><br>
+              <input type="number" form="backpack" id="LeyLine4Quantity" name="LeyLine4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('LeyLine4')"><br>
+              Total:<span id="LeyLine4Total"></span>
+              <br>Need:<span id="LeyLine4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/LeyLine3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="LeyLine3">
+              <br>Dead Ley Line Leaves
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 2&#9733 Craft:<span id="LeyLine2-3"></span><br>
+              <input type="number" form="backpack" id="LeyLine3Quantity" name="LeyLine3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('LeyLine3')"><br>
+              Total:<span id="LeyLine3Total"></span>
+              <br>Need:<span id="LeyLine3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/LeyLine2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="LeyLine2">
+              <br>Dead Ley Line Branches
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="LeyLine2Quantity" name="LeyLine2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('LeyLine2')"><br>
+              Total:<span id="LeyLine2Total"></span>
+              <br>Need:<span id="LeyLine2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/ChaosParts4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="ChaosParts4">
+              <br>Chaos Core
+            </div>
+            <div class="row">
+              Own:<br>From 3&#9733 Craft:<span id="ChaosParts3-4"></span><br>From 2&#9733 Craft:<span id="ChaosParts2-4"></span><br>
+              <input type="number" form="backpack" id="ChaosParts4Quantity" name="ChaosParts4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('ChaosParts4')"><br>
+              Total:<span id="ChaosParts4Total"></span>
+              <br>Need:<span id="ChaosParts4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/ChaosParts3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="ChaosParts3">
+              <br>Chaos Circuit
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 2&#9733 Craft:<span id="ChaosParts2-3"></span><br>
+              <input type="number" form="backpack" id="ChaosParts3Quantity" name="ChaosParts3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('ChaosParts3')"><br>
+              Total:<span id="ChaosParts3Total"></span>
+              <br>Need:<span id="ChaosParts3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/ChaosParts2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="ChaosParts2">
+              <br>Chaos Device
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="ChaosParts2Quantity" name="ChaosParts2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('ChaosParts2')"><br>
+              Total:<span id="ChaosParts2Total"></span>
+              <br>Need:<span id="ChaosParts2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/MistGrass4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="MistGrass4">
+              <br>Mist Grass Lamp
+            </div>
+            <div class="row">
+              Own:<br>From 3&#9733 Craft:<span id="MistGrass3-4"></span><br>From 2&#9733 Craft:<span id="MistGrass2-4"></span><br>
+              <input type="number" form="backpack" id="MistGrass4Quantity" name="MistGrass4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('MistGrass4')"><br>
+              Total:<span id="MistGrass4Total"></span>
+              <br>Need:<span id="MistGrass4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/MistGrass3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="MistGrass3">
+              <br>Mist Grass
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 2&#9733 Craft:<span id="MistGrass2-3"></span><br>
+              <input type="number" form="backpack" id="MistGrass3Quantity" name="MistGrass3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('MistGrass3')"><br>
+              Total:<span id="MistGrass3Total"></span>
+              <br>Need:<span id="MistGrass3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/MistGrass2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="MistGrass2">
+              <br>Mist Flower Pollen
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="MistGrass2Quantity" name="MistGrass2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('MistGrass2')"><br>
+              Total:<span id="MistGrass2Total"></span>
+              <br>Need:<span id="MistGrass2_Need"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row">
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/FatuiKnives4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="FatuiKnives4">
+              <br>Inspector's Sacrificial Knife
+            </div>
+            <div class="row">
+              Own:<br>From 3&#9733 Craft:<span id="FatuiKnives3-4"></span><br>From 2&#9733 Craft:<span id="FatuiKnives2-4"></span><br>
+              <input type="number" form="backpack" id="FatuiKnives4Quantity" name="FatuiKnives4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('FatuiKnives4')"><br>
+              Total:<span id="FatuiKnives4Total"></span>
+              <br>Need:<span id="FatuiKnives4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/FatuiKnives3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="FatuiKnives3">
+              <br>Agent's Sacrificial Knife
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 2&#9733 Craft:<span id="FatuiKnives2-3"></span><br>
+              <input type="number" form="backpack" id="FatuiKnives3Quantity" name="FatuiKnives3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('FatuiKnives3')"><br>
+              Total:<span id="FatuiKnives3Total"></span>
+              <br>Need:<span id="FatuiKnives3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/FatuiKnives2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="FatuiKnives2">
+              <br>Hunter's Sacrificial Knife
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="FatuiKnives2Quantity" name="FatuiKnives2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('FatuiKnives2')"><br>
+              Total:<span id="FatuiKnives2Total"></span>
+              <br>Need:<span id="FatuiKnives2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/FatuiInsignias3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="FatuiInsignias3">
+              <br>Lieutenant's Insignia
+            </div>
+            <div class="row">
+              Own:<br>From 2&#9733 Craft:<span id="FatuiInsignias2-3"></span><br>From 1&#9733 Craft:<span id="FatuiInsignias1-3"></span><br>
+              <input type="number" form="backpack" id="FatuiInsignias3Quantity" name="FatuiInsignias3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('FatuiInsignias3')"><br>
+              Total:<span id="FatuiInsignias3Total"></span>
+              <br>Need:<span id="FatuiInsignias3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/FatuiInsignias2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="FatuiInsignias2">
+              <br>Sergeant's Insignia
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 1&#9733 Craft:<span id="FatuiInsignias1-2"></span><br>
+              <input type="number" form="backpack" id="FatuiInsignias2Quantity" name="FatuiInsignias2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('FatuiInsignias2')"><br>
+              Total:<span id="FatuiInsignias2Total"></span>
+              <br>Need:<span id="FatuiInsignias2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/FatuiInsignias1.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="FatuiInsignias1">
+              <br>Recruit's Insignia
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="FatuiInsignias1Quantity" name="FatuiInsignias1_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('FatuiInsignias1')"><br>
+              Total:<span id="FatuiInsignias1Total"></span>
+              <br>Need:<span id="FatuiInsignias1_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/TreasureHoarderInsignias3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="TreasureHoarderInsignias3">
+              <br>Golden Raven Insignia
+            </div>
+            <div class="row">
+              Own:<br>From 2&#9733 Craft:<span id="TreasureHoarderInsignias2-3"></span><br>From 1&#9733 Craft:<span id="TreasureHoarderInsignias1-3"></span><br>
+              <input type="number" form="backpack" id="TreasureHoarderInsignias3Quantity" name="TreasureHoarderInsignias3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('TreasureHoarderInsignias3')"><br>
+              Total:<span id="TreasureHoarderInsignias3Total"></span>
+              <br>Need:<span id="TreasureHoarderInsignias3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/TreasureHoarderInsignias2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="TreasureHoarderInsignias2">
+              <br>Silver Raven Insignia
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 1&#9733 Craft:<span id="TreasureHoarderInsignias1-2"></span><br>
+              <input type="number" form="backpack" id="TreasureHoarderInsignias2Quantity" name="TreasureHoarderInsignias2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('TreasureHoarderInsignias2')"><br>
+              Total:<span id="TreasureHoarderInsignias2Total"></span>
+              <br>Need:<span id="TreasureHoarderInsignias2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/TreasureHoarderInsignias1.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="TreasureHoarderInsignias1">
+              <br>Treasure Hoarder Insignia
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="TreasureHoarderInsignias1Quantity" name="TreasureHoarderInsignias1_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('TreasureHoarderInsignias1')"><br>
+              Total:<span id="TreasureHoarderInsignias1Total"></span>
+              <br>Need:<span id="TreasureHoarderInsignias1_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/DvalinsPlume.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="DvalinsPlume">
+              <br>Dvalin's Plume
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="DvalinsPlumeQuantity" name="DvalinsPlume_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('DvalinsPlume')">
+              <br>Need:<span id="DvalinsPlume_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/DvalinsClaw.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="DvalinsClaw">
+              <br>Dvalin's Claw
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="DvalinsClawQuantity" name="DvalinsClaw_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('DvalinsClaw')">
+              <br>Need:<span id="DvalinsClaw_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/DvalinsSigh.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="DvalinsSigh">
+              <br>Dvalin's Sigh
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="DvalinsSighQuantity" name="DvalinsSigh_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('DvalinsSigh')">
+              <br>Need:<span id="DvalinsSigh_Need"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="container-fluid bg-3 text-center">
+        <div class="row">
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/TailofBoreas.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="TailofBoreas">
+              <br>Tail of Boreas
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="TailofBoreasQuantity" name="TailofBoreas_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('TailofBoreas')">
+              <br>Need:<span id="TailofBoreas_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/RingofBoreas.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="RingofBoreas">
+              <br>Ring of Boreas
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="RingofBoreasQuantity" name="RingofBoreas_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('RingofBoreas')">
+              <br>Need:<span id="RingofBoreas_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/SpiritLocketofBoreas.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="SpiritLocketofBoreas">
+              <br>Spirit Locket of Boreas
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="SpiritLocketofBoreasQuantity" name="SpiritLocketofBoreas_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('SpiritLocketofBoreas')">
+              <br>Need:<span id="SpiritLocketofBoreas_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/TuskofMonocerosCaeli.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="TuskofMonocerosCaeli">
+              <br>Tusk of Monoceros Caeli
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="TuskofMonocerosCaeliQuantity" name="TuskofMonocerosCaeli_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('TuskofMonocerosCaeli')">
+              <br>Need:<span id="TuskofMonocerosCaeli_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/ShardofaFoulLegacy.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="ShardofaFoulLegacy">
+              <br>Shard of a Foul Legacy
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="ShardofaFoulLegacyQuantity" name="_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('ShardofaFoulLegacy')">
+              <br>Need:<span id="ShardofaFoulLegacy_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/ShadowoftheWarrior.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="ShadowoftheWarrior">
+              <br>Shadow of the Warrior
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="ShadowoftheWarriorQuantity" name="ShadowoftheWarrior_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('ShadowoftheWarrior')">
+              <br>Need:<span id="ShadowoftheWarrior_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/BossAnemo.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="BossAnemo">
+              <br>Hurricane Seed
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="BossAnemoQuantity" name="BossAnemo_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('BossAnemo')">
+              <br>Need:<span id="BossAnemo_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/BossElectro.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="BossElectro">
+              <br>Lightning Prism
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="BossElectroQuantity" name="BossElectro_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('BossElectro')">
+              <br>Need:<span id="BossElectro_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/BossGeo.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="BossGeo">
+              <br>Basalt Pillar
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="BossGeoQuantity" name="BossGeo_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('BossGeo')">
+              <br>Need:<span id="BossGeo_Need"></span>
+            </div>
+          </div>     
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/BossCryo.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="BossCryo">
+              <br>Hoarfrost Core
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="BossCryoQuantity" name="BossCryo_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('BossCryo')">
+              <br>Need:<span id="BossCryo_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/BossPyro.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="BossPyro">
+              <br>Everflame Seed
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="BossPyroQuantity" name="BossPyro_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('BossPyro')">
+              <br>Need:<span id="BossPyro_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/BossHydro.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="BossHydro">
+              <br>Cleansing Heart
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="BossHydroQuantity" name="BossHydro_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('BossHydro')">
+              <br>Need:<span id="BossHydro_Need"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row">
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Nectar3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Nectar3">
+              <br>Energy Nectar
+            </div>
+            <div class="row">
+              Own:<br>From 2&#9733 Craft:<span id="Nectar2-3"></span><br>From 1&#9733 Craft:<span id="Nectar1-3"></span><br>
+              <input type="number" form="backpack" id="Nectar3Quantity" name="Nectar3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Nectar3')"><br>
+              Total:<span id="Nectar3Total"></span>
+              <br>Need:<span id="Nectar3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Nectar2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Nectar2">
+              <br>Shimmering Nectar
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 1&#9733 Craft:<span id="Nectar1-2"></span><br>
+              <input type="number" form="backpack" id="Nectar2Quantity" name="Nectar2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Nectar2')"><br>
+              Total:<span id="Nectar2Total"></span>
+              <br>Need:<span id="Nectar2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Nectar1.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Nectar1">
+              <br>Whopperflower Nectar
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="Nectar1Quantity" name="Nectar1_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Nectar1')"><br>
+              Total:<span id="Nectar1Total"></span>
+              <br>Need:<span id="Nectar1_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/BoneShards4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="BoneShards4">
+              <br>Fossilized Bone Shard
+            </div>
+            <div class="row">
+              Own:<br>From 3&#9733 Craft:<span id="BoneShards3-4"></span><br>From 2&#9733 Craft:<span id="BoneShards2-4"></span><br>
+              <input type="number" form="backpack" id="BoneShards4Quantity" name="BoneShards4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('BoneShards4')"><br>
+              Total:<span id="BoneShards4Total"></span>
+              <br>Need:<span id="BoneShards4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/BoneShards3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="BoneShards3">
+              <br>Sturdy Bone Shard
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 2&#9733 Craft:<span id="BoneShards2-3"></span><br>
+              <input type="number" form="backpack" id="BoneShards3Quantity" name="BoneShards3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('BoneShards3')"><br>
+              Total:<span id="BoneShards3Total"></span>
+              <br>Need:<span id="BoneShards3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/BoneShards2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="BoneShards2">
+              <br>Fragile Bone Shard
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="BoneShards2Quantity" name="BoneShards2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('BoneShards2')"><br>
+              Total:<span id="BoneShards2Total"></span>
+              <br>Need:<span id="BoneShards2_Need"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row">
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Pyro5.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Pyro5">
+              <br>Agnidus Agate Gemstone
+            </div>
+            <div class="row">
+              Own:<br>From 4&#9733 Craft:<span id="Pyro4-5"></span><br>From 3&#9733 Craft:<span id="Pyro3-5"></span><br> From 2&#9733 Craft:<span id="Pyro2-5"></span><br>
+              <input type="number" form="backpack" id="Pyro5Quantity" name="Pyro5_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Pyro5')"><br>
+              Total:<span id="Pyro5Total"></span>
+              <br>Need:<span id="Pyro5_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Pyro4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Pyro4">
+              <br>Agnidus Agate Chunk
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 3&#9733 Craft:<span id="Pyro3-4"></span><br>From 2&#9733 Craft:<span id="Pyro2-4"></span><br>
+              <input type="number" form="backpack" id="Pyro4Quantity" name="Pyro4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Pyro4')"><br>
+              Total:<span id="Pyro4Total"></span>
+              <br>Need:<span id="Pyro4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Pyro3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Pyro3">
+              <br>Agnidus Agate Fragment
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>From 2&#9733 Craft:<span id="Pyro2-3"></span><br>
+              <input type="number" form="backpack" id="Pyro3Quantity" name="Pyro3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Pyro3')"><br>
+              Total:<span id="Pyro3Total"></span>
+              <br>Need:<span id="Pyro3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Pyro2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Pyro2">
+              <br>Agnidus Agate Sliver
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>-<br>
+              <input type="number" form="backpack" id="Pyro2Quantity" name="Pyro2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Pyro2')"><br>
+              Total:<span id="Pyro2Total"></span>
+              <br>Need:<span id="Pyro2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Hydro5.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Hydro5">
+              <br>Varunada Lazurite Gemstone
+            </div>
+            <div class="row">
+              Own:<br>From 4&#9733 Craft:<span id="Hydro4-5"></span><br>From 3&#9733 Craft:<span id="Hydro3-5"></span><br> From 2&#9733 Craft:<span id="Hydro2-5"></span><br>
+              <input type="number" form="backpack" id="Hydro5Quantity" name="Hydro5_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Hydro5')"><br>
+              Total:<span id="Hydro5Total"></span>
+              <br>Need:<span id="Hydro5_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Hydro4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Hydro4">
+              <br>Varunada Lazurite Chunk
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 3&#9733 Craft:<span id="Hydro3-4"></span><br>From 2&#9733 Craft:<span id="Hydro2-4"></span><br>
+              <input type="number" form="backpack" id="Hydro4Quantity" name="Hydro4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Hydro4')"><br>
+              Total:<span id="Hydro4Total"></span>
+              <br>Need:<span id="Hydro4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Hydro3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Hydro3">
+              <br>Varunada Lazurite Fragment
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>From 2&#9733 Craft:<span id="Hydro2-3"></span><br>
+              <input type="number" form="backpack" id="Hydro3Quantity" name="Hydro3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Hydro3')"><br>
+              Total:<span id="Hydro3Total"></span>
+              <br>Need:<span id="Hydro3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Hydro2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Hydro2">
+              <br>Varunada Lazurite Sliver
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>-<br>
+            <input type="number" form="backpack" id="Hydro2Quantity" name="Hydro2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Hydro2')"><br>
+            Total:<span id="Hydro2Total"></span>
+            <br>Need:<span id="Hydro2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Electro5.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Electro5">
+              <br>Vajrada Amethyst Gemstone
+            </div>
+            <div class="row">
+              Own:<br>From 4&#9733 Craft:<span id="Electro4-5"></span><br>From 3&#9733 Craft:<span id="Electro3-5"></span><br> From 2&#9733 Craft:<span id="Electro2-5"></span><br>
+              <input type="number" form="backpack" id="Electro5Quantity" name="Electro5_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Electro5')"><br>
+              Total:<span id="Electro5Total"></span>
+              <br>Need:<span id="Electro5_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Electro4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Electro4">
+              <br>Vajrada Amethyst Chunk
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 3&#9733 Craft:<span id="Electro3-4"></span><br>From 2&#9733 Craft:<span id="Electro2-4"></span><br>
+              <input type="number" form="backpack" id="Electro4Quantity" name="Electro4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Electro4')"><br>
+              Total:<span id="Electro4Total"></span>
+              <br>Need:<span id="Electro4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Electro3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Electro3">
+              <br>Vajrada Amethyst Fragment
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>From 2&#9733 Craft:<span id="Electro2-3"></span><br>
+              <input type="number" form="backpack" id="Electro3Quantity" name="Electro3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Electro3')"><br>
+              Total:<span id="Electro3Total"></span>
+              <br>Need:<span id="Electro3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Electro2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Electro2">
+              <br>Vajrada Amethyst Sliver
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>-<br>
+              <input type="number" form="backpack" id="Electro2Quantity" name="Electro2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Electro2')"><br>
+              Total:<span id="Electro2Total"></span>
+              <br>Need:<span id="Electro2_Need"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row">
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Anemo5.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Anemo5">
+              <br>Agnidus Agate Gemstone
+            </div>
+            <div class="row">
+              Own:<br>From 4&#9733 Craft:<span id="Anemo4-5"></span><br>From 3&#9733 Craft:<span id="Anemo3-5"></span><br> From 2&#9733 Craft:<span id="Anemo2-5"></span><br>
+              <input type="number" form="backpack" id="Anemo5Quantity" name="Anemo5_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Anemo5')"><br>
+              Total:<span id="Anemo5Total"></span>
+              <br>Need:<span id="Anemo5_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Anemo4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Anemo4">
+              <br>Agnidus Agate Chunk
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 3&#9733 Craft:<span id="Anemo3-4"></span><br>From 2&#9733 Craft:<span id="Anemo2-4"></span><br>
+              <input type="number" form="backpack" id="Anemo4Quantity" name="Anemo4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Anemo4')"><br>
+              Total:<span id="Anemo4Total"></span>
+              <br>Need:<span id="Anemo4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Anemo3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Anemo3">
+              <br>Agnidus Agate Fragment
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>From 2&#9733 Craft:<span id="Anemo2-3"></span><br>
+              <input type="number" form="backpack" id="Anemo3Quantity" name="Anemo3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Anemo3')"><br>
+              Total:<span id="Anemo3Total"></span>
+              <br>Need:<span id="Anemo3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Anemo2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Anemo2">
+              <br>Agnidus Agate Sliver
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>-<br>
+              <input type="number" form="backpack" id="Anemo2Quantity" name="Anemo2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Anemo2')"><br>
+              Total:<span id="Anemo2Total"></span>
+              <br>Need:<span id="Anemo2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Cryo5.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Cryo5">
+              <br>Varunada Lazurite Gemstone
+            </div>
+            <div class="row">
+              Own:<br>From 4&#9733 Craft:<span id="Cryo4-5"></span><br>From 3&#9733 Craft:<span id="Cryo3-5"></span><br> From 2&#9733 Craft:<span id="Cryo2-5"></span><br>
+              <input type="number" form="backpack" id="Cryo5Quantity" name="Cryo5_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Cryo5')"><br>
+              Total:<span id="Cryo5Total"></span>
+              <br>Need:<span id="Cryo5_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Cryo4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Cryo4">
+              <br>Varunada Lazurite Chunk
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 3&#9733 Craft:<span id="Cryo3-4"></span><br>From 2&#9733 Craft:<span id="Cryo2-4"></span><br>
+              <input type="number" form="backpack" id="Cryo4Quantity" name="Cryo4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Cryo4')"><br>
+              Total:<span id="Cryo4Total"></span>
+              <br>Need:<span id="Cryo4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Cryo3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Cryo3">
+              <br>Varunada Lazurite Fragment
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>From 2&#9733 Craft:<span id="Cryo2-3"></span><br>
+              <input type="number" form="backpack" id="Cryo3Quantity" name="Cryo3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Cryo3')"><br>
+              Total:<span id="Cryo3Total"></span>
+              <br>Need:<span id="Cryo3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Cryo2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Cryo2">
+              <br>Varunada Lazurite Sliver
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>-<br>
+              <input type="number" form="backpack" id="Cryo2Quantity" name="Cryo2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Cryo2')"><br>
+              Total:<span id="Cryo2Total"></span>
+              <br>Need:<span id="Cryo2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Geo5.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Geo5">
+              <br>Vajrada Amethyst Gemstone
+            </div>
+            <div class="row">
+              Own:<br>From 4&#9733 Craft:<span id="Geo4-5"></span><br>From 3&#9733 Craft:<span id="Geo3-5"></span><br> From 2&#9733 Craft:<span id="Geo2-5"></span><br>
+              <input type="number" form="backpack" id="Geo5Quantity" name="Geo5_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Geo5')"><br>
+              Total:<span id="Geo5Total"></span>
+              <br>Need:<span id="Geo5_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Geo4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Geo4">
+              <br>Vajrada Amethyst Chunk
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 3&#9733 Craft:<span id="Geo3-4"></span><br>From 2&#9733 Craft:<span id="Geo2-4"></span><br>
+              <input type="number" form="backpack" id="Geo4Quantity" name="Geo4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Geo4')"><br>
+              Total:<span id="Geo4Total"></span>
+              <br>Need:<span id="Geo4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Geo3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Geo3">
+              <br>Vajrada Amethyst Fragment
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>From 2&#9733 Craft:<span id="Geo2-3"></span><br>
+              <input type="number" form="backpack" id="Geo3Quantity" name="Geo3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Geo3')"><br>
+              Total:<span id="Geo3Total"></span>
+              <br>Need:<span id="Geo3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Geo2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Geo2">
+              <br>Vajrada Amethyst Sliver
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>-<br>
+              <input type="number" form="backpack" id="Geo2Quantity" name="Geo2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Geo2')"><br>
+              Total:<span id="Geo2Total"></span>
+              <br>Need:<span id="Geo2_Need"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center" style="background-color:gray;color:#fff">
+        <hr>
+        <h3>Forsaken Rift</h3>
+        <hr>
+      </div>
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row DivDominio3"></div>
+        <div class="row">
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Freedom4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Freedom4">
+              <br>Philosophies of "Freedom"
+            </div>
+            <div class="row">
+              Own:<br>From 3&#9733 Craft:<span id="Freedom3-4"></span><br>From 2&#9733 Craft:<span id="Freedom2-4"></span><br>
+              <input type="number" form="backpack" id="Freedom4Quantity" name="Freedom4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Freedom4')"><br>
+              Total:<span id="Freedom4Total"></span>
+              <br>Need:<span id="Freedom4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Freedom3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Freedom3">
+              <br>Guide to "Freedom"
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 2&#9733 Craft:<span id="Freedom2-3"></span><br>
+              <input type="number" form="backpack" id="Freedom3Quantity" name="Freedom3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Freedom3')"><br>
+              Total:<span id="Freedom3Total"></span>
+              <br>Need:<span id="Freedom3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Freedom2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Freedom2">
+              <br>Teachings of "Freedom"
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="Freedom2Quantity" name="Freedom2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Freedom2')"><br>
+              Total:<span id="Freedom2Total"></span>
+              <br>Need:<span id="Freedom2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Resistance4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Resistance4">
+              <br>Philosophies of "Resistance"
+            </div>
+            <div class="row">
+              Own:<br>From 3&#9733 Craft:<span id="Resistance3-4"></span><br>From 2&#9733 Craft:<span id="Resistance2-4"></span><br>
+              <input type="number" form="backpack" id="Resistance4Quantity" name="Resistance4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Resistance4')"><br>
+              Total:<span id="Resistance4Total"></span>
+              <br>Need:<span id="Resistance4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Resistance3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Resistance3">
+              <br>Guide to "Resistance"
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 2&#9733 Craft:<span id="Resistance2-3"></span><br>
+              <input type="number" form="backpack" id="Resistance3Quantity" name="Resistance3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Resistance3')"><br>
+              Total:<span id="Resistance3Total"></span>
+              <br>Need:<span id="Resistance3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Resistance2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Resistance2">
+              <br>Teachings of "Resistance"
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="Resistance2Quantity" name="Resistance2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Resistance2')"><br>
+              Total:<span id="Resistance2Total"></span>
+              <br>Need:<span id="Resistance2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Ballad4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Ballad4">
+              <br>Philosophies of "Ballad"
+            </div>
+            <div class="row">
+              Own:<br>From 3&#9733 Craft:<span id="Ballad3-4"></span><br>From 2&#9733 Craft:<span id="Ballad2-4"></span><br>
+              <input type="number" form="backpack" id="Ballad4Quantity" name="Ballad4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Ballad4')"><br>
+              Total:<span id="Ballad4Total"></span>
+              <br>Need:<span id="Ballad4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Ballad3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Ballad3">
+              <br>Guide to "Ballad"
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 2&#9733 Craft:<span id="Ballad2-3"></span><br>
+              <input type="number" form="backpack" id="Ballad3Quantity" name="Ballad3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Ballad3')"><br>
+              Total:<span id="Ballad3Total"></span>
+              <br>Need:<span id="Ballad3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Ballad2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Ballad2">
+              <br>Teachings of "Ballad"
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="Ballad2Quantity" name="Ballad2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Ballad2')"><br>
+              Total:<span id="Ballad2Total"></span>
+              <br>Need:<span id="Ballad2_Need"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center" style="background-color:gray;color:#fff">
+        <hr>
+        <h3>Taishan Mansion</h3>
+        <hr>
+      </div>
+      <div class="container-fluid bg-3 text-center">   
+        <div class="row DivDominio3"></div> 
+        <div class="row">
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Prosperity4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Prosperity4">
+              <br>Philosophies of "Prosperity"
+            </div>
+            <div class="row">
+              Own:<br>From 3&#9733 Craft:<span id="Prosperity3-4"></span><br>From 2&#9733 Craft:<span id="Prosperity2-4"></span><br>
+              <input type="number" form="backpack" id="Prosperity4Quantity" name="Prosperity4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Prosperity4')"><br>
+              Total:<span id="Prosperity4Total"></span>
+              <br>Need:<span id="Prosperity4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Prosperity3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Prosperity3">
+              <br>Guide to "Prosperity"
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 2&#9733 Craft:<span id="Prosperity2-3"></span><br>
+              <input type="number" form="backpack" id="Prosperity3Quantity" name="Prosperity3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Prosperity3')"><br>
+              Total:<span id="Prosperity3Total"></span>
+              <br>Need:<span id="Prosperity3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Prosperity2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Prosperity2">
+              <br>Teachings of "Prosperity"
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="Prosperity2Quantity" name="Prosperity2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Prosperity2')"><br>
+              Total:<span id="Prosperity2Total"></span>
+              <br>Need:<span id="Prosperity2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Diligence4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Diligence4">
+              <br>Philosophies of "Diligence"
+            </div>
+            <div class="row">
+              Own:<br>From 3&#9733 Craft:<span id="Diligence3-4"></span><br>From 2&#9733 Craft:<span id="Diligence2-4"></span><br>
+              <input type="number" form="backpack" id="Diligence4Quantity" name="Diligence4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Diligence4')"><br>
+              Total:<span id="Diligence4Total"></span>
+              <br>Need:<span id="Diligence4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Diligence3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Diligence3">
+              <br>Guide to "Diligence"
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 2&#9733 Craft:<span id="Diligence2-3"></span><br>
+              <input type="number" form="backpack" id="Diligence3Quantity" name="Diligence3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Diligence3')"><br>
+              Total:<span id="Diligence3Total"></span>
+              <br>Need:<span id="Diligence3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Diligence2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Diligence2">
+              <br>Teachings of "Diligence"
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="Diligence2Quantity" name="Diligence2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Diligence2')"><br>
+              Total:<span id="Diligence2Total"></span>
+              <br>Need:<span id="Diligence2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Gold4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Gold4">
+              <br>Philosophies of "Gold"
+            </div>
+            <div class="row">
+              Own:<br>From 3&#9733 Craft:<span id="Gold3-4"></span><br>From 2&#9733 Craft:<span id="Gold2-4"></span><br>
+              <input type="number" form="backpack" id="Gold4Quantity" name="Gold4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Gold4')"><br>
+              Total:<span id="Gold4Total"></span>
+              <br>Need:<span id="Gold4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Gold3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Gold3">
+              <br>Guide to "Gold"
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 2&#9733 Craft:<span id="Gold2-3"></span><br>
+              <input type="number" form="backpack" id="Gold3Quantity" name="Gold3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Gold3')"><br>
+              Total:<span id="Gold3Total"></span>
+              <br>Need:<span id="Gold3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Gold2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Gold2">
+              <br>Teachings of "Gold"
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="Gold2Quantity" name="Gold2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Gold2')"><br>
+              Total:<span id="Gold2Total"></span>
+              <br>Need:<span id="Gold2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <!-- Coluna Vazia -->
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/CrownofInsight.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="CrownofInsight">
+              <br>Crown of Insight
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>
+              <input type="number" form="backpack" id="CrownofInsightQuantity" name="CrownofInsight_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('CrownofInsight')"><br>
+              Total:<span id="CrownofInsightTotal"></span>
+              <br>Need:<span id="CrownofInsight_Need"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center" style="background-color:gray;color:#fff">
+        <hr>
+        <h3>Cecilia Garden</h3>
+        <hr>
+      </div>
+      <div class="container-fluid bg-3 text-center">
+        <div class="row DivDominio4"></div>    
+        <div class="row">
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Decarabian5.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Decarabian5">
+              <br>Scattered Piece of Decarabian's Dream
+            </div>
+            <div class="row">
+              Own:<br>From 4&#9733 Craft:<span id="Decarabian4-5"></span><br>From 3&#9733 Craft:<span id="Decarabian3-5"></span><br> From 2&#9733 Craft:<span id="Decarabian2-5"></span><br>
+              <input type="number" form="backpack" id="Decarabian5Quantity" name="Decarabian5_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Decarabian5')"><br>
+              Total:<span id="Decarabian5Total"></span>
+              <br>Need:<span id="Decarabian5_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Decarabian4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Decarabian4">
+              <br>Fragment of Decarabian's Epic
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 3&#9733 Craft:<span id="Decarabian3-4"></span><br>From 2&#9733 Craft:<span id="Decarabian2-4"></span><br>
+              <input type="number" form="backpack" id="Decarabian4Quantity" name="Decarabian4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Decarabian4')"><br>
+              Total:<span id="Decarabian4Total"></span>
+              <br>Need:<span id="Decarabian4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Decarabian3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Decarabian3">
+              <br>Debris of Decarabian's City
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>From 2&#9733 Craft:<span id="Decarabian2-3"></span><br>
+              <input type="number" form="backpack" id="Decarabian3Quantity" name="Decarabian3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Decarabian3')"><br>
+              Total:<span id="Decarabian3Total"></span>
+              <br>Need:<span id="Decarabian3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Decarabian2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Decarabian2">
+              <br>Tile of Decarabian's Tower
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>-<br>
+              <input type="number" form="backpack" id="Decarabian2Quantity" name="Decarabian2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Decarabian2')"><br>
+              Total:<span id="Decarabian2Total"></span>
+              <br>Need:<span id="Decarabian2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/BorealWolf5.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="BorealWolf5">
+              <br>Boreal Wolf's Nostalgia
+            </div>
+            <div class="row">
+              Own:<br>From 4&#9733 Craft:<span id="BorealWolf4-5"></span><br>From 3&#9733 Craft:<span id="BorealWolf3-5"></span><br> From 2&#9733 Craft:<span id="BorealWolf2-5"></span><br>
+              <input type="number" form="backpack" id="BorealWolf5Quantity" name="BorealWolf5_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('BorealWolf5')"><br>
+              Total:<span id="BorealWolf5Total"></span>
+              <br>Need:<span id="BorealWolf5_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/BorealWolf4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="BorealWolf4">
+              <br>Boreal Wolf's Broken Fang
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 3&#9733 Craft:<span id="BorealWolf3-4"></span><br>From 2&#9733 Craft:<span id="BorealWolf2-4"></span><br>
+              <input type="number" form="backpack" id="BorealWolf4Quantity" name="BorealWolf4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('BorealWolf4')"><br>
+              Total:<span id="BorealWolf4Total"></span>
+              <br>Need:<span id="BorealWolf4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/BorealWolf3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="BorealWolf3">
+              <br>Boreal Wolf's Cracked Tooth
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>From 2&#9733 Craft:<span id="BorealWolf2-3"></span><br>
+              <input type="number" form="backpack" id="BorealWolf3Quantity" name="BorealWolf3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('BorealWolf3')"><br>
+              Total:<span id="BorealWolf3Total"></span>
+              <br>Need:<span id="BorealWolf3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/BorealWolf2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="BorealWolf2">
+              <br>Boreal Wolf's Milk Tooth
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>-<br>
+              <input type="number" form="backpack" id="BorealWolf2Quantity" name="BorealWolf2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('BorealWolf2')"><br>
+              Total:<span id="BorealWolf2Total"></span>
+              <br>Need:<span id="BorealWolf2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/DandelionGladiator5.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="DandelionGladiator5">
+              <br>Dream of the Dandelion Gladiator
+            </div>
+            <div class="row">
+              Own:<br>From 4&#9733 Craft:<span id="DandelionGladiator4-5"></span><br>From 3&#9733 Craft:<span id="DandelionGladiator3-5"></span><br> From 2&#9733 Craft:<span id="DandelionGladiator2-5"></span><br>
+              <input type="number" form="backpack" id="DandelionGladiator5Quantity" name="DandelionGladiator5_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('DandelionGladiator5')"><br>
+              Total:<span id="DandelionGladiator5Total"></span>
+              <br>Need:<span id="DandelionGladiator5_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/DandelionGladiator4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="DandelionGladiator4">
+              <br>Shackles of the Dandelion Gladiator
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 3&#9733 Craft:<span id="DandelionGladiator3-4"></span><br>From 2&#9733 Craft:<span id="DandelionGladiator2-4"></span><br>
+              <input type="number" form="backpack" id="DandelionGladiator4Quantity" name="DandelionGladiator4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('DandelionGladiator4')"><br>
+              Total:<span id="DandelionGladiator4Total"></span>
+              <br>Need:<span id="DandelionGladiator4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/DandelionGladiator3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="DandelionGladiator3">
+              <br>Chains of the Dandelion Gladiator
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>From 2&#9733 Craft:<span id="DandelionGladiator2-3"></span><br>
+              <input type="number" form="backpack" id="DandelionGladiator3Quantity" name="DandelionGladiator3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('DandelionGladiator3')"><br>
+              Total:<span id="DandelionGladiator3Total"></span>
+              <br>Need:<span id="DandelionGladiator3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/DandelionGladiator2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="DandelionGladiator2">
+              <br>Fetters of the Dandelion Gladiator
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>-<br>
+              <input type="number" form="backpack" id="DandelionGladiator2Quantity" name="DandelionGladiator2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('DandelionGladiator2')"><br>
+              Total:<span id="DandelionGladiator2Total"></span>
+              <br>Need:<span id="DandelionGladiator2_Need"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center" style="background-color:gray;color:#fff">
+        <hr>
+        <h3>Hidden Palace of Lianshan Formula</h3>
+        <hr>
+      </div>
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row DivDominio4"></div>
+        <div class="row">
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Guyun5.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Guyun5">
+              <br>Divine Body from Guyun
+            </div>
+            <div class="row">
+              Own:<br>From 4&#9733 Craft:<span id="Guyun4-5"></span><br>From 3&#9733 Craft:<span id="Guyun3-5"></span><br> From 2&#9733 Craft:<span id="Guyun2-5"></span><br>
+              <input type="number" form="backpack" id="Guyun5Quantity" name="Guyun5_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Guyun5')"><br>
+              Total:<span id="Guyun5Total"></span>
+              <br>Need:<span id="Guyun5_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Guyun4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Guyun4">
+              <br>Relic from Guyun
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 3&#9733 Craft:<span id="Guyun3-4"></span><br>From 2&#9733 Craft:<span id="Guyun2-4"></span><br>
+              <input type="number" form="backpack" id="Guyun4Quantity" name="Guyun4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Guyun4')"><br>
+              Total:<span id="Guyun4Total"></span>
+              <br>Need:<span id="Guyun4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Guyun3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Guyun3">
+              <br>Lustrous Stone from Guyun
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>From 2&#9733 Craft:<span id="Guyun2-3"></span><br>
+              <input type="number" form="backpack" id="Guyun3Quantity" name="Guyun3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Guyun3')"><br>
+              Total:<span id="Guyun3Total"></span>
+              <br>Need:<span id="Guyun3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Guyun2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Guyun2">
+              <br>Luminous Sands from Guyun
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>-<br>
+              <input type="number" form="backpack" id="Guyun2Quantity" name="Guyun2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Guyun2')"><br>
+              Total:<span id="Guyun2Total"></span>
+              <br>Need:<span id="Guyun2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/MistVeiledElixir5.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="MistVeiledElixir5">
+              <br>Mist Veiled Primo Elixir
+            </div>
+            <div class="row">
+              Own:<br>From 4&#9733 Craft:<span id="MistVeiledElixir4-5"></span><br>From 3&#9733 Craft:<span id="MistVeiledElixir3-5"></span><br> From 2&#9733 Craft:<span id="MistVeiledElixir2-5"></span><br>
+              <input type="number" form="backpack" id="MistVeiledElixir5Quantity" name="MistVeiledElixir5_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('MistVeiledElixir5')"><br>
+              Total:<span id="MistVeiledElixir5Total"></span>
+              <br>Need:<span id="MistVeiledElixir5_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/MistVeiledElixir4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="MistVeiledElixir4">
+              <br>Mist Veiled Gold Elixir
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 3&#9733 Craft:<span id="MistVeiledElixir3-4"></span><br>From 2&#9733 Craft:<span id="MistVeiledElixir2-4"></span><br>
+              <input type="number" form="backpack" id="MistVeiledElixir4Quantity" name="MistVeiledElixir4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('MistVeiledElixir4')"><br>
+              Total:<span id="MistVeiledElixir4Total"></span>
+              <br>Need:<span id="MistVeiledElixir4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/MistVeiledElixir3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="MistVeiledElixir3">
+              <br>Mist Veiled Mercury Elixir
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>From 2&#9733 Craft:<span id="MistVeiledElixir2-3"></span><br>
+              <input type="number" form="backpack" id="MistVeiledElixir3Quantity" name="MistVeiledElixir3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('MistVeiledElixir3')"><br>
+              Total:<span id="MistVeiledElixir3Total"></span>
+              <br>Need:<span id="MistVeiledElixir3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/MistVeiledElixir2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="MistVeiledElixir2">
+              <br>Mist Veiled Lead Elixir
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>-<br>
+              <input type="number" form="backpack" id="MistVeiledElixir2Quantity" name="MistVeiledElixir2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('MistVeiledElixir2')"><br>
+              Total:<span id="MistVeiledElixir2Total"></span>
+              <br>Need:<span id="MistVeiledElixir2_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Aerosiderite5.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Aerosiderite5">
+              <br>Chunk of Aerosiderite
+            </div>
+            <div class="row">
+              Own:<br>From 4&#9733 Craft:<span id="Aerosiderite4-5"></span><br>From 3&#9733 Craft:<span id="Aerosiderite3-5"></span><br> From 2&#9733 Craft:<span id="Aerosiderite2-5"></span><br>
+              <input type="number" form="backpack" id="Aerosiderite5Quantity" name="Aerosiderite5_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Aerosiderite5')"><br>
+              Total:<span id="Aerosiderite5Total"></span>
+              <br>Need:<span id="Aerosiderite5_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Aerosiderite4.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Aerosiderite4">
+              <br>Bit of Aerosiderite
+            </div>
+            <div class="row">
+              Own:<br>-<br>From 3&#9733 Craft:<span id="Aerosiderite3-4"></span><br>From 2&#9733 Craft:<span id="Aerosiderite2-4"></span><br>
+              <input type="number" form="backpack" id="Aerosiderite4Quantity" name="Aerosiderite4_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Aerosiderite4')"><br>
+              Total:<span id="Aerosiderite4Total"></span>
+              <br>Need:<span id="Aerosiderite4_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Aerosiderite3.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Aerosiderite3">
+              <br>Piece of Aerosiderite
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>From 2&#9733 Craft:<span id="Aerosiderite2-3"></span><br>
+              <input type="number" form="backpack" id="Aerosiderite3Quantity" name="Aerosiderite3_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Aerosiderite3')"><br>
+              Total:<span id="Aerosiderite3Total"></span>
+              <br>Need:<span id="Aerosiderite3_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Aerosiderite2.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Aerosiderite2">
+              <br>Grain of Aerosiderite
+            </div>
+            <div class="row">
+              Own:<br>-<br>-<br>-<br>
+              <input type="number" form="backpack" id="Aerosiderite2Quantity" name="Aerosiderite2_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Aerosiderite2')"><br>
+              Total:<span id="Aerosiderite2Total"></span>
+              <br>Need:<span id="Aerosiderite2_Need"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center" style="background-color:gray;color:#fff">
+        <hr>
+        <h3>Local Specialty</h3>
+        <hr>
+      </div>
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row">
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/CallaLily.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="CallaLily">
+              <br>Calla Lily
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="CallaLilyQuantity" name="CallaLily_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('CallaLily')">
+              <br>Need:<span id="CallaLily_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Wolfhook.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Wolfhook">
+              <br>Wolfhook
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="WolfhookQuantity" name="Wolfhook_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Wolfhook')">
+              <br>Need:<span id="Wolfhook_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Valberry.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Valberry">
+              <br>Valberry
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="ValberryQuantity" name="Valberry_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Valberry')">
+              <br>Need:<span id="Valberry_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Cecilia.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Cecilia">
+              <br>Cecilia
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="CeciliaQuantity" name="Cecilia_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Cecilia')">
+              <br>Need:<span id="Cecilia_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/WindwheelAster.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="WindwheelAster">
+              <br>Windwheel Aster
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="WindwheelAsterQuantity" name="WindwheelAster_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('WindwheelAster')">
+              <br>Need:<span id="WindwheelAster_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/PhilanemoMushroom.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="PhilanemoMushroom">
+              <br>Philanemo Mushroom
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="PhilanemoMushroomQuantity" name="PhilanemoMushroom_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('PhilanemoMushroom')">
+              <br>Need:<span id="PhilanemoMushroom_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/JueyunChili.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="JueyunChili">
+              <br>Jueyun Chili
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="JueyunChiliQuantity" name="JueyunChili_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('JueyunChili')">
+              <br>Need:<span id="JueyunChili_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/NoctilucousJade.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="NoctilucousJade">
+              <br>Noctilucous Jade
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="NoctilucousJadeQuantity" name="NoctilucousJade_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('NoctilucousJade')">
+              <br>Need:<span id="NoctilucousJade_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/SilkFlower.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="SilkFlower">
+              <br>Silk Flower
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="SilkFlowerQuantity" name="SilkFlower_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('SilkFlower')">
+              <br>Need:<span id="SilkFlower_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/GlazeLily.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="GlazeLily">
+              <br>Glaze Lily
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="GlazeLilyQuantity" name="GlazeLily_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('GlazeLily')">
+              <br>Need:<span id="GlazeLily_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Qingxin.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Qingxin">
+              <br>Qingxin
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="QingxinQuantity" name="Qingxin_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Qingxin')">
+              <br>Need:<span id="Qingxin_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Starconch.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Starconch">
+              <br>Starconch
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="StarconchQuantity" name="Starconch_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Starconch')">
+              <br>Need:<span id="Starconch_Need"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row">
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/Violetgrass.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="Violetgrass">
+              <br>Violetgrass
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="VioletgrassQuantity" name="Violetgrass_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('Violetgrass')">
+              <br>Need:<span id="Violetgrass_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/SmallLampGrass.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="SmallLampGrass">
+              <br>Small Lamp Grass
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="SmallLampGrassQuantity" name="SmallLampGrass_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('SmallLampGrass')">
+              <br>Need:<span id="SmallLampGrass_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/DandelionSeed.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="DandelionSeed">
+              <br>Dandelion Seed
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="DandelionSeedQuantity" name="DandelionSeed_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('DandelionSeed')">
+              <br>Need:<span id="DandelionSeed_Need"></span>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="row ajustaimagem">
+              <img src="Image/CorLapis.png" class="img-responsive img-thumbnail mx-auto" style="width:100px" alt="CorLapis">
+              <br>Cor Lapis
+            </div>
+            <div class="row">
+              Own:<br>
+              <input type="number" form="backpack" id="CorLapisQuantity" name="CorLapis_Own" min=0 style="width: 80%;" onchange="Atualiza_BancoDeDados('CorLapis')">
+              <br>Need:<span id="CorLapis_Need"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br><br>
+              
+		</section>
+		<footer class="container-fluid text-center" style="background-color:#333;color:#fff">
+			<b>Made by Fabiano Médice<br>2020</b>
+    </footer>
+
+    <script>
+      ConfereUsuario()
+      Ler_BancoDeDadosQuantidades()
+      Ler_BancoDeDadosFarm()
+      Dominios_Do_Dia()
+    </script>
+
+	</body>
+</html>

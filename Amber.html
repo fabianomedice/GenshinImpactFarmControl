@@ -1,0 +1,973 @@
+<!DOCTYPE html> 
+
+<html lang="en" style="scroll-behavior: smooth;">
+	<head>
+		<!-- Titulo da aba-->
+		<title> 
+			Genshin Impact Farm Helper
+		</title>
+		<!-- Metadados -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="Fabiano Médice">
+		<meta name="description" content="Controle de Informações de farm de Genshin Impact">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="JS/banco_de_dados.js"></script>
+        <script src="JS/chars.js"></script>
+        <script src="JS/login.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <!-- bootstrap 3.0 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <style>
+                /* 
+                Conserta o link levar para embaixo do nav
+                Solução do site http://nicolasgallagher.com/jump-links-and-viewport-positioning/
+                */
+                #Albedo::before, #Amber::before, #Barbara::before, #Beidou::before, #Bennett::before, #Chongyun::before, #Diluc::before, #Diona::before, #Fischl::before, #Ganyu::before, #Jean::before, #Kaeya::before, #Keqing::before, #Klee::before, #Lisa::before, #Mona::before, #Ningguang::before, #Noelle::before, #Qiqi::before, #Razor::before, #Sucrose::before, #Tartaglia::before, #Traveler::before, #Venti::before, #Xiangling::before, #Xingqiu::before
+                {
+                    content: "";
+                    display: block;
+                    height: 180px;
+                    margin: -180px 0 0;
+                }
+                /*CSS responsível para diferentes tamanhos de tela*/
+                /*Aparece para adicionar um vazio embaixo da foto*/
+                @media screen and (max-width: 1196px) 
+                {
+                    .DivArrumadora
+                    {
+                        display: inline;
+                    }
+                }
+                /*Some pois a foto ocupa esse vazio*/
+                @media screen and (min-width: 1197px) 
+                {
+                    .DivArrumadora
+                    {
+                        display: none;
+                    }
+                }
+        </style>
+	</head>
+	<body>
+		<header style="position:sticky; top:0; z-index:1">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li><a href="backpack.html">Backpack</a></li>
+              <li class="active"><a href="chars.html">Characters</a></li>
+              <!--<li><a href="weapons.html">Weapons</a></li>-->
+              <li><a href="farm.html">Complete Farm Sheet</a></li>
+              <li><a href="index.html">About</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a>Please help us maintain this site</a></li>
+              <li><a href="https://streamlabs.com/mrbadgerbr/tip" style="padding:0px"><img src="Image/PayPal.png" style="height:50px" alt="PayPal"></a></li>
+              <li><a><br></a></li>
+              <li><a href="https://pag.ae/7WB124EQp" style="padding:0px"><img src="Image/PagSeguro.png" style="height:50px" alt="PagSeguro"></a></li>
+              <li><a><br></a></li>
+              <li id="LoginOption"><a onclick=AbreLogin()><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              <li id="LoginUser" style="display: none;"> <form id="FormLogin" method="POST" action="PHP/register.php"><input type="text" placeholder="Enter Email" name="email" id="LoginEmail" > <br> <input type="password" placeholder="Enter Password" name="password" id="LoginPassword" ></form></li>
+              <li id="LoginButton" style="display: none;"><button onclick=FazLogin() style="width:70px"> Log in </button><br><input type="submit" value="Register" form="FormLogin" style="width:70px"></li>
+              <li id="ForgetPasswordButton" style="display: none;"><span style="width: 3px;height: 21px; display: inline-block;"></span> <input type="checkbox" id="RememberMe" onclick=LembrarLogin()> <b style="color: white;">Remember me</b> <br><button onclick='location.href="PHP/resetpassword.php"'> Reset Password </button></li>
+              <li id="RegisterUser" style="display: none;"></li>
+              <li id="LogoutButton" style="display: none;"><a style="color: black;"><button onclick=DesfazLogin() style="width:70px"> Log out </button></a></li>
+            </ul>
+          </div>
+        </div>
+        <div style="background-color:#080808;color:#fff"> 
+          <div class="container text-center">
+            <h1>Characters - Amber</h1>      
+          </div>
+        </div>
+          <!-- Navegador para os chars-->
+          <nav>
+            <ul class=" navbar-nav" style="list-style-type:none;">
+                <li><a href="Albedo.html"><img src="Image/Albedo.png" style="width:50px" alt="Albedo"></a></li>
+                <li><a href="Amber.html"><img src="Image/Amber.png" style="width:50px" alt="Amber"></a></li>
+                <li><a href="Barbara.html"><img src="Image/Barbara.png" style="width:50px" alt="Barbara"></a></li>
+                <li><a href="Beidou.html"><img src="Image/Beidou.png" style="width:50px" alt="Beidou"></a></li>
+                <li><a href="Bennett.html"><img src="Image/Bennett.png" style="width:50px" alt="Bennett"></a></li>
+                <li><a href="Chongyun.html"><img src="Image/Chongyun.png" style="width:50px" alt="Chongyun"></a></li>
+                <li><a href="Diluc.html"><img src="Image/Diluc.png" style="width:50px" alt="Diluc"></a></li>
+                <li><a href="Diona.html"><img src="Image/Diona.png" style="width:50px" alt="Diona"></a></li>
+                <li><a href="Fischl.html"><img src="Image/Fischl.png" style="width:50px" alt="Fischl"></a></li>
+                <li><a href="Ganyu.html"><img src="Image/Ganyu.png" style="width:50px" alt="Ganyu"></a></li>
+                <li><a href="Jean.html"><img src="Image/Jean.png" style="width:50px" alt="Jean"></a></li>
+                <li><a href="Kaeya.html"><img src="Image/Kaeya.png" style="width:50px" alt="Kaeya"></a></li>
+                <li><a href="Keqing.html"><img src="Image/Keqing.png" style="width:50px" alt="Keqing"></a></li>
+                <li><a href="Klee.html"><img src="Image/Klee.png" style="width:50px" alt="Klee"></a></li>
+                <li><a href="Lisa.html"><img src="Image/Lisa.png" style="width:50px" alt="Lisa"></a></li>
+                <li><a href="Mona.html"><img src="Image/Mona.png" style="width:50px" alt="Mona"></a></li>
+                <li><a href="Ningguang.html"><img src="Image/Ningguang.png" style="width:50px" alt="Ningguang"></a></li>
+                <li><a href="Noelle.html"><img src="Image/Noelle.png" style="width:50px" alt="Noelle"></a></li>
+                <li><a href="Qiqi.html"><img src="Image/Qiqi.png" style="width:50px" alt="Qiqi"></a></li>
+                <li><a href="Razor.html"><img src="Image/Razor.png" style="width:50px" alt="Razor"></a></li>
+                <li><a href="Sucrose.html"><img src="Image/Sucrose.png" style="width:50px" alt="Sucrose"></a></li>
+                <li><a href="Tartaglia.html"><img src="Image/Tartaglia.png" style="width:50px" alt="Tartaglia"></a></li>
+                <li><a href="Traveler.html"><img src="Image/Traveler(Anemo).png" style="width:50px" alt="Traveler"></a></li>
+                <li><a href="Venti.html"><img src="Image/Venti.png" style="width:50px" alt="Venti"></a></li>
+                <li><a href="Xiangling.html"><img src="Image/Xiangling.png" style="width:50px" alt="Xiangling"></a></li>
+                <li><a href="Xingqiu.html"><img src="Image/Xingqiu.png" style="width:50px" alt="Xingqiu"></a></li>
+                <li><a href="Xinyan.html"><img src="Image/Xinyan.png" style="width:50px" alt="Xinyan"></a></li>
+                <li><a href="Zhongli.html"><img src="Image/Zhongli.png" style="width:50px" alt="Zhongli"></a></li>
+            </ul>
+          </nav>
+      </nav>
+    </header>    
+		<br>
+		<section >
+      <form id="chars"> 
+        <!-- Criado o formulario-->
+      </form>
+
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row" id="Amber">
+            <div class="col-sm-3" >
+                <img src="Image/Amber_Card.jpg" class="img-responsive img-thumbnail mx-auto" style="max-height: 800px;" alt="Amber">
+            </div>
+            <div class="col-sm-9" >
+
+                <div class="row" >
+                    <div class="col-sm-2" >
+                        <input type="checkbox" id="AmberOwn" name="Amber_Own" value=True form="chars" onchange="Confirma_Personagem('Amber')">
+                        <label for="AmberOwn">I have this char</label>
+                    </div>
+                    <div class="col-sm-3" >
+                        <b>Ascension Level</b><br>
+                        <input type="radio" form="chars" id="AmberAscension0" name="AmberAscension" value=0 onchange="Atualiza_char_Ascension_Level('Amber',0)">
+                        <label for="AmberAscension0">0 </label>
+                        <input type="radio" form="chars" id="AmberAscension1" name="AmberAscension" value=1 onchange="Atualiza_char_Ascension_Level('Amber',1)">
+                        <label for="AmberAscension1">1 </label>
+                        <input type="radio" form="chars" id="AmberAscension2" name="AmberAscension" value=2 onchange="Atualiza_char_Ascension_Level('Amber',2)">
+                        <label for="AmberAscension2">2 </label>
+                        <input type="radio" form="chars" id="AmberAscension3" name="AmberAscension" value=3 onchange="Atualiza_char_Ascension_Level('Amber',3)">
+                        <label for="AmberAscension3">3 </label>
+                        <input type="radio" form="chars" id="AmberAscension4" name="AmberAscension" value=4 onchange="Atualiza_char_Ascension_Level('Amber',4)">
+                        <label for="AmberAscension4">4 </label>
+                        <input type="radio" form="chars" id="AmberAscension5" name="AmberAscension" value=5 onchange="Atualiza_char_Ascension_Level('Amber',5)">
+                        <label for="AmberAscension5">5 </label>
+                        <input type="radio" form="chars" id="AmberAscension6" name="AmberAscension" value=6 onchange="Atualiza_char_Ascension_Level('Amber',6)">
+                        <label for="AmberAscension6">6 </label>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Attack</b><br>
+                        <select id="AmberTalentAtk" form="chars" name="Amber_TalentAtk" onchange="Atualiza_talento('Amber','Atk')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Elemental Skill</b><br>
+                        <select id="AmberTalentElementalSkill" form="chars" name="Amber_TalentElementalSkill" onchange="Atualiza_talento('Amber','ElementalSkill')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Elemental Burst</b><br>
+                        <select id="AmberTalentElementalBurst" form="chars" name="Amber_ElementalBurst" onchange="Atualiza_talento('Amber','ElementalBurst')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row" >
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Pyro2.png" style="width:35px" alt="Pyro2"> <span id="AmberElement2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Pyro3.png" style="width:35px" alt="Pyro3"> <span id="AmberElement3"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Pyro4.png" style="width:35px" alt="Pyro4"> <span id="AmberElement4"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Pyro5.png" style="width:35px" alt="Pyro5"> <span id="AmberElement5"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/BossPyro.png" style="width:35px" alt="BossPyro"> <span id="AmberBoss"></span><br>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2" >
+                            <b>Own/Need</b>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/SmallLampGrass.png" style="width:35px" alt="Small Lamp Grass"> <span id="AmberLocal_Specialty"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/HilichurlArrowheads1.png" style="width:35px" alt="HilichurlArrowheads1"> <span id="AmberComum_Item1"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/HilichurlArrowheads2.png" style="width:35px" alt="HilichurlArrowheads2"> <span id="AmberComum_Item2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/HilichurlArrowheads3.png" style="width:35px" alt="HilichurlArrowheads3"> <span id="AmberComum_Item3"></span><br>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Freedom2.png" style="width:35px" alt="Freedom2"> <span id="AmberTalent2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Freedom3.png" style="width:35px" alt="Freedom3"> <span id="AmberTalent3"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Freedom4.png" style="width:35px" alt="Freedom4"> <span id="AmberTalent4"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/DvalinsSigh.png" style="width:35px" alt="Dvalin's Sigh"> <span id="AmberBossTalent"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/CrownofInsight.png" style="width:35px" alt="Crown of Insight"> <span id="AmberCrownofInsight"></span>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row" >
+                    <div class="col-sm-2" id="AmberAscension1Div">
+                        <b>Ascension 1</b><br>
+                        <img src="Image/Pyro2.png" style="width:50px" alt="Pyro2"> x01<br>
+                        <img src="Image/SmallLampGrass.png" style="width:50px" alt="Small Lamp Grass"> x03 <br>
+                        <img src="Image/HilichurlArrowheads1.png" style="width:50px" alt="HilichurlArrowheads1"> x03
+                    </div>
+                    <div class="col-sm-2" id="AmberAscension2Div">
+                        <b>Ascension 2</b><br>
+                        <img src="Image/Pyro3.png" style="width:50px" alt="Pyro3"> x03<br>
+                        <img src="Image/BossPyro.png" style="width:50px" alt="BossPyro"> x02<br>
+                        <img src="Image/SmallLampGrass.png" style="width:50px" alt="Small Lamp Grass"> x10 <br>
+                        <img src="Image/HilichurlArrowheads1.png" style="width:50px" alt="HilichurlArrowheads1"> x15
+                    </div>
+                    <div class="col-sm-2" id="AmberAscension3Div">
+                        <b>Ascension 3</b><br>
+                        <img src="Image/Pyro3.png" style="width:50px" alt="Pyro3"> x06<br>
+                        <img src="Image/BossPyro.png" style="width:50px" alt="BossPyro"> x04<br>
+                        <img src="Image/SmallLampGrass.png" style="width:50px" alt="Small Lamp Grass"> x20 <br>
+                        <img src="Image/HilichurlArrowheads2.png" style="width:50px" alt="HilichurlArrowheads2"> x12
+                    </div>
+                    <div class="col-sm-2" id="AmberAscension4Div">
+                        <b>Ascension 4</b><br>
+                        <img src="Image/Pyro4.png" style="width:50px" alt="Pyro4"> x03<br>
+                        <img src="Image/BossPyro.png" style="width:50px" alt="BossPyro"> x08<br>
+                        <img src="Image/SmallLampGrass.png" style="width:50px" alt="Small Lamp Grass"> x30 <br>
+                        <img src="Image/HilichurlArrowheads2.png" style="width:50px" alt="HilichurlArrowheads2"> x18
+                    </div>
+                    <div class="col-sm-2" id="AmberAscension5Div">
+                        <b>Ascension 5</b><br>
+                        <img src="Image/Pyro4.png" style="width:50px" alt="Pyro4"> x06<br>
+                        <img src="Image/BossPyro.png" style="width:50px" alt="BossPyro"> x12<br>
+                        <img src="Image/SmallLampGrass.png" style="width:50px" alt="Small Lamp Grass"> x45 <br>
+                        <img src="Image/HilichurlArrowheads3.png" style="width:50px" alt="HilichurlArrowheads3"> x12
+                    </div>
+                    <div class="col-sm-2" id="AmberAscension6Div">
+                        <b>Ascension 6</b><br>
+                        <img src="Image/Pyro5.png" style="width:50px" alt="Pyro5"> x06<br>
+                        <img src="Image/BossPyro.png" style="width:50px" alt="BossPyro"> x20<br>
+                        <img src="Image/SmallLampGrass.png" style="width:50px" alt="Small Lamp Grass"> x60 <br>
+                        <img src="Image/HilichurlArrowheads3.png" style="width:50px" alt="HilichurlArrowheads3"> x24
+                    </div>
+                </div>
+                <br>
+                <div class="row" ><br></div>
+            </div>
+            <div class="col-sm-3 DivArrumadora" >
+                <!--Div Arrumadora de padrão-->
+            </div>
+            <div class="col-sm-1" id="AmberTalent2Div">
+                <b>Talent Lv 2</b><br>
+                <img src="Image/Freedom2.png" style="width:50px" alt="Freedom2"> x3 / Talent <br>
+                <img src="Image/HilichurlArrowheads1.png" style="width:50px" alt="HilichurlArrowheads1"> x6 / Talent
+            </div>
+            <div class="col-sm-1" id="AmberTalent3Div">
+                <b>Talent Lv 3</b><br>
+                <img src="Image/Freedom3.png" style="width:50px" alt="Freedom3"> x2 / Talent <br>
+                <img src="Image/HilichurlArrowheads2.png" style="width:50px" alt="HilichurlArrowheads2"> x3 / Talent
+            </div>
+            <div class="col-sm-1" id="AmberTalent4Div">
+                <b>Talent Lv 4</b><br>
+                <img src="Image/Freedom3.png" style="width:50px" alt="Freedom3"> x4 / Talent <br>
+                <img src="Image/HilichurlArrowheads2.png" style="width:50px" alt="HilichurlArrowheads2"> x4 / Talent
+            </div>
+            <div class="col-sm-1" id="AmberTalent5Div">
+                <b>Talent Lv 5</b><br>
+                <img src="Image/Freedom3.png" style="width:50px" alt="Freedom3"> x6 / Talent <br>
+                <img src="Image/HilichurlArrowheads2.png" style="width:50px" alt="HilichurlArrowheads2"> x6 / Talent
+            </div>
+            <div class="col-sm-1" id="AmberTalent6Div">
+                <b>Talent Lv 6</b><br>
+                <img src="Image/Freedom3.png" style="width:50px" alt="Freedom3"> x9 / Talent <br>
+                <img src="Image/HilichurlArrowheads2.png" style="width:50px" alt="HilichurlArrowheads2"> x9 / Talent
+            </div>
+            <div class="col-sm-1" id="AmberTalent7Div">
+                <b>Talent Lv 7</b><br>
+                <img src="Image/Freedom4.png" style="width:50px" alt="Freedom4"> x4 / Talent <br>
+                <img src="Image/HilichurlArrowheads3.png" style="width:50px" alt="HilichurlArrowheads3"> x4 / Talent<br>
+                <img src="Image/DvalinsSigh.png" style="width:50px" alt="DvalinsSigh"> x1 / Talent
+            </div>
+            <div class="col-sm-1" id="AmberTalent8Div">
+                <b>Talent Lv 8</b><br>
+                <img src="Image/Freedom4.png" style="width:50px" alt="Freedom4"> x6 / Talent <br>
+                <img src="Image/HilichurlArrowheads3.png" style="width:50px" alt="HilichurlArrowheads3"> x6 / Talent <br>
+                <img src="Image/DvalinsSigh.png" style="width:50px" alt="DvalinsSigh"> x1 / Talent
+            </div>
+            <div class="col-sm-1" id="AmberTalent9Div">
+                <b>Talent Lv 9</b><br>
+                <img src="Image/Freedom4.png" style="width:50px" alt="Freedom4"> x12 / Talent <br>
+                <img src="Image/HilichurlArrowheads3.png" style="width:50px" alt="HilichurlArrowheads3"> x09 / Talent <br>
+                <img src="Image/DvalinsSigh.png" style="width:50px" alt="DvalinsSigh"> x02 / Talent
+            </div>
+            <div class="col-sm-1" id="AmberTalent10Div">
+                <b>Talent Lv 10</b><br>
+                <img src="Image/Freedom4.png" style="width:50px" alt="Freedom4"> x16 / Talent <br>
+                <img src="Image/HilichurlArrowheads3.png" style="width:50px" alt="HilichurlArrowheads3"> x12 / Talent <br>
+                <img src="Image/DvalinsSigh.png" style="width:50px" alt="DvalinsSigh"> x02 / Talent<br>
+                <img src="Image/CrownofInsight.png" style="width:50px" alt="Crown of Insight"> x01 / Talent<br>
+            </div>
+
+            <div class="col-sm-3" >
+                <!--Div Arrumadora de padrão-->
+            </div>
+            <div class="col-sm-9" >
+                <div class="col-sm-2" >
+                    <label for="AmberWeapon">Choose a weapon (Bows):</label>
+                    <select id="AmberWeapon" form="chars" name="Amber_Weapon" onchange="Atualiza_weapon('Amber')">
+                        <option value="NoneBow">None</option>
+                        <!--<option value="AlleyHunter">Alley Hunter</option>-->
+                        <option value="AmosBow">Amos' Bow</option>
+                        <option value="BlackcliffWarbow">Blackcliff Warbow</option>
+                        <option value="CompoundBow">Compound Bow</option>
+                        <!--<option value="EbonyBow">Ebony Bow</option>-->
+                        <option value="FavoniusWarbow">Favonius Warbow</option>
+                        <option value="Messenger">Messenger</option>
+                        <option value="PrototypeCrescent">Prototype Crescent</option>
+                        <option value="RavenBow">Raven Bow</option>
+                        <option value="RecurveBow">Recurve Bow</option>
+                        <option value="RoyalBow">Royal Bow</option>
+                        <option value="Rust">Rust</option>
+                        <option value="SacrificialBow">Sacrificial Bow</option>
+                        <option value="SharpshootersOath">Sharpshooter's Oath</option>
+                        <option value="SkywardHarp">Skyward Harp</option>
+                        <option value="Slingshot">Slingshot</option>
+                        <option value="TheStringless">The Stringless</option>
+                        <option value="TheViridescentHunt">The Viridescent Hunt</option>
+                    </select>
+                    <br>
+                    <b>Weapon Ascension Level</b><br>
+                    <input type="radio" form="chars" id="AmberWeaponAscension0" name="AmberWeaponAscension" value=0 onchange="Atualiza_weapon_Ascension_Level('Amber',0)">
+                    <label for="AmberWeaponAscension0">0 </label>
+                    <input type="radio" form="chars" id="AmberWeaponAscension1" name="AmberWeaponAscension" value=1 onchange="Atualiza_weapon_Ascension_Level('Amber',1)">
+                    <label for="AmberWeaponAscension1">1 </label>
+                    <input type="radio" form="chars" id="AmberWeaponAscension2" name="AmberWeaponAscension" value=2 onchange="Atualiza_weapon_Ascension_Level('Amber',2)">
+                    <label for="AmberWeaponAscension2">2 </label>
+                    <input type="radio" form="chars" id="AmberWeaponAscension3" name="AmberWeaponAscension" value=3 onchange="Atualiza_weapon_Ascension_Level('Amber',3)">
+                    <label for="AmberWeaponAscension3">3 </label>
+                    <input type="radio" form="chars" id="AmberWeaponAscension4" name="AmberWeaponAscension" value=4 onchange="Atualiza_weapon_Ascension_Level('Amber',4)">
+                    <label for="AmberWeaponAscension4">4 </label>
+                    <input type="radio" form="chars" id="AmberWeaponAscension5" name="AmberWeaponAscension" value=5 onchange="Atualiza_weapon_Ascension_Level('Amber',5)">
+                    <label for="AmberWeaponAscension5">5 </label>
+                    <input type="radio" form="chars" id="AmberWeaponAscension6" name="AmberWeaponAscension" value=6 onchange="Atualiza_weapon_Ascension_Level('Amber',6)">
+                    <label for="AmberWeaponAscension6">6 </label>
+                    <br>
+                    <img src="Image/NoneBow.png" class="img-responsive img-thumbnail mx-auto" style="width:130px" alt="NoneBow" id="AmberWeaponImage">
+                    <br>
+                </div>
+                <div class="col-sm-10" >
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Dominio_2" id="AmberWeaponDominio_2"> <span id="AmberWeaponDominio_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Dominio_3" id="AmberWeaponDominio_3"> <span id="AmberWeaponDominio_3_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Dominio_4" id="AmberWeaponDominio_4"> <span id="AmberWeaponDominio_4_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Dominio_5" id="AmberWeaponDominio_5"> <span id="AmberWeaponDominio_5_Quant"></span><br></div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Comum_Item_2a4_2" id="AmberWeaponComum_Item_2a4_2"> <span id="AmberWeaponComum_Item_2a4_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Comum_Item_2a4_3" id="AmberWeaponComum_Item_2a4_3"> <span id="AmberWeaponComum_Item_2a4_3_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Comum_Item_2a4_4" id="AmberWeaponComum_Item_2a4_4"> <span id="AmberWeaponComum_Item_2a4_4_Quant"></span></div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <b>Own/Need</b><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Comum_Item_1a3_1" id="AmberWeaponComum_Item_1a3_1"> <span id="AmberWeaponComum_Item_1a3_1_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Comum_Item_1a3_2" id="AmberWeaponComum_Item_1a3_2"> <span id="AmberWeaponComum_Item_1a3_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Comum_Item_1a3_3" id="AmberWeaponComum_Item_1a3_3"> <span id="AmberWeaponComum_Item_1a3_3_Quant"></span><br></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <div class="row" >
+            <hr>
+            <h1>Builds</h1>
+            <hr>
+            <h4>This is Amber Base Stats</h4>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr repeat(8, 2fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Ascension</div>
+                <div style="border: solid black 1px;">0</div>
+                <div style="border: solid black 1px;">1</div>
+                <div style="border: solid black 1px;">2</div>
+                <div style="border: solid black 1px;">3</div>
+                <div style="border: solid black 1px;">4</div>
+                <div style="border: solid black 1px;">5</div>
+                <div style="border: solid black 1px;">6</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Level</div>
+                <div style="border: solid black 1px;">1</div>
+                <div style="border: solid black 1px;">20</div>
+                <div style="border: solid black 1px;">20</div>
+                <div style="border: solid black 1px;">40</div>
+                <div style="border: solid black 1px;">40</div>
+                <div style="border: solid black 1px;">50</div>
+                <div style="border: solid black 1px;">50</div>
+                <div style="border: solid black 1px;">60</div>
+                <div style="border: solid black 1px;">60</div>
+                <div style="border: solid black 1px;">70</div>
+                <div style="border: solid black 1px;">70</div>
+                <div style="border: solid black 1px;">80</div>
+                <div style="border: solid black 1px;">80</div>
+                <div style="border: solid black 1px;">90</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">HP</div>
+                <div style="border: solid black 1px;">793</div>
+                <div style="border: solid black 1px;">2038</div>
+                <div style="border: solid black 1px;">2630</div>
+                <div style="border: solid black 1px;">3940</div>
+                <div style="border: solid black 1px;">4361</div>
+                <div style="border: solid black 1px;">5016</div>
+                <div style="border: solid black 1px;">5578</div>
+                <div style="border: solid black 1px;">6233</div>
+                <div style="border: solid black 1px;">6654</div>
+                <div style="border: solid black 1px;">7309</div>
+                <div style="border: solid black 1px;">7730</div>
+                <div style="border: solid black 1px;">8385</div>
+                <div style="border: solid black 1px;">8806</div>
+                <div style="border: solid black 1px;">9461</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">ATK</div>
+                <div style="border: solid black 1px;">19</div>
+                <div style="border: solid black 1px;">48</div>
+                <div style="border: solid black 1px;">62</div>
+                <div style="border: solid black 1px;">93</div>
+                <div style="border: solid black 1px;">103</div>
+                <div style="border: solid black 1px;">118</div>
+                <div style="border: solid black 1px;">132</div>
+                <div style="border: solid black 1px;">147</div>
+                <div style="border: solid black 1px;">157</div>
+                <div style="border: solid black 1px;">172</div>
+                <div style="border: solid black 1px;">182</div>
+                <div style="border: solid black 1px;">198</div>
+                <div style="border: solid black 1px;">208</div>
+                <div style="border: solid black 1px;">223</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">DEF</div>
+                <div style="border: solid black 1px;">50</div>
+                <div style="border: solid black 1px;">129</div>
+                <div style="border: solid black 1px;">167</div>
+                <div style="border: solid black 1px;">250</div>
+                <div style="border: solid black 1px;">277</div>
+                <div style="border: solid black 1px;">318</div>
+                <div style="border: solid black 1px;">354</div>
+                <div style="border: solid black 1px;">396</div>
+                <div style="border: solid black 1px;">422</div>
+                <div style="border: solid black 1px;">464</div>
+                <div style="border: solid black 1px;">491</div>
+                <div style="border: solid black 1px;">532</div>
+                <div style="border: solid black 1px;">559</div>
+                <div style="border: solid black 1px;">601</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">ATK %</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">6%</div>
+                <div style="border: solid black 1px;">6%</div>
+                <div style="border: solid black 1px;">12%</div>
+                <div style="border: solid black 1px;">12%</div>
+                <div style="border: solid black 1px;">12%</div>
+                <div style="border: solid black 1px;">12%</div>
+                <div style="border: solid black 1px;">18%</div>
+                <div style="border: solid black 1px;">18%</div>
+                <div style="border: solid black 1px;">24%</div>
+                <div style="border: solid black 1px;">24%</div>
+            </div>
+        </div>
+        <br>
+        <div class="row" >
+            <h4>This is Amber Normal Attack Stats</h4>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Attack Speed</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">Lv 1</div>
+                <div style="border: solid black 1px;">Lv 2</div>
+                <div style="border: solid black 1px;">Lv 3</div>
+                <div style="border: solid black 1px;">Lv 4</div>
+                <div style="border: solid black 1px;">Lv 5</div>
+                <div style="border: solid black 1px;">Lv 6</div>
+                <div style="border: solid black 1px;">Lv 7</div>
+                <div style="border: solid black 1px;">Lv 8</div>
+                <div style="border: solid black 1px;">Lv 9</div>
+                <div style="border: solid black 1px;">Lv 10</div>
+                <div style="border: solid black 1px;">Lv 11</div>
+                <div style="border: solid black 1px;">Lv 12</div>
+                <div style="border: solid black 1px;">Lv 13</div>
+                <div style="border: solid black 1px;">Lv 14</div>
+                <div style="border: solid black 1px;">Lv 15</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">1-Hit Damage</div>
+                <div style="border: solid black 1px;">0.17s (10/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">36.1%</div>
+                <div style="border: solid black 1px;">39.1%</div>
+                <div style="border: solid black 1px;">42.0%</div>
+                <div style="border: solid black 1px;">46.2%</div>
+                <div style="border: solid black 1px;">49.1%</div>
+                <div style="border: solid black 1px;">52.5%</div>
+                <div style="border: solid black 1px;">57.1%</div>
+                <div style="border: solid black 1px;">61.7%</div>
+                <div style="border: solid black 1px;">66.4%</div>
+                <div style="border: solid black 1px;">71.4%</div>
+                <div style="border: solid black 1px;">76.4%</div>
+                <div style="border: solid black 1px;">81.5%</div>
+                <div style="border: solid black 1px;">86.5%</div>
+                <div style="border: solid black 1px;">91.6%</div>
+                <div style="border: solid black 1px;">96.6%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">2-Hit Damage</div>
+                <div style="border: solid black 1px;">0.17s (10/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">36.1%</div>
+                <div style="border: solid black 1px;">39.1%</div>
+                <div style="border: solid black 1px;">42.0%</div>
+                <div style="border: solid black 1px;">46.2%</div>
+                <div style="border: solid black 1px;">49.1%</div>
+                <div style="border: solid black 1px;">52.5%</div>
+                <div style="border: solid black 1px;">57.1%</div>
+                <div style="border: solid black 1px;">61.7%</div>
+                <div style="border: solid black 1px;">66.4%</div>
+                <div style="border: solid black 1px;">71.4%</div>
+                <div style="border: solid black 1px;">76.4%</div>
+                <div style="border: solid black 1px;">81.5%</div>
+                <div style="border: solid black 1px;">86.5%</div>
+                <div style="border: solid black 1px;">91.6%</div>
+                <div style="border: solid black 1px;">96.6%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">3-Hit Damage</div>
+                <div style="border: solid black 1px;">0.75s (15/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">46.4%</div>
+                <div style="border: solid black 1px;">50.2%</div>
+                <div style="border: solid black 1px;">54.0%</div>
+                <div style="border: solid black 1px;">59.4%</div>
+                <div style="border: solid black 1px;">63.2%</div>
+                <div style="border: solid black 1px;">67.5%</div>
+                <div style="border: solid black 1px;">73.4%</div>
+                <div style="border: solid black 1px;">79.4%</div>
+                <div style="border: solid black 1px;">85.3%</div>
+                <div style="border: solid black 1px;">91.8%</div>
+                <div style="border: solid black 1px;">98.3%</div>
+                <div style="border: solid black 1px;">105%</div>
+                <div style="border: solid black 1px;">111%</div>
+                <div style="border: solid black 1px;">118%</div>
+                <div style="border: solid black 1px;">124%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">4-Hit Damage</div>
+                <div style="border: solid black 1px;">0.2s (12/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">47.3%</div>
+                <div style="border: solid black 1px;">51.2%</div>
+                <div style="border: solid black 1px;">55.0%</div>
+                <div style="border: solid black 1px;">60.5%</div>
+                <div style="border: solid black 1px;">64.4%</div>
+                <div style="border: solid black 1px;">68.8%</div>
+                <div style="border: solid black 1px;">74.8%</div>
+                <div style="border: solid black 1px;">80.9%</div>
+                <div style="border: solid black 1px;">86.9%</div>
+                <div style="border: solid black 1px;">93.5%</div>
+                <div style="border: solid black 1px;">100%</div>
+                <div style="border: solid black 1px;">107%</div>
+                <div style="border: solid black 1px;">113%</div>
+                <div style="border: solid black 1px;">120%</div>
+                <div style="border: solid black 1px;">127%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">5-Hit Damage</div>
+                <div style="border: solid black 1px;">0.42s (25/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">59.3%</div>
+                <div style="border: solid black 1px;">64.2%</div>
+                <div style="border: solid black 1px;">69.0%</div>
+                <div style="border: solid black 1px;">75.9%</div>
+                <div style="border: solid black 1px;">80.7%</div>
+                <div style="border: solid black 1px;">86.3%</div>
+                <div style="border: solid black 1px;">93.8%</div>
+                <div style="border: solid black 1px;">101%</div>
+                <div style="border: solid black 1px;">109%</div>
+                <div style="border: solid black 1px;">117%</div>
+                <div style="border: solid black 1px;">126%</div>
+                <div style="border: solid black 1px;">134%</div>
+                <div style="border: solid black 1px;">142%</div>
+                <div style="border: solid black 1px;">150%</div>
+                <div style="border: solid black 1px;">159%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Total</div>
+                <div style="border: solid black 1px;">1.2s (72/60 fps)</div>
+            </div>
+        </div>
+        <div class="row" >
+            <h4>This is Amber Charged Attack Stats</h4>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Attack Speed</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">Lv 1</div>
+                <div style="border: solid black 1px;">Lv 2</div>
+                <div style="border: solid black 1px;">Lv 3</div>
+                <div style="border: solid black 1px;">Lv 4</div>
+                <div style="border: solid black 1px;">Lv 5</div>
+                <div style="border: solid black 1px;">Lv 6</div>
+                <div style="border: solid black 1px;">Lv 7</div>
+                <div style="border: solid black 1px;">Lv 8</div>
+                <div style="border: solid black 1px;">Lv 9</div>
+                <div style="border: solid black 1px;">Lv 10</div>
+                <div style="border: solid black 1px;">Lv 11</div>
+                <div style="border: solid black 1px;">Lv 12</div>
+                <div style="border: solid black 1px;">Lv 13</div>
+                <div style="border: solid black 1px;">Lv 14</div>
+                <div style="border: solid black 1px;">Lv 15</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Aimed Shot</div>
+                <div style="border: solid black 1px;">0.60s (36/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">43.9%</div>
+                <div style="border: solid black 1px;">47.4%</div>
+                <div style="border: solid black 1px;">51.0%</div>
+                <div style="border: solid black 1px;">56.1%</div>
+                <div style="border: solid black 1px;">59.7%</div>
+                <div style="border: solid black 1px;">63.8%</div>
+                <div style="border: solid black 1px;">69.4%</div>
+                <div style="border: solid black 1px;">75.0%</div>
+                <div style="border: solid black 1px;">80.6%</div>
+                <div style="border: solid black 1px;">86.7%</div>
+                <div style="border: solid black 1px;">92.8%</div>
+                <div style="border: solid black 1px;">98.9%</div>
+                <div style="border: solid black 1px;">105%</div>
+                <div style="border: solid black 1px;">111%</div>
+                <div style="border: solid black 1px;">117%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Fully-Charged</div>
+                <div style="border: solid black 1px;">2.13s (128/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">124%</div>
+                <div style="border: solid black 1px;">133%</div>
+                <div style="border: solid black 1px;">143%</div>
+                <div style="border: solid black 1px;">155%</div>
+                <div style="border: solid black 1px;">164%</div>
+                <div style="border: solid black 1px;">174%</div>
+                <div style="border: solid black 1px;">186%</div>
+                <div style="border: solid black 1px;">198%</div>
+                <div style="border: solid black 1px;">211%</div>
+                <div style="border: solid black 1px;">223%</div>
+                <div style="border: solid black 1px;">236%</div>
+                <div style="border: solid black 1px;">248%</div>
+                <div style="border: solid black 1px;">264%</div>
+                <div style="border: solid black 1px;">279%</div>
+                <div style="border: solid black 1px;">295%</div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 6fr 8fr 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div >
+                    <h4>Elemental Skill</h4>
+                    <div style="grid-template-columns: repeat(2, 3fr); display: grid;">
+                        <div>
+                            Cooldown:<br>
+                            Particles:<br>
+                            Energy Recharge:
+                        </div>
+                        <div>
+                            15s (Press)<br>
+                            3 Pyro Particles (Press)<br>
+                            9 (on field) 5.4 (out field)
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4>Elemental Burst</h4>
+                    <div style="grid-template-columns: 1fr 1fr; display: grid;">
+                        <div>
+                            Cooldown: 12s<br>
+                            Energy Cost: 40<br>
+                            Duration: 2s <br><br>
+                        </div>
+                        <div class="text-left">
+                            Modifiers to get Energy<br>
+                            Constellation 4: Decrease Elemental Skill (Explosive Puppet) CD by 20%. Adds 1 additional charge.<br>
+                            Constellation 6: Elemental Burst (Fiery Rain) increases all party members' Movement SPD by 15% and ATK by 15% for 10s.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <h4><b> Role</b></h4>
+            <div style="grid-template-columns: 1fr 10fr 1fr 10fr 1fr 10fr 1fr 10fr 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Description:</b><br>
+                    
+                    
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>This build has 3 variations:</b><br>
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Flower:</b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <br>
+                    1) HP (always)<br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Feather:</b><br>
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <br>
+                    1) ATK (always)<br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Hourglass:</b><br>
+                    <img src="Image/Set_Hourglass_.png" style="width:50px">
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Goblet:</b><br>
+                    <img src="Image/Set_Goblet_.png" style="width:50px">
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Crown:</b><br>
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) 
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Weapons:</b><br>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <h4><b>Other builds, videos or links below</b></h4>
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/jb5e11/quick_tldr_support_buildguide_for_amber/">Amber Support Guide by 2Board_ from Reddit <br>Version 1.0<br><img src="Image/Amber.png" style="width:100px" alt="Amber"></a>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://youtu.be/y9NHP1bxEo8?t=1742">COMPLETE SUPPORT GUIDE FOR EVERY CHARACTER by Zy0x from Youtube <br>Version 1.2<br><img src="https://i.ytimg.com/vi/y9NHP1bxEo8/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDsZZekgCZllXSBK7JTd0n_a-1NCA"></a>
+            
+        </div>  
+            
+        <br>
+        <br>  
+        
+              
+		</section>
+		<footer class="container-fluid text-center" style="background-color:#333;color:#fff">
+			<b>Made by Fabiano Médice<br>2020</b>
+    </footer>
+
+    <script>
+      ConfereUsuario()
+      Ler_BancoDeDadosQuantidades()
+      Ler_BancoDeDadosChar()
+      Atualiza_Valores_Char("Amber",1);
+    </script>
+
+	</body>
+</html>

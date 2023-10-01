@@ -1,0 +1,923 @@
+<!DOCTYPE html> 
+
+<html lang="en" style="scroll-behavior: smooth;">
+	<head>
+		<!-- Titulo da aba-->
+		<title> 
+			Genshin Impact Farm Helper
+		</title>
+		<!-- Metadados -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="Fabiano Médice">
+		<meta name="description" content="Controle de Informações de farm de Genshin Impact">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="JS/banco_de_dados.js"></script>
+        <script src="JS/chars.js"></script>
+        <script src="JS/login.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <!-- bootstrap 3.0 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <style>
+                /* 
+                Conserta o link levar para embaixo do nav
+                Solução do site http://nicolasgallagher.com/jump-links-and-viewport-positioning/
+                */
+                #Albedo::before, #Amber::before, #Barbara::before, #Beidou::before, #Bennett::before, #Chongyun::before, #Diluc::before, #Diona::before, #Fischl::before, #Ganyu::before, #Jean::before, #Kaeya::before, #Keqing::before, #Klee::before, #Lisa::before, #Mona::before, #Ningguang::before, #Noelle::before, #Qiqi::before, #Razor::before, #Sucrose::before, #Tartaglia::before, #Traveler::before, #Venti::before, #Xiangling::before, #Xingqiu::before
+                {
+                    content: "";
+                    display: block;
+                    height: 180px;
+                    margin: -180px 0 0;
+                }
+                /*CSS responsível para diferentes tamanhos de tela*/
+                /*Aparece para adicionar um vazio embaixo da foto*/
+                @media screen and (max-width: 1196px) 
+                {
+                    .DivArrumadora
+                    {
+                        display: inline;
+                    }
+                }
+                /*Some pois a foto ocupa esse vazio*/
+                @media screen and (min-width: 1197px) 
+                {
+                    .DivArrumadora
+                    {
+                        display: none;
+                    }
+                }
+        </style>
+	</head>
+	<body>
+		<header style="position:sticky; top:0; z-index:1">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li><a href="backpack.html">Backpack</a></li>
+              <li class="active"><a href="chars.html">Characters</a></li>
+              <!--<li><a href="weapons.html">Weapons</a></li>-->
+              <li><a href="farm.html">Complete Farm Sheet</a></li>
+              <li><a href="index.html">About</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a>Please help us maintain this site</a></li>
+              <li><a href="https://streamlabs.com/mrbadgerbr/tip" style="padding:0px"><img src="Image/PayPal.png" style="height:50px" alt="PayPal"></a></li>
+              <li><a><br></a></li>
+              <li><a href="https://pag.ae/7WB124EQp" style="padding:0px"><img src="Image/PagSeguro.png" style="height:50px" alt="PagSeguro"></a></li>
+              <li><a><br></a></li>
+              <li id="LoginOption"><a onclick=AbreLogin()><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              <li id="LoginUser" style="display: none;"> <form id="FormLogin" method="POST" action="PHP/register.php"><input type="text" placeholder="Enter Email" name="email" id="LoginEmail" > <br> <input type="password" placeholder="Enter Password" name="password" id="LoginPassword" ></form></li>
+              <li id="LoginButton" style="display: none;"><button onclick=FazLogin() style="width:70px"> Log in </button><br><input type="submit" value="Register" form="FormLogin" style="width:70px"></li>
+              <li id="ForgetPasswordButton" style="display: none;"><span style="width: 3px;height: 21px; display: inline-block;"></span> <input type="checkbox" id="RememberMe" onclick=LembrarLogin()> <b style="color: white;">Remember me</b> <br><button onclick='location.href="PHP/resetpassword.php"'> Reset Password </button></li>
+              <li id="RegisterUser" style="display: none;"></li>
+              <li id="LogoutButton" style="display: none;"><a style="color: black;"><button onclick=DesfazLogin() style="width:70px"> Log out </button></a></li>
+            </ul>
+          </div>
+        </div>
+        <div style="background-color:#080808;color:#fff"> 
+          <div class="container text-center">
+            <h1>Characters - Albedo</h1>      
+          </div>
+        </div>
+          <!-- Navegador para os chars-->
+          <nav>
+            <ul class=" navbar-nav" style="list-style-type:none;">
+                <li><a href="Albedo.html"><img src="Image/Albedo.png" style="width:50px" alt="Albedo"></a></li>
+                <li><a href="Amber.html"><img src="Image/Amber.png" style="width:50px" alt="Amber"></a></li>
+                <li><a href="Barbara.html"><img src="Image/Barbara.png" style="width:50px" alt="Barbara"></a></li>
+                <li><a href="Beidou.html"><img src="Image/Beidou.png" style="width:50px" alt="Beidou"></a></li>
+                <li><a href="Bennett.html"><img src="Image/Bennett.png" style="width:50px" alt="Bennett"></a></li>
+                <li><a href="Chongyun.html"><img src="Image/Chongyun.png" style="width:50px" alt="Chongyun"></a></li>
+                <li><a href="Diluc.html"><img src="Image/Diluc.png" style="width:50px" alt="Diluc"></a></li>
+                <li><a href="Diona.html"><img src="Image/Diona.png" style="width:50px" alt="Diona"></a></li>
+                <li><a href="Fischl.html"><img src="Image/Fischl.png" style="width:50px" alt="Fischl"></a></li>
+                <li><a href="Ganyu.html"><img src="Image/Ganyu.png" style="width:50px" alt="Ganyu"></a></li>
+                <li><a href="Jean.html"><img src="Image/Jean.png" style="width:50px" alt="Jean"></a></li>
+                <li><a href="Kaeya.html"><img src="Image/Kaeya.png" style="width:50px" alt="Kaeya"></a></li>
+                <li><a href="Keqing.html"><img src="Image/Keqing.png" style="width:50px" alt="Keqing"></a></li>
+                <li><a href="Klee.html"><img src="Image/Klee.png" style="width:50px" alt="Klee"></a></li>
+                <li><a href="Lisa.html"><img src="Image/Lisa.png" style="width:50px" alt="Lisa"></a></li>
+                <li><a href="Mona.html"><img src="Image/Mona.png" style="width:50px" alt="Mona"></a></li>
+                <li><a href="Ningguang.html"><img src="Image/Ningguang.png" style="width:50px" alt="Ningguang"></a></li>
+                <li><a href="Noelle.html"><img src="Image/Noelle.png" style="width:50px" alt="Noelle"></a></li>
+                <li><a href="Qiqi.html"><img src="Image/Qiqi.png" style="width:50px" alt="Qiqi"></a></li>
+                <li><a href="Razor.html"><img src="Image/Razor.png" style="width:50px" alt="Razor"></a></li>
+                <li><a href="Sucrose.html"><img src="Image/Sucrose.png" style="width:50px" alt="Sucrose"></a></li>
+                <li><a href="Tartaglia.html"><img src="Image/Tartaglia.png" style="width:50px" alt="Tartaglia"></a></li>
+                <li><a href="Traveler.html"><img src="Image/Traveler(Anemo).png" style="width:50px" alt="Traveler"></a></li>
+                <li><a href="Venti.html"><img src="Image/Venti.png" style="width:50px" alt="Venti"></a></li>
+                <li><a href="Xiangling.html"><img src="Image/Xiangling.png" style="width:50px" alt="Xiangling"></a></li>
+                <li><a href="Xingqiu.html"><img src="Image/Xingqiu.png" style="width:50px" alt="Xingqiu"></a></li>
+                <li><a href="Xinyan.html"><img src="Image/Xinyan.png" style="width:50px" alt="Xinyan"></a></li>
+                <li><a href="Zhongli.html"><img src="Image/Zhongli.png" style="width:50px" alt="Zhongli"></a></li>
+            </ul>
+          </nav>
+      </nav>
+    </header>    
+		<br>
+		<section >
+      <form id="chars"> 
+        <!-- Criado o formulario-->
+      </form>
+
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row" id="Albedo">
+            <div class="col-sm-3" >
+                <img src="Image/Albedo_Card.png" class="img-responsive img-thumbnail mx-auto" style="max-height: 800px;" alt="Albedo">
+            </div>
+            <div class="col-sm-9" >
+
+                <div class="row" >
+                    <div class="col-sm-2" >
+                        <input type="checkbox" id="AlbedoOwn" name="Albedo_Own" value=True form="chars" onchange="Confirma_Personagem('Albedo')">
+                        <label for="AlbedoOwn">I have this char</label>
+                    </div>
+                    <div class="col-sm-3" >
+                        <b>Ascension Level</b><br>
+                        <input type="radio" form="chars" id="AlbedoAscension0" name="AlbedoAscension" value=0 onchange="Atualiza_char_Ascension_Level('Albedo',0)">
+                        <label for="AlbedoAscension0">0 </label>
+                        <input type="radio" form="chars" id="AlbedoAscension1" name="AlbedoAscension" value=1 onchange="Atualiza_char_Ascension_Level('Albedo',1)">
+                        <label for="AlbedoAscension1">1 </label>
+                        <input type="radio" form="chars" id="AlbedoAscension2" name="AlbedoAscension" value=2 onchange="Atualiza_char_Ascension_Level('Albedo',2)">
+                        <label for="AlbedoAscension2">2 </label>
+                        <input type="radio" form="chars" id="AlbedoAscension3" name="AlbedoAscension" value=3 onchange="Atualiza_char_Ascension_Level('Albedo',3)">
+                        <label for="AlbedoAscension3">3 </label>
+                        <input type="radio" form="chars" id="AlbedoAscension4" name="AlbedoAscension" value=4 onchange="Atualiza_char_Ascension_Level('Albedo',4)">
+                        <label for="AlbedoAscension4">4 </label>
+                        <input type="radio" form="chars" id="AlbedoAscension5" name="AlbedoAscension" value=5 onchange="Atualiza_char_Ascension_Level('Albedo',5)">
+                        <label for="AlbedoAscension5">5 </label>
+                        <input type="radio" form="chars" id="AlbedoAscension6" name="AlbedoAscension" value=6 onchange="Atualiza_char_Ascension_Level('Albedo',6)">
+                        <label for="AlbedoAscension6">6 </label>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Attack</b><br>
+                        <select id="AlbedoTalentAtk" form="chars" name="Albedo_TalentAtk" onchange="Atualiza_talento('Albedo','Atk')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Elemental Skill</b><br>
+                        <select id="AlbedoTalentElementalSkill" form="chars" name="Albedo_TalentElementalSkill" onchange="Atualiza_talento('Albedo','ElementalSkill')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Elemental Burst</b><br>
+                        <select id="AlbedoTalentElementalBurst" form="chars" name="Albedo_ElementalBurst" onchange="Atualiza_talento('Albedo','ElementalBurst')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row" >
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Geo2.png" style="width:35px" alt="Geo2"> <span id="AlbedoElement2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Geo3.png" style="width:35px" alt="Geo3"> <span id="AlbedoElement3"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Geo4.png" style="width:35px" alt="Geo4"> <span id="AlbedoElement4"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Geo5.png" style="width:35px" alt="Geo5"> <span id="AlbedoElement5"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/BossGeo.png" style="width:35px" alt="BossGeo"> <span id="AlbedoBoss"></span><br>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2" >
+                            <b>Own/Need</b>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Cecilia.png" style="width:35px" alt="Cecilia"> <span id="AlbedoLocal_Specialty"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/SamachurlScrolls1.png" style="width:35px" alt="SamachurlScrolls1"> <span id="AlbedoComum_Item1"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/SamachurlScrolls2.png" style="width:35px" alt="SamachurlScrolls2"> <span id="AlbedoComum_Item2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/SamachurlScrolls3.png" style="width:35px" alt="SamachurlScrolls3"> <span id="AlbedoComum_Item3"></span><br>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Ballad2.png" style="width:35px" alt="Ballad2"> <span id="AlbedoTalent2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Ballad3.png" style="width:35px" alt="Ballad3"> <span id="AlbedoTalent3"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Ballad4.png" style="width:35px" alt="Ballad4"> <span id="AlbedoTalent4"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/TuskofMonocerosCaeli.png" style="width:35px" alt="Tusk of Monoceros Caeli"> <span id="AlbedoBossTalent"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/CrownofInsight.png" style="width:35px" alt="Crown of Insight"> <span id="AlbedoCrownofInsight"></span>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row" >
+                    <div class="col-sm-2" id="AlbedoAscension1Div">
+                        <b>Ascension 1</b><br>
+                        <img src="Image/Geo2.png" style="width:50px" alt="Geo2"> x01<br>
+                        <img src="Image/Cecilia.png" style="width:50px" alt="Cecilia"> x03 <br>
+                        <img src="Image/SamachurlScrolls1.png" style="width:50px" alt="SamachurlScrolls1"> x03
+                    </div>
+                    <div class="col-sm-2" id="AlbedoAscension2Div">
+                        <b>Ascension 2</b><br>
+                        <img src="Image/Geo3.png" style="width:50px" alt="Geo3"> x03<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x02<br>
+                        <img src="Image/Cecilia.png" style="width:50px" alt="Cecilia"> x10 <br>
+                        <img src="Image/SamachurlScrolls1.png" style="width:50px" alt="SamachurlScrolls1"> x15
+                    </div>
+                    <div class="col-sm-2" id="AlbedoAscension3Div">
+                        <b>Ascension 3</b><br>
+                        <img src="Image/Geo3.png" style="width:50px" alt="Geo3"> x06<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x04<br>
+                        <img src="Image/Cecilia.png" style="width:50px" alt="Cecilia"> x20 <br>
+                        <img src="Image/SamachurlScrolls2.png" style="width:50px" alt="SamachurlScrolls2"> x12
+                    </div>
+                    <div class="col-sm-2" id="AlbedoAscension4Div">
+                        <b>Ascension 4</b><br>
+                        <img src="Image/Geo4.png" style="width:50px" alt="Geo4"> x03<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x08<br>
+                        <img src="Image/Cecilia.png" style="width:50px" alt="Cecilia"> x30 <br>
+                        <img src="Image/SamachurlScrolls2.png" style="width:50px" alt="SamachurlScrolls2"> x18
+                    </div>
+                    <div class="col-sm-2" id="AlbedoAscension5Div">
+                        <b>Ascension 5</b><br>
+                        <img src="Image/Geo4.png" style="width:50px" alt="Geo4"> x06<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x12<br>
+                        <img src="Image/Cecilia.png" style="width:50px" alt="Cecilia"> x45 <br>
+                        <img src="Image/SamachurlScrolls3.png" style="width:50px" alt="SamachurlScrolls3"> x12
+                    </div>
+                    <div class="col-sm-2" id="AlbedoAscension6Div">
+                        <b>Ascension 6</b><br>
+                        <img src="Image/Geo5.png" style="width:50px" alt="Geo5"> x06<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x20<br>
+                        <img src="Image/Cecilia.png" style="width:50px" alt="Cecilia"> x60 <br>
+                        <img src="Image/SamachurlScrolls3.png" style="width:50px" alt="SamachurlScrolls3"> x24
+                    </div>
+                </div>
+                <br>
+                <div class="row" ><br></div>
+            </div>
+            <div class="col-sm-3 DivArrumadora" >
+                <!--Div Arrumadora de padrão-->
+            </div>
+            <div class="col-sm-1" id="AlbedoTalent2Div">
+                <b>Talent Lv 2</b><br>
+                <img src="Image/Ballad2.png" style="width:50px" alt="Ballad2"> x3 / Talent <br>
+                <img src="Image/SamachurlScrolls1.png" style="width:50px" alt="SamachurlScrolls1"> x6 / Talent
+            </div>
+            <div class="col-sm-1" id="AlbedoTalent3Div">
+                <b>Talent Lv 3</b><br>
+                <img src="Image/Ballad3.png" style="width:50px" alt="Ballad3"> x2 / Talent <br>
+                <img src="Image/SamachurlScrolls2.png" style="width:50px" alt="SamachurlScrolls2"> x3 / Talent
+            </div>
+            <div class="col-sm-1" id="AlbedoTalent4Div">
+                <b>Talent Lv 4</b><br>
+                <img src="Image/Ballad3.png" style="width:50px" alt="Ballad3"> x4 / Talent <br>
+                <img src="Image/SamachurlScrolls2.png" style="width:50px" alt="SamachurlScrolls2"> x4 / Talent
+            </div>
+            <div class="col-sm-1" id="AlbedoTalent5Div">
+                <b>Talent Lv 5</b><br>
+                <img src="Image/Ballad3.png" style="width:50px" alt="Ballad3"> x6 / Talent <br>
+                <img src="Image/SamachurlScrolls2.png" style="width:50px" alt="SamachurlScrolls2"> x6 / Talent
+            </div>
+            <div class="col-sm-1" id="AlbedoTalent6Div">
+                <b>Talent Lv 6</b><br>
+                <img src="Image/Ballad3.png" style="width:50px" alt="Ballad3"> x9 / Talent <br>
+                <img src="Image/SamachurlScrolls2.png" style="width:50px" alt="SamachurlScrolls2"> x9 / Talent
+            </div>
+            <div class="col-sm-1" id="AlbedoTalent7Div">
+                <b>Talent Lv 7</b><br>
+                <img src="Image/Ballad4.png" style="width:50px" alt="Ballad4"> x4 / Talent <br>
+                <img src="Image/SamachurlScrolls3.png" style="width:50px" alt="SamachurlScrolls3"> x4 / Talent<br>
+                <img src="Image/TuskofMonocerosCaeli.png" style="width:50px" alt="TuskofMonocerosCaeli"> x1 / Talent
+            </div>
+            <div class="col-sm-1" id="AlbedoTalent8Div">
+                <b>Talent Lv 8</b><br>
+                <img src="Image/Ballad4.png" style="width:50px" alt="Ballad4"> x6 / Talent <br>
+                <img src="Image/SamachurlScrolls3.png" style="width:50px" alt="SamachurlScrolls3"> x6 / Talent <br>
+                <img src="Image/TuskofMonocerosCaeli.png" style="width:50px" alt="TuskofMonocerosCaeli"> x1 / Talent
+            </div>
+            <div class="col-sm-1" id="AlbedoTalent9Div">
+                <b>Talent Lv 9</b><br>
+                <img src="Image/Ballad4.png" style="width:50px" alt="Ballad4"> x12 / Talent <br>
+                <img src="Image/SamachurlScrolls3.png" style="width:50px" alt="SamachurlScrolls3"> x09 / Talent <br>
+                <img src="Image/TuskofMonocerosCaeli.png" style="width:50px" alt="TuskofMonocerosCaeli"> x02 / Talent
+            </div>
+            <div class="col-sm-1" id="AlbedoTalent10Div">
+                <b>Talent Lv 10</b><br>
+                <img src="Image/Ballad4.png" style="width:50px" alt="Ballad4"> x16 / Talent <br>
+                <img src="Image/SamachurlScrolls3.png" style="width:50px" alt="SamachurlScrolls3"> x12 / Talent <br>
+                <img src="Image/TuskofMonocerosCaeli.png" style="width:50px" alt="TuskofMonocerosCaeli"> x02 / Talent<br>
+                <img src="Image/CrownofInsight.png" style="width:50px" alt="Crown of Insight"> x01 / Talent<br>
+            </div>
+
+            <div class="col-sm-3" >
+                <!--Div Arrumadora de padrão-->
+            </div>
+            <div class="col-sm-9" >
+                <div class="col-sm-2" >
+                    <label for="BennettWeapon">Choose a weapon (Swords):</label>
+                    <select id="AlbedoWeapon" form="chars" name="Albedo_Weapon" onchange="Atualiza_weapon('Albedo')">
+                        <option value="NoneSword">None</option>
+                        <option value="AquilaFavonia">Aquila Favonia</option>
+                        <option value="BlackcliffLongsword">Blackcliff Longsword</option>
+                        <option value="CoolSteel">Cool Steel</option>
+                        <!--<option value="DarkIronSword">Dark Iron Sword</option>-->
+                        <option value="FavoniusSword">Favonius Sword</option>
+                        <option value="FesteringDesire">Festering Desire</option>
+                        <option value="FilletBlade">Fillet Blade</option>
+                        <option value="HarbingerofDawn">Harbinger of Dawn</option>
+                        <option value="IronSting">Iron Sting</option>
+                        <option value="LionsRoar">Lion's Roar</option>
+                        <option value="PrototypeRancour">Prototype Rancour</option>
+                        <option value="RoyalLongsword">Royal Longsword</option>
+                        <option value="SacrificialSword">Sacrificial Sword</option>
+                        <option value="SkyriderSword">Skyrider Sword</option>
+                        <option value="SkywardBlade">Skyward Blade</option>
+                        <option value="SummitShaper">Summit Shaper</option>
+                        <option value="SwordofDescension">Sword of Descension</option>
+                        <!--<option value="TheAlleyFlash">The Alley Flash</option>-->
+                        <option value="TheBlackSword">The Black Sword</option>
+                        <option value="TheFlute">The Flute</option>
+                        <option value="TravelersHandySword">Traveler's Handy Sword</option>
+                    </select>
+                    <br>
+                    <b>Weapon Ascension Level</b><br>
+                    <input type="radio" form="chars" id="AlbedoWeaponAscension0" name="AlbedoWeaponAscension" value=0 onchange="Atualiza_weapon_Ascension_Level('Albedo',0)">
+                    <label for="AlbedoWeaponAscension0">0 </label>
+                    <input type="radio" form="chars" id="AlbedoWeaponAscension1" name="AlbedoWeaponAscension" value=1 onchange="Atualiza_weapon_Ascension_Level('Albedo',1)">
+                    <label for="AlbedoWeaponAscension1">1 </label>
+                    <input type="radio" form="chars" id="AlbedoWeaponAscension2" name="AlbedoWeaponAscension" value=2 onchange="Atualiza_weapon_Ascension_Level('Albedo',2)">
+                    <label for="AlbedoWeaponAscension2">2 </label>
+                    <input type="radio" form="chars" id="AlbedoWeaponAscension3" name="AlbedoWeaponAscension" value=3 onchange="Atualiza_weapon_Ascension_Level('Albedo',3)">
+                    <label for="AlbedoWeaponAscension3">3 </label>
+                    <input type="radio" form="chars" id="AlbedoWeaponAscension4" name="AlbedoWeaponAscension" value=4 onchange="Atualiza_weapon_Ascension_Level('Albedo',4)">
+                    <label for="AlbedoWeaponAscension4">4 </label>
+                    <input type="radio" form="chars" id="AlbedoWeaponAscension5" name="AlbedoWeaponAscension" value=5 onchange="Atualiza_weapon_Ascension_Level('Albedo',5)">
+                    <label for="AlbedoWeaponAscension5">5 </label>
+                    <input type="radio" form="chars" id="AlbedoWeaponAscension6" name="AlbedoWeaponAscension" value=6 onchange="Atualiza_weapon_Ascension_Level('Albedo',6)">
+                    <label for="AlbedoWeaponAscension6">6 </label>
+                    <br>
+                    <img src="Image/NoneSword.png" class="img-responsive img-thumbnail mx-auto" style="width:130px" alt="NoneSword" id="AlbedoWeaponImage">
+                    <br>
+                </div>
+                <div class="col-sm-10" >
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Dominio_2" id="AlbedoWeaponDominio_2"> <span id="AlbedoWeaponDominio_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Dominio_3" id="AlbedoWeaponDominio_3"> <span id="AlbedoWeaponDominio_3_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Dominio_4" id="AlbedoWeaponDominio_4"> <span id="AlbedoWeaponDominio_4_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Dominio_5" id="AlbedoWeaponDominio_5"> <span id="AlbedoWeaponDominio_5_Quant"></span><br></div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Comum_Item_2a4_2" id="AlbedoWeaponComum_Item_2a4_2"> <span id="AlbedoWeaponComum_Item_2a4_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Comum_Item_2a4_3" id="AlbedoWeaponComum_Item_2a4_3"> <span id="AlbedoWeaponComum_Item_2a4_3_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Comum_Item_2a4_4" id="AlbedoWeaponComum_Item_2a4_4"> <span id="AlbedoWeaponComum_Item_2a4_4_Quant"></span></div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <b>Own/Need</b><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Comum_Item_1a3_1" id="AlbedoWeaponComum_Item_1a3_1"> <span id="AlbedoWeaponComum_Item_1a3_1_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Comum_Item_1a3_2" id="AlbedoWeaponComum_Item_1a3_2"> <span id="AlbedoWeaponComum_Item_1a3_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Comum_Item_1a3_3" id="AlbedoWeaponComum_Item_1a3_3"> <span id="AlbedoWeaponComum_Item_1a3_3_Quant"></span><br></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <div class="row" >
+            <hr>
+            <h1>Builds</h1>
+            <hr>
+            <h4>This is Albedo Base Stats</h4>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr repeat(8, 2fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Ascension</div>
+                <div style="border: solid black 1px;">0</div>
+                <div style="border: solid black 1px;">1</div>
+                <div style="border: solid black 1px;">2</div>
+                <div style="border: solid black 1px;">3</div>
+                <div style="border: solid black 1px;">4</div>
+                <div style="border: solid black 1px;">5</div>
+                <div style="border: solid black 1px;">6</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Level</div>
+                <div style="border: solid black 1px;">1</div>
+                <div style="border: solid black 1px;">20</div>
+                <div style="border: solid black 1px;">20</div>
+                <div style="border: solid black 1px;">40</div>
+                <div style="border: solid black 1px;">40</div>
+                <div style="border: solid black 1px;">50</div>
+                <div style="border: solid black 1px;">50</div>
+                <div style="border: solid black 1px;">60</div>
+                <div style="border: solid black 1px;">60</div>
+                <div style="border: solid black 1px;">70</div>
+                <div style="border: solid black 1px;">70</div>
+                <div style="border: solid black 1px;">80</div>
+                <div style="border: solid black 1px;">80</div>
+                <div style="border: solid black 1px;">90</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">HP</div>
+                <div style="border: solid black 1px;">1030</div>
+                <div style="border: solid black 1px;">2671</div>
+                <div style="border: solid black 1px;">3554</div>
+                <div style="border: solid black 1px;">5317</div>
+                <div style="border: solid black 1px;">5944</div>
+                <div style="border: solid black 1px;">6839</div>
+                <div style="border: solid black 1px;">7675</div>
+                <div style="border: solid black 1px;">8579</div>
+                <div style="border: solid black 1px;">9207</div>
+                <div style="border: solid black 1px;">10119</div>
+                <div style="border: solid black 1px;">10746</div>
+                <div style="border: solid black 1px;">11669</div>
+                <div style="border: solid black 1px;">12296</div>
+                <div style="border: solid black 1px;">13226</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">ATK</div>
+                <div style="border: solid black 1px;">20</div>
+                <div style="border: solid black 1px;">51</div>
+                <div style="border: solid black 1px;">68</div>
+                <div style="border: solid black 1px;">101</div>
+                <div style="border: solid black 1px;">113</div>
+                <div style="border: solid black 1px;">130</div>
+                <div style="border: solid black 1px;">146</div>
+                <div style="border: solid black 1px;">163</div>
+                <div style="border: solid black 1px;">175</div>
+                <div style="border: solid black 1px;">192</div>
+                <div style="border: solid black 1px;">204</div>
+                <div style="border: solid black 1px;">222</div>
+                <div style="border: solid black 1px;">233</div>
+                <div style="border: solid black 1px;">251</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">DEF</div>
+                <div style="border: solid black 1px;">68</div>
+                <div style="border: solid black 1px;">177</div>
+                <div style="border: solid black 1px;">235</div>
+                <div style="border: solid black 1px;">352</div>
+                <div style="border: solid black 1px;">394</div>
+                <div style="border: solid black 1px;">453</div>
+                <div style="border: solid black 1px;">508</div>
+                <div style="border: solid black 1px;">568</div>
+                <div style="border: solid black 1px;">610</div>
+                <div style="border: solid black 1px;">670</div>
+                <div style="border: solid black 1px;">712</div>
+                <div style="border: solid black 1px;">773</div>
+                <div style="border: solid black 1px;">815</div>
+                <div style="border: solid black 1px;">876</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Geo DMG %</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">7.2%</div>
+                <div style="border: solid black 1px;">7.2%</div>
+                <div style="border: solid black 1px;">14.4%</div>
+                <div style="border: solid black 1px;">14.4%</div>
+                <div style="border: solid black 1px;">14.4%</div>
+                <div style="border: solid black 1px;">14.4%</div>
+                <div style="border: solid black 1px;">21.6%</div>
+                <div style="border: solid black 1px;">21.6%</div>
+                <div style="border: solid black 1px;">28.8%</div>
+                <div style="border: solid black 1px;">28.8%</div>
+            </div>
+        </div>
+        <br>
+        <div class="row" >
+            <h4>This is Albedo Normal Attack Stats</h4>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Attack Speed</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">Lv 1</div>
+                <div style="border: solid black 1px;">Lv 2</div>
+                <div style="border: solid black 1px;">Lv 3</div>
+                <div style="border: solid black 1px;">Lv 4</div>
+                <div style="border: solid black 1px;">Lv 5</div>
+                <div style="border: solid black 1px;">Lv 6</div>
+                <div style="border: solid black 1px;">Lv 7</div>
+                <div style="border: solid black 1px;">Lv 8</div>
+                <div style="border: solid black 1px;">Lv 9</div>
+                <div style="border: solid black 1px;">Lv 10</div>
+                <div style="border: solid black 1px;">Lv 11</div>
+                <div style="border: solid black 1px;">Lv 12</div>
+                <div style="border: solid black 1px;">Lv 13</div>
+                <div style="border: solid black 1px;">Lv 14</div>
+                <div style="border: solid black 1px;">Lv 15</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">1-Hit Damage</div>
+                <div style="border: solid black 1px;">0.22s (13/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">36.7%</div>
+                <div style="border: solid black 1px;">39.7%</div>
+                <div style="border: solid black 1px;">42.7%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">62.8%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">2-Hit Damage</div>
+                <div style="border: solid black 1px;">0.50s (30/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">36.7%</div>
+                <div style="border: solid black 1px;">39.7%</div>
+                <div style="border: solid black 1px;">42.7%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">62.8%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">3-Hit Damage</div>
+                <div style="border: solid black 1px;">0.53s (32/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">47.5%</div>
+                <div style="border: solid black 1px;">51.3%</div>
+                <div style="border: solid black 1px;">55.2%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">81.1%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">4-Hit Damage</div>
+                <div style="border: solid black 1px;">0.60s (36/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">49.8%</div>
+                <div style="border: solid black 1px;">53.8%</div>
+                <div style="border: solid black 1px;">57.9%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">85.0%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">5-Hit Damage</div>
+                <div style="border: solid black 1px;">1.07s (64/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">62.1%</div>
+                <div style="border: solid black 1px;">67.1%</div>
+                <div style="border: solid black 1px;">72.2%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">106.1%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Total</div>
+                <div style="border: solid black 1px;">1.82s (109/60 fps)</div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 6fr 8fr 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div >
+                    <h4>Elemental Skill</h4>
+                    <div style="grid-template-columns: repeat(2, 3fr); display: grid;">
+                        <div>
+                            Cooldown:<br>
+                            Duration:<br>
+                            Particles:<br><br>
+                            Energy Recharge:
+                        </div>
+                        <div>
+                            4s (Press)<br>
+                            30s <br>
+                            1 Geo Particle <br>(When hit with Geo each 2s inside area)<br>
+                            3 (on field) 1.8 (out field)
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4>Elemental Burst</h4>
+                    <div style="grid-template-columns: 1fr 1fr; display: grid;">
+                        <div>
+                            Cooldown: 12s<br>
+                            Energy Cost: 40<br>
+                            Duration: Instantaneous <br><br>
+                        </div>
+                        <div class="text-left">
+                            Modifiers to get Energy<br>
+                            Constellation 1: Transient Blossoms generated by Albedo's Elemental Skill (Abiogenesis: Solar Isotoma) regenerate 1.2 Energy for Albedo.<br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <h4><b> Role</b></h4>
+            <div style="grid-template-columns: 1fr 10fr 1fr 10fr 1fr 10fr 1fr 10fr 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Description:</b><br>
+                    
+                    
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>This build has 3 variations:</b><br>
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Flower:</b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <br>
+                    1) HP (always)<br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Feather:</b><br>
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <br>
+                    1) ATK (always)<br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Hourglass:</b><br>
+                    <img src="Image/Set_Hourglass_.png" style="width:50px">
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Goblet:</b><br>
+                    <img src="Image/Set_Goblet_.png" style="width:50px">
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Crown:</b><br>
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) 
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Weapons:</b><br>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <h4><b>Other builds, videos or links below</b></h4>
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/kin4sc/quick_tldr_dps_and_support_guidebuild_for_albedo/">Albedo Guide by 2Board_ from Reddit <br>Version 1.2<br><img src="Image/Albedo.png" style="width:100px"></a>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/ktef2b/albedo_indepth_character_guide_5_geo_support/">Albedo In-Depth Character Guide by Not-Casuals from Reddit <br>Version 1.2<br><img src="Image/Albedo.png" style="width:100px" alt="Albedo"></a>
+        </div>
+            
+        <br>
+        <br>
+
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.youtube.com/watch?v=FkhdOPSYdhs">ALBEDO IS INSANE! Best Albedo Build by Zy0x from Youtube <br>Version 1.2<br><img src="https://i.ytimg.com/vi/FkhdOPSYdhs/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDTs4AtphqNIkk4GPj3Zmn77wDghQ"></a>
+            <a href="https://www.youtube.com/watch?v=RECboYIfSPg">Albedo Character Guide Build by Not-Casuals from Reddit <br>Version 1.2<br><img src="https://i.ytimg.com/vi/RECboYIfSPg/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDDoLJjwFxlc11jdF-3CMkhtjWcQA" alt="Albedo"></a>
+        </div>
+            
+        <br>
+        <br>
+
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.youtube.com/watch?v=oRukS6B7XUU">GEO GOD COMP DESTROYS EVERYTHING (Geo Quickswap Team) by Zy0x from Youtube <br>Version 1.2<br><img src="https://i.ytimg.com/vi/oRukS6B7XUU/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAJKNFr6J4ztD4pGfto7dPv8KxCBw"></a>
+            <a href="https://youtu.be/y9NHP1bxEo8?t=558">COMPLETE SUPPORT GUIDE FOR EVERY CHARACTER by Zy0x from Youtube <br>Version 1.2<br><img src="https://i.ytimg.com/vi/y9NHP1bxEo8/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDsZZekgCZllXSBK7JTd0n_a-1NCA"></a>
+        </div>
+            
+        <br>
+        <br>
+        
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://docs.google.com/document/d/1trRf3ttEbz8yHz6XgrDjDTAynCqt1B-6AMcMIzmpIRM/edit#">Albedo Build AR45+ Gobelyn from Google Docs <br>Version 1.2<br><img src="https://i.imgur.com/9YUTrWb.png" width="100%"></a>
+        </div>
+
+        <br>
+        <br>  
+        
+              
+		</section>
+		<footer class="container-fluid text-center" style="background-color:#333;color:#fff">
+			<b>Made by Fabiano Médice<br>2020</b>
+    </footer>
+
+    <script>
+      ConfereUsuario()
+      Ler_BancoDeDadosQuantidades()
+      Ler_BancoDeDadosChar()
+      Atualiza_Valores_Char("Albedo",1);
+    </script>
+
+	</body>
+</html>

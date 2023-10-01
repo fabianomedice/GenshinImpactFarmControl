@@ -1,0 +1,782 @@
+<!DOCTYPE html> 
+
+<html lang="en" style="scroll-behavior: smooth;">
+	<head>
+		<!-- Titulo da aba-->
+		<title> 
+			Genshin Impact Farm Helper
+		</title>
+		<!-- Metadados -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="Fabiano Médice">
+		<meta name="description" content="Controle de Informações de farm de Genshin Impact">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="JS/banco_de_dados.js"></script>
+        <script src="JS/chars.js"></script>
+        <script src="JS/login.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <!-- bootstrap 3.0 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <style>
+                /* 
+                Conserta o link levar para embaixo do nav
+                Solução do site http://nicolasgallagher.com/jump-links-and-viewport-positioning/
+                */
+                #Albedo::before, #Amber::before, #Barbara::before, #Beidou::before, #Bennett::before, #Chongyun::before, #Diluc::before, #Diona::before, #Fischl::before, #Ganyu::before, #Jean::before, #Kaeya::before, #Keqing::before, #Klee::before, #Lisa::before, #Mona::before, #Ningguang::before, #Noelle::before, #Qiqi::before, #Razor::before, #Sucrose::before, #Tartaglia::before, #Traveler::before, #Venti::before, #Xiangling::before, #Xingqiu::before
+                {
+                    content: "";
+                    display: block;
+                    height: 180px;
+                    margin: -180px 0 0;
+                }
+                /*CSS responsível para diferentes tamanhos de tela*/
+                /*Aparece para adicionar um vazio embaixo da foto*/
+                @media screen and (max-width: 1196px) 
+                {
+                    .DivArrumadora
+                    {
+                        display: inline;
+                    }
+                }
+                /*Some pois a foto ocupa esse vazio*/
+                @media screen and (min-width: 1197px) 
+                {
+                    .DivArrumadora
+                    {
+                        display: none;
+                    }
+                }
+        </style>
+	</head>
+	<body>
+		<header style="position:sticky; top:0; z-index:1">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li><a href="backpack.html">Backpack</a></li>
+              <li class="active"><a href="chars.html">Characters</a></li>
+              <!--<li><a href="weapons.html">Weapons</a></li>-->
+              <li><a href="farm.html">Complete Farm Sheet</a></li>
+              <li><a href="index.html">About</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a>Please help us maintain this site</a></li>
+              <li><a href="https://streamlabs.com/mrbadgerbr/tip" style="padding:0px"><img src="Image/PayPal.png" style="height:50px" alt="PayPal"></a></li>
+              <li><a><br></a></li>
+              <li><a href="https://pag.ae/7WB124EQp" style="padding:0px"><img src="Image/PagSeguro.png" style="height:50px" alt="PagSeguro"></a></li>
+              <li><a><br></a></li>
+              <li id="LoginOption"><a onclick=AbreLogin()><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              <li id="LoginUser" style="display: none;"> <form id="FormLogin" method="POST" action="PHP/register.php"><input type="text" placeholder="Enter Email" name="email" id="LoginEmail" > <br> <input type="password" placeholder="Enter Password" name="password" id="LoginPassword" ></form></li>
+              <li id="LoginButton" style="display: none;"><button onclick=FazLogin() style="width:70px"> Log in </button><br><input type="submit" value="Register" form="FormLogin" style="width:70px"></li>
+              <li id="ForgetPasswordButton" style="display: none;"><span style="width: 3px;height: 21px; display: inline-block;"></span> <input type="checkbox" id="RememberMe" onclick=LembrarLogin()> <b style="color: white;">Remember me</b> <br><button onclick='location.href="PHP/resetpassword.php"'> Reset Password </button></li>
+              <li id="RegisterUser" style="display: none;"></li>
+              <li id="LogoutButton" style="display: none;"><a style="color: black;"><button onclick=DesfazLogin() style="width:70px"> Log out </button></a></li>
+            </ul>
+          </div>
+        </div>
+        <div style="background-color:#080808;color:#fff"> 
+          <div class="container text-center">
+            <h1>Characters - Zhongli</h1>      
+          </div>
+        </div>
+          <!-- Navegador para os chars-->
+          <nav>
+            <ul class=" navbar-nav" style="list-style-type:none;">
+                <li><a href="Albedo.html"><img src="Image/Albedo.png" style="width:50px" alt="Albedo"></a></li>
+                <li><a href="Amber.html"><img src="Image/Amber.png" style="width:50px" alt="Amber"></a></li>
+                <li><a href="Barbara.html"><img src="Image/Barbara.png" style="width:50px" alt="Barbara"></a></li>
+                <li><a href="Beidou.html"><img src="Image/Beidou.png" style="width:50px" alt="Beidou"></a></li>
+                <li><a href="Bennett.html"><img src="Image/Bennett.png" style="width:50px" alt="Bennett"></a></li>
+                <li><a href="Chongyun.html"><img src="Image/Chongyun.png" style="width:50px" alt="Chongyun"></a></li>
+                <li><a href="Diluc.html"><img src="Image/Diluc.png" style="width:50px" alt="Diluc"></a></li>
+                <li><a href="Diona.html"><img src="Image/Diona.png" style="width:50px" alt="Diona"></a></li>
+                <li><a href="Fischl.html"><img src="Image/Fischl.png" style="width:50px" alt="Fischl"></a></li>
+                <li><a href="Ganyu.html"><img src="Image/Ganyu.png" style="width:50px" alt="Ganyu"></a></li>
+                <li><a href="Jean.html"><img src="Image/Jean.png" style="width:50px" alt="Jean"></a></li>
+                <li><a href="Kaeya.html"><img src="Image/Kaeya.png" style="width:50px" alt="Kaeya"></a></li>
+                <li><a href="Keqing.html"><img src="Image/Keqing.png" style="width:50px" alt="Keqing"></a></li>
+                <li><a href="Klee.html"><img src="Image/Klee.png" style="width:50px" alt="Klee"></a></li>
+                <li><a href="Lisa.html"><img src="Image/Lisa.png" style="width:50px" alt="Lisa"></a></li>
+                <li><a href="Mona.html"><img src="Image/Mona.png" style="width:50px" alt="Mona"></a></li>
+                <li><a href="Ningguang.html"><img src="Image/Ningguang.png" style="width:50px" alt="Ningguang"></a></li>
+                <li><a href="Noelle.html"><img src="Image/Noelle.png" style="width:50px" alt="Noelle"></a></li>
+                <li><a href="Qiqi.html"><img src="Image/Qiqi.png" style="width:50px" alt="Qiqi"></a></li>
+                <li><a href="Razor.html"><img src="Image/Razor.png" style="width:50px" alt="Razor"></a></li>
+                <li><a href="Sucrose.html"><img src="Image/Sucrose.png" style="width:50px" alt="Sucrose"></a></li>
+                <li><a href="Tartaglia.html"><img src="Image/Tartaglia.png" style="width:50px" alt="Tartaglia"></a></li>
+                <li><a href="Traveler.html"><img src="Image/Traveler(Anemo).png" style="width:50px" alt="Traveler"></a></li>
+                <li><a href="Venti.html"><img src="Image/Venti.png" style="width:50px" alt="Venti"></a></li>
+                <li><a href="Xiangling.html"><img src="Image/Xiangling.png" style="width:50px" alt="Xiangling"></a></li>
+                <li><a href="Xingqiu.html"><img src="Image/Xingqiu.png" style="width:50px" alt="Xingqiu"></a></li>
+                <li><a href="Xinyan.html"><img src="Image/Xinyan.png" style="width:50px" alt="Xinyan"></a></li>
+                <li><a href="Zhongli.html"><img src="Image/Zhongli.png" style="width:50px" alt="Zhongli"></a></li>
+            </ul>
+          </nav>
+      </nav>
+    </header>    
+		<br>
+		<section >
+      <form id="chars"> 
+        <!-- Criado o formulario-->
+      </form>
+
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row" id="Zhongli">
+            <div class="col-sm-3" >
+                <img src="Image/Zhongli_Card.jpg" class="img-responsive img-thumbnail mx-auto" style="max-height: 800px;" alt="Zhongli">
+            </div>
+            <div class="col-sm-9" >
+
+                <div class="row" >
+                    <div class="col-sm-2" >
+                        <input type="checkbox" id="ZhongliOwn" name="Zhongli_Own" value=True form="chars" onchange="Confirma_Personagem('Zhongli')">
+                        <label for="ZhongliOwn">I have this char</label>
+                    </div>
+                    <div class="col-sm-3" >
+                        <b>Ascension Level</b><br>
+                        <input type="radio" form="chars" id="ZhongliAscension0" name="ZhongliAscension" value=0 onchange="Atualiza_char_Ascension_Level('Zhongli',0)">
+                        <label for="ZhongliAscension0">0 </label>
+                        <input type="radio" form="chars" id="ZhongliAscension1" name="ZhongliAscension" value=1 onchange="Atualiza_char_Ascension_Level('Zhongli',1)">
+                        <label for="ZhongliAscension1">1 </label>
+                        <input type="radio" form="chars" id="ZhongliAscension2" name="ZhongliAscension" value=2 onchange="Atualiza_char_Ascension_Level('Zhongli',2)">
+                        <label for="ZhongliAscension2">2 </label>
+                        <input type="radio" form="chars" id="ZhongliAscension3" name="ZhongliAscension" value=3 onchange="Atualiza_char_Ascension_Level('Zhongli',3)">
+                        <label for="ZhongliAscension3">3 </label>
+                        <input type="radio" form="chars" id="ZhongliAscension4" name="ZhongliAscension" value=4 onchange="Atualiza_char_Ascension_Level('Zhongli',4)">
+                        <label for="ZhongliAscension4">4 </label>
+                        <input type="radio" form="chars" id="ZhongliAscension5" name="ZhongliAscension" value=5 onchange="Atualiza_char_Ascension_Level('Zhongli',5)">
+                        <label for="ZhongliAscension5">5 </label>
+                        <input type="radio" form="chars" id="ZhongliAscension6" name="ZhongliAscension" value=6 onchange="Atualiza_char_Ascension_Level('Zhongli',6)">
+                        <label for="ZhongliAscension6">6 </label>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Attack</b><br>
+                        <select id="ZhongliTalentAtk" form="chars" name="Zhongli_TalentAtk" onchange="Atualiza_talento('Zhongli','Atk')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Elemental Skill</b><br>
+                        <select id="ZhongliTalentElementalSkill" form="chars" name="Zhongli_TalentElementalSkill" onchange="Atualiza_talento('Zhongli','ElementalSkill')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Elemental Burst</b><br>
+                        <select id="ZhongliTalentElementalBurst" form="chars" name="Zhongli_ElementalBurst" onchange="Atualiza_talento('Zhongli','ElementalBurst')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row" >
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Geo2.png" style="width:35px" alt="Geo2"> <span id="ZhongliElement2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Geo3.png" style="width:35px" alt="Geo3"> <span id="ZhongliElement3"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Geo4.png" style="width:35px" alt="Geo4"> <span id="ZhongliElement4"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Geo5.png" style="width:35px" alt="Geo5"> <span id="ZhongliElement5"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/BossGeo.png" style="width:35px" alt="BossGeo"> <span id="ZhongliBoss"></span><br>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2" >
+                            <b>Own/Need</b>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/CorLapis.png" style="width:35px" alt="CorLapis"> <span id="ZhongliLocal_Specialty"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Slime1.png" style="width:35px" alt="Slime1"> <span id="ZhongliComum_Item1"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Slime2.png" style="width:35px" alt="Slime2"> <span id="ZhongliComum_Item2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Slime3.png" style="width:35px" alt="Slime3"> <span id="ZhongliComum_Item3"></span><br>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Gold2.png" style="width:35px" alt="Gold2"> <span id="ZhongliTalent2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Gold3.png" style="width:35px" alt="Gold3"> <span id="ZhongliTalent3"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Gold4.png" style="width:35px" alt="Gold4"> <span id="ZhongliTalent4"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/TuskofMonocerosCaeli.png" style="width:35px" alt="Dvalin's Claw"> <span id="ZhongliBossTalent"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/CrownofInsight.png" style="width:35px" alt="Crown of Insight"> <span id="ZhongliCrownofInsight"></span>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row" >
+                    <div class="col-sm-2" id="ZhongliAscension1Div">
+                        <b>Ascension 1</b><br>
+                        <img src="Image/Geo2.png" style="width:50px" alt="Geo2"> x01<br>
+                        <img src="Image/CorLapis.png" style="width:50px" alt="CorLapis"> x03 <br>
+                        <img src="Image/Slime1.png" style="width:50px" alt="Slime1"> x03
+                    </div>
+                    <div class="col-sm-2" id="ZhongliAscension2Div">
+                        <b>Ascension 2</b><br>
+                        <img src="Image/Geo3.png" style="width:50px" alt="Geo3"> x03<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x02<br>
+                        <img src="Image/CorLapis.png" style="width:50px" alt="CorLapis"> x10 <br>
+                        <img src="Image/Slime1.png" style="width:50px" alt="Slime1"> x15
+                    </div>
+                    <div class="col-sm-2" id="ZhongliAscension3Div">
+                        <b>Ascension 3</b><br>
+                        <img src="Image/Geo3.png" style="width:50px" alt="Geo3"> x06<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x04<br>
+                        <img src="Image/CorLapis.png" style="width:50px" alt="CorLapis"> x20 <br>
+                        <img src="Image/Slime2.png" style="width:50px" alt="Slime2"> x12
+                    </div>
+                    <div class="col-sm-2" id="ZhongliAscension4Div">
+                        <b>Ascension 4</b><br>
+                        <img src="Image/Geo4.png" style="width:50px" alt="Geo4"> x03<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x08<br>
+                        <img src="Image/CorLapis.png" style="width:50px" alt="CorLapis"> x30 <br>
+                        <img src="Image/Slime2.png" style="width:50px" alt="Slime2"> x18
+                    </div>
+                    <div class="col-sm-2" id="ZhongliAscension5Div">
+                        <b>Ascension 5</b><br>
+                        <img src="Image/Geo4.png" style="width:50px" alt="Geo4"> x06<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x12<br>
+                        <img src="Image/CorLapis.png" style="width:50px" alt="CorLapis"> x45 <br>
+                        <img src="Image/Slime3.png" style="width:50px" alt="Slime3"> x12
+                    </div>
+                    <div class="col-sm-2" id="ZhongliAscension6Div">
+                        <b>Ascension 6</b><br>
+                        <img src="Image/Geo5.png" style="width:50px" alt="Geo5"> x06<br>
+                        <img src="Image/BossGeo.png" style="width:50px" alt="BossGeo"> x20<br>
+                        <img src="Image/CorLapis.png" style="width:50px" alt="CorLapis"> x60 <br>
+                        <img src="Image/Slime3.png" style="width:50px" alt="Slime3"> x24
+                    </div>
+                </div>
+                <br>
+                <div class="row" ><br></div>
+            </div>
+            <div class="col-sm-3 DivArrumadora" >
+                <!--Div Arrumadora de padrão-->
+            </div>
+            <div class="col-sm-1" id="ZhongliTalent2Div">
+                <b>Talent Lv 2</b><br>
+                <img src="Image/Gold2.png" style="width:50px" alt="Gold2"> x3 / Talent <br>
+                <img src="Image/Slime1.png" style="width:50px" alt="Slime1"> x6 / Talent
+            </div>
+            <div class="col-sm-1" id="ZhongliTalent3Div">
+                <b>Talent Lv 3</b><br>
+                <img src="Image/Gold3.png" style="width:50px" alt="Gold3"> x2 / Talent <br>
+                <img src="Image/Slime2.png" style="width:50px" alt="Slime2"> x3 / Talent
+            </div>
+            <div class="col-sm-1" id="ZhongliTalent4Div">
+                <b>Talent Lv 4</b><br>
+                <img src="Image/Gold3.png" style="width:50px" alt="Gold3"> x4 / Talent <br>
+                <img src="Image/Slime2.png" style="width:50px" alt="Slime2"> x4 / Talent
+            </div>
+            <div class="col-sm-1" id="ZhongliTalent5Div">
+                <b>Talent Lv 5</b><br>
+                <img src="Image/Gold3.png" style="width:50px" alt="Gold3"> x6 / Talent <br>
+                <img src="Image/Slime2.png" style="width:50px" alt="Slime2"> x6 / Talent
+            </div>
+            <div class="col-sm-1" id="ZhongliTalent6Div">
+                <b>Talent Lv 6</b><br>
+                <img src="Image/Gold3.png" style="width:50px" alt="Gold3"> x9 / Talent <br>
+                <img src="Image/Slime2.png" style="width:50px" alt="Slime2"> x9 / Talent
+            </div>
+            <div class="col-sm-1" id="ZhongliTalent7Div">
+                <b>Talent Lv 7</b><br>
+                <img src="Image/Gold4.png" style="width:50px" alt="Gold4"> x4 / Talent <br>
+                <img src="Image/Slime3.png" style="width:50px" alt="Slime3"> x4 / Talent<br>
+                <img src="Image/TuskofMonocerosCaeli.png" style="width:50px" alt="TuskofMonocerosCaeli"> x1 / Talent
+            </div>
+            <div class="col-sm-1" id="ZhongliTalent8Div">
+                <b>Talent Lv 8</b><br>
+                <img src="Image/Gold4.png" style="width:50px" alt="Gold4"> x6 / Talent <br>
+                <img src="Image/Slime3.png" style="width:50px" alt="Slime3"> x6 / Talent <br>
+                <img src="Image/TuskofMonocerosCaeli.png" style="width:50px" alt="TuskofMonocerosCaeli"> x1 / Talent
+            </div>
+            <div class="col-sm-1" id="ZhongliTalent9Div">
+                <b>Talent Lv 9</b><br>
+                <img src="Image/Gold4.png" style="width:50px" alt="Gold4"> x12 / Talent <br>
+                <img src="Image/Slime3.png" style="width:50px" alt="Slime3"> x09 / Talent <br>
+                <img src="Image/TuskofMonocerosCaeli.png" style="width:50px" alt="TuskofMonocerosCaeli"> x02 / Talent
+            </div>
+            <div class="col-sm-1" id="ZhongliTalent10Div">
+                <b>Talent Lv 10</b><br>
+                <img src="Image/Gold4.png" style="width:50px" alt="Gold4"> x16 / Talent <br>
+                <img src="Image/Slime3.png" style="width:50px" alt="Slime3"> x12 / Talent <br>
+                <img src="Image/TuskofMonocerosCaeli.png" style="width:50px" alt="TuskofMonocerosCaeli"> x02 / Talent<br>
+                <img src="Image/CrownofInsight.png" style="width:50px" alt="Crown of Insight"> x01 / Talent<br>
+            </div>
+
+            <div class="col-sm-3" >
+                <!--Div Arrumadora de padrão-->
+            </div>
+            <div class="col-sm-9" >
+                <div class="col-sm-2" >
+                    <label for="ZhongliWeapon">Choose a weapon (Polearms):</label>
+                    <select id="ZhongliWeapon" form="chars" name="Zhongli_Weapon" onchange="Atualiza_weapon('Zhongli')">
+                        <option value="NonePolearm">None</option>
+                        <option value="BlackTassel">Black Tassel</option>
+                        <option value="BlackcliffPole">Blackcliff Pole</option>
+                        <option value="CrescentPike">Crescent Pike </option>
+                        <option value="Deathmatch">Deathmatch</option>
+                        <option value="DragonsBane">Dragon's Bane</option>
+                        <option value="DragonspineSpear">Dragonspine Spear</option>
+                        <option value="FavoniusLance">Favonius Lance</option>
+                        <option value="Halberd">Halberd</option>
+                        <!--<option value="KunwusIrisRift">Kunwu's Iris Rift</option>-->
+                        <!--<option value="LithicSpear">Lithic Spear</option>-->
+                        <option value="PrimordialJadeWingedSpear">Primordial Jade Winged-Spear</option>
+                        <option value="PrototypeStarglitter">Prototype Starglitter</option>
+                        <option value="RoyalSpear">Royal Spear</option>
+                        <option value="SkywardSpine">Skyward Spine</option>
+                        <option value="VortexVanquisher">Vortex Vanquisher</option>
+                        <option value="WhiteTassel">White Tassel</option>
+                    </select>
+                    <br>
+                    <b>Weapon Ascension Level</b><br>
+                    <input type="radio" form="chars" id="ZhongliWeaponAscension0" name="ZhongliWeaponAscension" value=0 onchange="Atualiza_weapon_Ascension_Level('Zhongli',0)">
+                    <label for="ZhongliWeaponAscension0">0 </label>
+                    <input type="radio" form="chars" id="ZhongliWeaponAscension1" name="ZhongliWeaponAscension" value=1 onchange="Atualiza_weapon_Ascension_Level('Zhongli',1)">
+                    <label for="ZhongliWeaponAscension1">1 </label>
+                    <input type="radio" form="chars" id="ZhongliWeaponAscension2" name="ZhongliWeaponAscension" value=2 onchange="Atualiza_weapon_Ascension_Level('Zhongli',2)">
+                    <label for="ZhongliWeaponAscension2">2 </label>
+                    <input type="radio" form="chars" id="ZhongliWeaponAscension3" name="ZhongliWeaponAscension" value=3 onchange="Atualiza_weapon_Ascension_Level('Zhongli',3)">
+                    <label for="ZhongliWeaponAscension3">3 </label>
+                    <input type="radio" form="chars" id="ZhongliWeaponAscension4" name="ZhongliWeaponAscension" value=4 onchange="Atualiza_weapon_Ascension_Level('Zhongli',4)">
+                    <label for="ZhongliWeaponAscension4">4 </label>
+                    <input type="radio" form="chars" id="ZhongliWeaponAscension5" name="ZhongliWeaponAscension" value=5 onchange="Atualiza_weapon_Ascension_Level('Zhongli',5)">
+                    <label for="ZhongliWeaponAscension5">5 </label>
+                    <input type="radio" form="chars" id="ZhongliWeaponAscension6" name="ZhongliWeaponAscension" value=6 onchange="Atualiza_weapon_Ascension_Level('Zhongli',6)">
+                    <label for="ZhongliWeaponAscension6">6 </label>
+                    <br>
+                    <img src="Image/NonePolearm.png" class="img-responsive img-thumbnail mx-auto" style="width:130px" alt="NonePolearm" id="ZhongliWeaponImage">
+                    <br>
+                </div>
+                <div class="col-sm-10" >
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NonePolearm.png" style="width:35px" alt="Dominio_2" id="ZhongliWeaponDominio_2"> <span id="ZhongliWeaponDominio_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NonePolearm.png" style="width:35px" alt="Dominio_3" id="ZhongliWeaponDominio_3"> <span id="ZhongliWeaponDominio_3_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NonePolearm.png" style="width:35px" alt="Dominio_4" id="ZhongliWeaponDominio_4"> <span id="ZhongliWeaponDominio_4_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NonePolearm.png" style="width:35px" alt="Dominio_5" id="ZhongliWeaponDominio_5"> <span id="ZhongliWeaponDominio_5_Quant"></span><br></div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NonePolearm.png" style="width:35px" alt="Comum_Item_2a4_2" id="ZhongliWeaponComum_Item_2a4_2"> <span id="ZhongliWeaponComum_Item_2a4_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NonePolearm.png" style="width:35px" alt="Comum_Item_2a4_3" id="ZhongliWeaponComum_Item_2a4_3"> <span id="ZhongliWeaponComum_Item_2a4_3_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NonePolearm.png" style="width:35px" alt="Comum_Item_2a4_4" id="ZhongliWeaponComum_Item_2a4_4"> <span id="ZhongliWeaponComum_Item_2a4_4_Quant"></span></div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <b>Own/Need</b><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NonePolearm.png" style="width:35px" alt="Comum_Item_1a3_1" id="ZhongliWeaponComum_Item_1a3_1"> <span id="ZhongliWeaponComum_Item_1a3_1_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NonePolearm.png" style="width:35px" alt="Comum_Item_1a3_2" id="ZhongliWeaponComum_Item_1a3_2"> <span id="ZhongliWeaponComum_Item_1a3_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NonePolearm.png" style="width:35px" alt="Comum_Item_1a3_3" id="ZhongliWeaponComum_Item_1a3_3"> <span id="ZhongliWeaponComum_Item_1a3_3_Quant"></span><br></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <div class="row" >
+            <hr>
+            <h1>Builds</h1>
+            <hr>
+            <h4>This is Zhongli Base Stats</h4>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr repeat(8, 2fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Ascension</div>
+                <div style="border: solid black 1px;">0</div>
+                <div style="border: solid black 1px;">1</div>
+                <div style="border: solid black 1px;">2</div>
+                <div style="border: solid black 1px;">3</div>
+                <div style="border: solid black 1px;">4</div>
+                <div style="border: solid black 1px;">5</div>
+                <div style="border: solid black 1px;">6</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Level</div>
+                <div style="border: solid black 1px;">1</div>
+                <div style="border: solid black 1px;">20</div>
+                <div style="border: solid black 1px;">20</div>
+                <div style="border: solid black 1px;">40</div>
+                <div style="border: solid black 1px;">40</div>
+                <div style="border: solid black 1px;">50</div>
+                <div style="border: solid black 1px;">50</div>
+                <div style="border: solid black 1px;">60</div>
+                <div style="border: solid black 1px;">60</div>
+                <div style="border: solid black 1px;">70</div>
+                <div style="border: solid black 1px;">70</div>
+                <div style="border: solid black 1px;">80</div>
+                <div style="border: solid black 1px;">80</div>
+                <div style="border: solid black 1px;">90</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">HP</div>
+                <div style="border: solid black 1px;">1144</div>
+                <div style="border: solid black 1px;">2967</div>
+                <div style="border: solid black 1px;">3948</div>
+                <div style="border: solid black 1px;">5908</div>
+                <div style="border: solid black 1px;">6605</div>
+                <div style="border: solid black 1px;">7599</div>
+                <div style="border: solid black 1px;">8528</div>
+                <div style="border: solid black 1px;">9533</div>
+                <div style="border: solid black 1px;">10230</div>
+                <div style="border: solid black 1px;">11243</div>
+                <div style="border: solid black 1px;">11940</div>
+                <div style="border: solid black 1px;">12965</div>
+                <div style="border: solid black 1px;">13662</div>
+                <div style="border: solid black 1px;">14695</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">ATK</div>
+                <div style="border: solid black 1px;">20</div>
+                <div style="border: solid black 1px;">51</div>
+                <div style="border: solid black 1px;">67</div>
+                <div style="border: solid black 1px;">101</div>
+                <div style="border: solid black 1px;">113</div>
+                <div style="border: solid black 1px;">130</div>
+                <div style="border: solid black 1px;">146</div>
+                <div style="border: solid black 1px;">163</div>
+                <div style="border: solid black 1px;">175</div>
+                <div style="border: solid black 1px;">192</div>
+                <div style="border: solid black 1px;">204</div>
+                <div style="border: solid black 1px;">222</div>
+                <div style="border: solid black 1px;">233</div>
+                <div style="border: solid black 1px;">251</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">DEF</div>
+                <div style="border: solid black 1px;">57</div>
+                <div style="border: solid black 1px;">149</div>
+                <div style="border: solid black 1px;">198</div>
+                <div style="border: solid black 1px;">297</div>
+                <div style="border: solid black 1px;">332</div>
+                <div style="border: solid black 1px;">382</div>
+                <div style="border: solid black 1px;">428</div>
+                <div style="border: solid black 1px;">479</div>
+                <div style="border: solid black 1px;">514</div>
+                <div style="border: solid black 1px;">564</div>
+                <div style="border: solid black 1px;">599</div>
+                <div style="border: solid black 1px;">651</div>
+                <div style="border: solid black 1px;">686</div>
+                <div style="border: solid black 1px;">738</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Geo DMG%</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">7.2%</div>
+                <div style="border: solid black 1px;">7.2%</div>
+                <div style="border: solid black 1px;">14.4%</div>
+                <div style="border: solid black 1px;">14.4%</div>
+                <div style="border: solid black 1px;">14.4%</div>
+                <div style="border: solid black 1px;">14.4%</div>
+                <div style="border: solid black 1px;">21.6%</div>
+                <div style="border: solid black 1px;">21.6%</div>
+                <div style="border: solid black 1px;">28.8%</div>
+                <div style="border: solid black 1px;">28.8%</div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 6fr 8fr 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div >
+                    <h4>Elemental Skill</h4>
+                    <div style="grid-template-columns: repeat(3, 3fr); display: grid;">
+                        <div>
+                            Cooldown:<br>
+                            Particles:<br>
+                            Energy Recharge:
+                        </div>
+                        <div>
+                            4s (Press)<br>
+                            1 Geo Particles (Press)<br>
+                            3 (on field) 1.8 (out field)
+                        </div>
+                        <div>
+                            12s (Hold)<br>
+                            No Particles (Hold)<br>
+                            0 (on field) 0 (out field)
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4>Elemental Burst</h4>
+                    <div style="grid-template-columns: 1fr 1fr; display: grid;">
+                        <div>
+                            Cooldown: 12s<br>
+                            Energy Cost: 40<br>
+                            Duration: 3.1s <br><br>
+                        </div>
+                        <div class="text-left">
+                            Modifiers to get Energy<br>
+                            Constellation 1: Increases the maximum number of Stone Steles created by Elemental Skill (Dominus Lapidis) that may exist simultaneously by 2.<br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <h4><b> Role</b></h4>
+            <div style="grid-template-columns: 1fr 10fr 1fr 10fr 1fr 10fr 1fr 10fr 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Description:</b><br>
+                    
+                    
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>This build has 3 variations:</b><br>
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Flower:</b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <br>
+                    1) HP (always)<br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Feather:</b><br>
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <br>
+                    1) ATK (always)<br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Hourglass:</b><br>
+                    <img src="Image/Set_Hourglass_.png" style="width:50px">
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Goblet:</b><br>
+                    <img src="Image/Set_Goblet_.png" style="width:50px">
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Crown:</b><br>
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) 
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Weapons:</b><br>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <h4><b>Other builds, videos or links below</b></h4>
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/k54c24/quick_tldr_dps_guidebuild_for_zhongli/">Zhongli Guide by 2Board_ from Reddit <br>Version 1.1<br><img src="Image/Zhongli.png" style="width:100px"></a>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/k8xdsl/quick_tldr_team_comp_guide_for_zhongli/">Zhongli Team Guide by 2Board_ from Reddit <br>Version 1.1<br><img src="Image/Zhongli.png" style="width:100px"></a>
+        </div>
+            
+        <br>
+        <br>
+
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://youtu.be/y9NHP1bxEo8?t=476">COMPLETE SUPPORT GUIDE FOR EVERY CHARACTER by Zy0x from Youtube <br>Version 1.2<br><img src="https://i.ytimg.com/vi/y9NHP1bxEo8/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDsZZekgCZllXSBK7JTd0n_a-1NCA"></a>
+            <a href="https://www.youtube.com/watch?v=VzIrKI__xI8&list=PL2zJhEtG0TYyR_3AUjBvEZKgYrPrOF2C0">Zhongli Character Guide by Not-Casuals from You Tube <br>Version 1.1<br><img src="https://i.ytimg.com/vi/VzIrKI__xI8/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDixM1xLOsbrq9SxFE7iJlqb41U1A"></a>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.youtube.com/watch?v=9N1RTNXPT8Y">MOST UNDERRATED DPS! Complete Zhongli DPS Guide by Zy0x from Youtube <br>Version 1.1<br><img src="https://i.ytimg.com/vi/9N1RTNXPT8Y/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAvibawMiVjig0Vyo4S0GO4r5gbEw"></a>
+            <a href="https://www.youtube.com/watch?v=aelDKtoWtr4">(134K CRIT) ZHONGLI IS CRAZY! Best Zhongli Build by Zy0x from You Tube <br>Version 1.1<br><img src="https://i.ytimg.com/vi/aelDKtoWtr4/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAfON4cnJFnmBKrX86l5QhgCKgzvg"></a>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.youtube.com/watch?v=oRukS6B7XUU">GEO GOD COMP DESTROYS EVERYTHING (Geo Quickswap Team) by Zy0x from Youtube <br>Version 1.2<br><img src="https://i.ytimg.com/vi/oRukS6B7XUU/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAJKNFr6J4ztD4pGfto7dPv8KxCBw"></a>
+            
+        </div>
+
+        <br>
+        <br>
+
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/k5kfpb/build_zhongli_5_ar45/">Zhongli Build AR45+ Gobelyn from Reddit <br>Version 1.1<br><img src="https://preview.redd.it/3uhxn9jnru261.png?width=960&crop=smart&auto=webp&s=19864b168ca07d9b86369fa144e63a36d98fb820" width="100%"></a>
+        </div>
+
+        <br>
+        <br>
+
+              
+        </section>
+        <footer class="container-fluid text-center" style="background-color:#333;color:#fff">
+            <b>Made by Fabiano Médice<br>2020</b>
+    </footer>
+
+    <script>
+      ConfereUsuario()
+      Ler_BancoDeDadosQuantidades()
+      Ler_BancoDeDadosChar()
+      Atualiza_Valores_Char("Zhongli",1);
+    </script>
+
+
+	</body>
+</html>

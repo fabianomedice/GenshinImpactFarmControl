@@ -1,0 +1,913 @@
+<!DOCTYPE html> 
+
+<html lang="en" style="scroll-behavior: smooth;">
+	<head>
+		<!-- Titulo da aba-->
+		<title> 
+			Genshin Impact Farm Helper
+		</title>
+		<!-- Metadados -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="Fabiano Médice">
+		<meta name="description" content="Controle de Informações de farm de Genshin Impact">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="JS/banco_de_dados.js"></script>
+        <script src="JS/chars.js"></script>
+        <script src="JS/login.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <!-- bootstrap 3.0 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <style>
+                /* 
+                Conserta o link levar para embaixo do nav
+                Solução do site http://nicolasgallagher.com/jump-links-and-viewport-positioning/
+                */
+                #Albedo::before, #Amber::before, #Barbara::before, #Beidou::before, #Bennett::before, #Chongyun::before, #Diluc::before, #Diona::before, #Fischl::before, #Ganyu::before, #Jean::before, #Kaeya::before, #Keqing::before, #Klee::before, #Lisa::before, #Mona::before, #Ningguang::before, #Noelle::before, #Qiqi::before, #Razor::before, #Sucrose::before, #Tartaglia::before, #Traveler::before, #Venti::before, #Xiangling::before, #Xingqiu::before
+                {
+                    content: "";
+                    display: block;
+                    height: 180px;
+                    margin: -180px 0 0;
+                }
+                /*CSS responsível para diferentes tamanhos de tela*/
+                /*Aparece para adicionar um vazio embaixo da foto*/
+                @media screen and (max-width: 1196px) 
+                {
+                    .DivArrumadora
+                    {
+                        display: inline;
+                    }
+                }
+                /*Some pois a foto ocupa esse vazio*/
+                @media screen and (min-width: 1197px) 
+                {
+                    .DivArrumadora
+                    {
+                        display: none;
+                    }
+                }
+        </style>
+	</head>
+	<body>
+		<header style="position:sticky; top:0; z-index:1">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li><a href="backpack.html">Backpack</a></li>
+              <li class="active"><a href="chars.html">Characters</a></li>
+              <!--<li><a href="weapons.html">Weapons</a></li>-->
+              <li><a href="farm.html">Complete Farm Sheet</a></li>
+              <li><a href="index.html">About</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a>Please help us maintain this site</a></li>
+              <li><a href="https://streamlabs.com/mrbadgerbr/tip" style="padding:0px"><img src="Image/PayPal.png" style="height:50px" alt="PayPal"></a></li>
+              <li><a><br></a></li>
+              <li><a href="https://pag.ae/7WB124EQp" style="padding:0px"><img src="Image/PagSeguro.png" style="height:50px" alt="PagSeguro"></a></li>
+              <li><a><br></a></li>
+              <li id="LoginOption"><a onclick=AbreLogin()><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              <li id="LoginUser" style="display: none;"> <form id="FormLogin" method="POST" action="PHP/register.php"><input type="text" placeholder="Enter Email" name="email" id="LoginEmail" > <br> <input type="password" placeholder="Enter Password" name="password" id="LoginPassword" ></form></li>
+              <li id="LoginButton" style="display: none;"><button onclick=FazLogin() style="width:70px"> Log in </button><br><input type="submit" value="Register" form="FormLogin" style="width:70px"></li>
+              <li id="ForgetPasswordButton" style="display: none;"><span style="width: 3px;height: 21px; display: inline-block;"></span> <input type="checkbox" id="RememberMe" onclick=LembrarLogin()> <b style="color: white;">Remember me</b> <br><button onclick='location.href="PHP/resetpassword.php"'> Reset Password </button></li>
+              <li id="RegisterUser" style="display: none;"></li>
+              <li id="LogoutButton" style="display: none;"><a style="color: black;"><button onclick=DesfazLogin() style="width:70px"> Log out </button></a></li>
+            </ul>
+          </div>
+        </div>
+        <div style="background-color:#080808;color:#fff"> 
+          <div class="container text-center">
+            <h1>Characters - Keqing</h1>      
+          </div>
+        </div>
+          <!-- Navegador para os chars-->
+          <nav>
+            <ul class=" navbar-nav" style="list-style-type:none;">
+                <li><a href="Albedo.html"><img src="Image/Albedo.png" style="width:50px" alt="Albedo"></a></li>
+                <li><a href="Amber.html"><img src="Image/Amber.png" style="width:50px" alt="Amber"></a></li>
+                <li><a href="Barbara.html"><img src="Image/Barbara.png" style="width:50px" alt="Barbara"></a></li>
+                <li><a href="Beidou.html"><img src="Image/Beidou.png" style="width:50px" alt="Beidou"></a></li>
+                <li><a href="Bennett.html"><img src="Image/Bennett.png" style="width:50px" alt="Bennett"></a></li>
+                <li><a href="Chongyun.html"><img src="Image/Chongyun.png" style="width:50px" alt="Chongyun"></a></li>
+                <li><a href="Diluc.html"><img src="Image/Diluc.png" style="width:50px" alt="Diluc"></a></li>
+                <li><a href="Diona.html"><img src="Image/Diona.png" style="width:50px" alt="Diona"></a></li>
+                <li><a href="Fischl.html"><img src="Image/Fischl.png" style="width:50px" alt="Fischl"></a></li>
+                <li><a href="Ganyu.html"><img src="Image/Ganyu.png" style="width:50px" alt="Ganyu"></a></li>
+                <li><a href="Jean.html"><img src="Image/Jean.png" style="width:50px" alt="Jean"></a></li>
+                <li><a href="Kaeya.html"><img src="Image/Kaeya.png" style="width:50px" alt="Kaeya"></a></li>
+                <li><a href="Keqing.html"><img src="Image/Keqing.png" style="width:50px" alt="Keqing"></a></li>
+                <li><a href="Klee.html"><img src="Image/Klee.png" style="width:50px" alt="Klee"></a></li>
+                <li><a href="Lisa.html"><img src="Image/Lisa.png" style="width:50px" alt="Lisa"></a></li>
+                <li><a href="Mona.html"><img src="Image/Mona.png" style="width:50px" alt="Mona"></a></li>
+                <li><a href="Ningguang.html"><img src="Image/Ningguang.png" style="width:50px" alt="Ningguang"></a></li>
+                <li><a href="Noelle.html"><img src="Image/Noelle.png" style="width:50px" alt="Noelle"></a></li>
+                <li><a href="Qiqi.html"><img src="Image/Qiqi.png" style="width:50px" alt="Qiqi"></a></li>
+                <li><a href="Razor.html"><img src="Image/Razor.png" style="width:50px" alt="Razor"></a></li>
+                <li><a href="Sucrose.html"><img src="Image/Sucrose.png" style="width:50px" alt="Sucrose"></a></li>
+                <li><a href="Tartaglia.html"><img src="Image/Tartaglia.png" style="width:50px" alt="Tartaglia"></a></li>
+                <li><a href="Traveler.html"><img src="Image/Traveler(Anemo).png" style="width:50px" alt="Traveler"></a></li>
+                <li><a href="Venti.html"><img src="Image/Venti.png" style="width:50px" alt="Venti"></a></li>
+                <li><a href="Xiangling.html"><img src="Image/Xiangling.png" style="width:50px" alt="Xiangling"></a></li>
+                <li><a href="Xingqiu.html"><img src="Image/Xingqiu.png" style="width:50px" alt="Xingqiu"></a></li>
+                <li><a href="Xinyan.html"><img src="Image/Xinyan.png" style="width:50px" alt="Xinyan"></a></li>
+                <li><a href="Zhongli.html"><img src="Image/Zhongli.png" style="width:50px" alt="Zhongli"></a></li>
+            </ul>
+          </nav>
+      </nav>
+    </header>    
+		<br>
+		<section >
+      <form id="chars"> 
+        <!-- Criado o formulario-->
+      </form>
+
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row" id="Keqing">
+            <div class="col-sm-3" >
+                <img src="Image/Keqing_Card.jpg" class="img-responsive img-thumbnail mx-auto" style="max-height: 800px;" alt="Keqing">
+            </div>
+            <div class="col-sm-9" >
+
+                <div class="row" >
+                    <div class="col-sm-2" >
+                        <input type="checkbox" id="KeqingOwn" name="Keqing_Own" value=True form="chars" onchange="Confirma_Personagem('Keqing')">
+                        <label for="KeqingOwn">I have this char</label>
+                    </div>
+                    <div class="col-sm-3" >
+                        <b>Ascension Level</b><br>
+                        <input type="radio" form="chars" id="KeqingAscension0" name="KeqingAscension" value=0 onchange="Atualiza_char_Ascension_Level('Keqing',0)">
+                        <label for="KeqingAscension0">0 </label>
+                        <input type="radio" form="chars" id="KeqingAscension1" name="KeqingAscension" value=1 onchange="Atualiza_char_Ascension_Level('Keqing',1)">
+                        <label for="KeqingAscension1">1 </label>
+                        <input type="radio" form="chars" id="KeqingAscension2" name="KeqingAscension" value=2 onchange="Atualiza_char_Ascension_Level('Keqing',2)">
+                        <label for="KeqingAscension2">2 </label>
+                        <input type="radio" form="chars" id="KeqingAscension3" name="KeqingAscension" value=3 onchange="Atualiza_char_Ascension_Level('Keqing',3)">
+                        <label for="KeqingAscension3">3 </label>
+                        <input type="radio" form="chars" id="KeqingAscension4" name="KeqingAscension" value=4 onchange="Atualiza_char_Ascension_Level('Keqing',4)">
+                        <label for="KeqingAscension4">4 </label>
+                        <input type="radio" form="chars" id="KeqingAscension5" name="KeqingAscension" value=5 onchange="Atualiza_char_Ascension_Level('Keqing',5)">
+                        <label for="KeqingAscension5">5 </label>
+                        <input type="radio" form="chars" id="KeqingAscension6" name="KeqingAscension" value=6 onchange="Atualiza_char_Ascension_Level('Keqing',6)">
+                        <label for="KeqingAscension6">6 </label>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Attack</b><br>
+                        <select id="KeqingTalentAtk" form="chars" name="Keqing_TalentAtk" onchange="Atualiza_talento('Keqing','Atk')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Elemental Skill</b><br>
+                        <select id="KeqingTalentElementalSkill" form="chars" name="Keqing_TalentElementalSkill" onchange="Atualiza_talento('Keqing','ElementalSkill')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Elemental Burst</b><br>
+                        <select id="KeqingTalentElementalBurst" form="chars" name="Keqing_ElementalBurst" onchange="Atualiza_talento('Keqing','ElementalBurst')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row" >
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Electro2.png" style="width:35px" alt="Electro2"> <span id="KeqingElement2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Electro3.png" style="width:35px" alt="Electro3"> <span id="KeqingElement3"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Electro4.png" style="width:35px" alt="Electro4"> <span id="KeqingElement4"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Electro5.png" style="width:35px" alt="Electro5"> <span id="KeqingElement5"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/BossElectro.png" style="width:35px" alt="BossElectro"> <span id="KeqingBoss"></span><br>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2" >
+                            <b>Own/Need</b>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/CorLapis.png" style="width:35px" alt="Cor Lapis"> <span id="KeqingLocal_Specialty"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Nectar1.png" style="width:35px" alt="Nectar1"> <span id="KeqingComum_Item1"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Nectar2.png" style="width:35px" alt="Nectar2"> <span id="KeqingComum_Item2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Nectar3.png" style="width:35px" alt="Nectar3"> <span id="KeqingComum_Item3"></span><br>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Prosperity2.png" style="width:35px" alt="Prosperity2"> <span id="KeqingTalent2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Prosperity3.png" style="width:35px" alt="Prosperity3"> <span id="KeqingTalent3"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Prosperity4.png" style="width:35px" alt="Prosperity4"> <span id="KeqingTalent4"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/RingofBoreas.png" style="width:35px" alt="Ring of Boreas"> <span id="KeqingBossTalent"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/CrownofInsight.png" style="width:35px" alt="Crown of Insight"> <span id="KeqingCrownofInsight"></span>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row" >
+                    <div class="col-sm-2" id="KeqingAscension1Div">
+                        <b>Ascension 1</b><br>
+                        <img src="Image/Electro2.png" style="width:50px" alt="Electro2"> x01<br>
+                        <img src="Image/CorLapis.png" style="width:50px" alt="Cor Lapis"> x03 <br>
+                        <img src="Image/Nectar1.png" style="width:50px" alt="Nectar1"> x03
+                    </div>
+                    <div class="col-sm-2" id="KeqingAscension2Div">
+                        <b>Ascension 2</b><br>
+                        <img src="Image/Electro3.png" style="width:50px" alt="Electro3"> x03<br>
+                        <img src="Image/BossElectro.png" style="width:50px" alt="BossElectro"> x02<br>
+                        <img src="Image/CorLapis.png" style="width:50px" alt="Cor Lapis"> x10 <br>
+                        <img src="Image/Nectar1.png" style="width:50px" alt="Nectar1"> x15
+                    </div>
+                    <div class="col-sm-2" id="KeqingAscension3Div">
+                        <b>Ascension 3</b><br>
+                        <img src="Image/Electro3.png" style="width:50px" alt="Electro3"> x06<br>
+                        <img src="Image/BossElectro.png" style="width:50px" alt="BossElectro"> x04<br>
+                        <img src="Image/CorLapis.png" style="width:50px" alt="Cor Lapis"> x20 <br>
+                        <img src="Image/Nectar2.png" style="width:50px" alt="Nectar2"> x12
+                    </div>
+                    <div class="col-sm-2" id="KeqingAscension4Div">
+                        <b>Ascension 4</b><br>
+                        <img src="Image/Electro4.png" style="width:50px" alt="Electro4"> x03<br>
+                        <img src="Image/BossElectro.png" style="width:50px" alt="BossElectro"> x08<br>
+                        <img src="Image/CorLapis.png" style="width:50px" alt="Cor Lapis"> x30 <br>
+                        <img src="Image/Nectar2.png" style="width:50px" alt="Nectar2"> x18
+                    </div>
+                    <div class="col-sm-2" id="KeqingAscension5Div">
+                        <b>Ascension 5</b><br>
+                        <img src="Image/Electro4.png" style="width:50px" alt="Electro4"> x06<br>
+                        <img src="Image/BossElectro.png" style="width:50px" alt="BossElectro"> x12<br>
+                        <img src="Image/CorLapis.png" style="width:50px" alt="Cor Lapis"> x45 <br>
+                        <img src="Image/Nectar3.png" style="width:50px" alt="Nectar3"> x12
+                    </div>
+                    <div class="col-sm-2" id="KeqingAscension6Div">
+                        <b>Ascension 6</b><br>
+                        <img src="Image/Electro5.png" style="width:50px" alt="Electro5"> x06<br>
+                        <img src="Image/BossElectro.png" style="width:50px" alt="BossElectro"> x20<br>
+                        <img src="Image/CorLapis.png" style="width:50px" alt="Cor Lapis"> x60 <br>
+                        <img src="Image/Nectar3.png" style="width:50px" alt="Nectar3"> x24
+                    </div>
+                </div>
+                <br>
+                <div class="row" ><br></div>
+            </div>
+            <div class="col-sm-3 DivArrumadora" >
+                <!--Div Arrumadora de padrão-->
+            </div>
+            <div class="col-sm-1" id="KeqingTalent2Div">
+                <b>Talent Lv 2</b><br>
+                <img src="Image/Prosperity2.png" style="width:50px" alt="Prosperity2"> x3 / Talent <br>
+                <img src="Image/Nectar1.png" style="width:50px" alt="Nectar1"> x6 / Talent
+            </div>
+            <div class="col-sm-1" id="KeqingTalent3Div">
+                <b>Talent Lv 3</b><br>
+                <img src="Image/Prosperity3.png" style="width:50px" alt="Prosperity3"> x2 / Talent <br>
+                <img src="Image/Nectar2.png" style="width:50px" alt="Nectar2"> x3 / Talent
+            </div>
+            <div class="col-sm-1" id="KeqingTalent4Div">
+                <b>Talent Lv 4</b><br>
+                <img src="Image/Prosperity3.png" style="width:50px" alt="Prosperity3"> x4 / Talent <br>
+                <img src="Image/Nectar2.png" style="width:50px" alt="Nectar2"> x4 / Talent
+            </div>
+            <div class="col-sm-1" id="KeqingTalent5Div">
+                <b>Talent Lv 5</b><br>
+                <img src="Image/Prosperity3.png" style="width:50px" alt="Prosperity3"> x6 / Talent <br>
+                <img src="Image/Nectar2.png" style="width:50px" alt="Nectar2"> x6 / Talent
+            </div>
+            <div class="col-sm-1" id="KeqingTalent6Div">
+                <b>Talent Lv 6</b><br>
+                <img src="Image/Prosperity3.png" style="width:50px" alt="Prosperity3"> x9 / Talent <br>
+                <img src="Image/Nectar2.png" style="width:50px" alt="Nectar2"> x9 / Talent
+            </div>
+            <div class="col-sm-1" id="KeqingTalent7Div">
+                <b>Talent Lv 7</b><br>
+                <img src="Image/Prosperity4.png" style="width:50px" alt="Prosperity4"> x4 / Talent <br>
+                <img src="Image/Nectar3.png" style="width:50px" alt="Nectar3"> x4 / Talent<br>
+                <img src="Image/RingofBoreas.png" style="width:50px" alt="RingofBoreas"> x1 / Talent
+            </div>
+            <div class="col-sm-1" id="KeqingTalent8Div">
+                <b>Talent Lv 8</b><br>
+                <img src="Image/Prosperity4.png" style="width:50px" alt="Prosperity4"> x6 / Talent <br>
+                <img src="Image/Nectar3.png" style="width:50px" alt="Nectar3"> x6 / Talent <br>
+                <img src="Image/RingofBoreas.png" style="width:50px" alt="RingofBoreas"> x1 / Talent
+            </div>
+            <div class="col-sm-1" id="KeqingTalent9Div">
+                <b>Talent Lv 9</b><br>
+                <img src="Image/Prosperity4.png" style="width:50px" alt="Prosperity4"> x12 / Talent <br>
+                <img src="Image/Nectar3.png" style="width:50px" alt="Nectar3"> x09 / Talent <br>
+                <img src="Image/RingofBoreas.png" style="width:50px" alt="RingofBoreas"> x02 / Talent
+            </div>
+            <div class="col-sm-1" id="KeqingTalent10Div">
+                <b>Talent Lv 10</b><br>
+                <img src="Image/Prosperity4.png" style="width:50px" alt="Prosperity4"> x16 / Talent <br>
+                <img src="Image/Nectar3.png" style="width:50px" alt="Nectar3"> x12 / Talent <br>
+                <img src="Image/RingofBoreas.png" style="width:50px" alt="RingofBoreas"> x02 / Talent<br>
+                <img src="Image/CrownofInsight.png" style="width:50px" alt="Crown of Insight"> x01 / Talent<br>
+            </div>
+
+            <div class="col-sm-3" >
+                <!--Div Arrumadora de padrão-->
+            </div>
+            <div class="col-sm-9" >
+                <div class="col-sm-2" >
+                    <label for="KeqingWeapon">Choose a weapon (Swords):</label>
+                    <select id="KeqingWeapon" form="chars" name="Keqing_Weapon" onchange="Atualiza_weapon('Keqing')">
+                        <option value="NoneSword">None</option>
+                        <option value="AquilaFavonia">Aquila Favonia</option>
+                        <option value="BlackcliffLongsword">Blackcliff Longsword</option>
+                        <option value="CoolSteel">Cool Steel</option>
+                        <!--<option value="DarkIronSword">Dark Iron Sword</option>-->
+                        <option value="FavoniusSword">Favonius Sword</option>
+                        <option value="FesteringDesire">Festering Desire</option>
+                        <option value="FilletBlade">Fillet Blade</option>
+                        <option value="HarbingerofDawn">Harbinger of Dawn</option>
+                        <option value="IronSting">Iron Sting</option>
+                        <option value="LionsRoar">Lion's Roar</option>
+                        <option value="PrototypeRancour">Prototype Rancour</option>
+                        <option value="RoyalLongsword">Royal Longsword</option>
+                        <option value="SacrificialSword">Sacrificial Sword</option>
+                        <option value="SkyriderSword">Skyrider Sword</option>
+                        <option value="SkywardBlade">Skyward Blade</option>
+                        <option value="SummitShaper">Summit Shaper</option>
+                        <option value="SwordofDescension">Sword of Descension</option>
+                        <!--<option value="TheAlleyFlash">The Alley Flash</option>-->
+                        <option value="TheBlackSword">The Black Sword</option>
+                        <option value="TheFlute">The Flute</option>
+                        <option value="TravelersHandySword">Traveler's Handy Sword</option>
+                    </select>
+                    <br>
+                    <b>Weapon Ascension Level</b><br>
+                    <input type="radio" form="chars" id="KeqingWeaponAscension0" name="KeqingWeaponAscension" value=0 onchange="Atualiza_weapon_Ascension_Level('Keqing',0)">
+                    <label for="KeqingWeaponAscension0">0 </label>
+                    <input type="radio" form="chars" id="KeqingWeaponAscension1" name="KeqingWeaponAscension" value=1 onchange="Atualiza_weapon_Ascension_Level('Keqing',1)">
+                    <label for="KeqingWeaponAscension1">1 </label>
+                    <input type="radio" form="chars" id="KeqingWeaponAscension2" name="KeqingWeaponAscension" value=2 onchange="Atualiza_weapon_Ascension_Level('Keqing',2)">
+                    <label for="KeqingWeaponAscension2">2 </label>
+                    <input type="radio" form="chars" id="KeqingWeaponAscension3" name="KeqingWeaponAscension" value=3 onchange="Atualiza_weapon_Ascension_Level('Keqing',3)">
+                    <label for="KeqingWeaponAscension3">3 </label>
+                    <input type="radio" form="chars" id="KeqingWeaponAscension4" name="KeqingWeaponAscension" value=4 onchange="Atualiza_weapon_Ascension_Level('Keqing',4)">
+                    <label for="KeqingWeaponAscension4">4 </label>
+                    <input type="radio" form="chars" id="KeqingWeaponAscension5" name="KeqingWeaponAscension" value=5 onchange="Atualiza_weapon_Ascension_Level('Keqing',5)">
+                    <label for="KeqingWeaponAscension5">5 </label>
+                    <input type="radio" form="chars" id="KeqingWeaponAscension6" name="KeqingWeaponAscension" value=6 onchange="Atualiza_weapon_Ascension_Level('Keqing',6)">
+                    <label for="KeqingWeaponAscension6">6 </label>
+                    <br>
+                    <img src="Image/NoneSword.png" class="img-responsive img-thumbnail mx-auto" style="width:130px" alt="NoneSword" id="KeqingWeaponImage">
+                    <br>
+                </div>
+                <div class="col-sm-10" >
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Dominio_2" id="KeqingWeaponDominio_2"> <span id="KeqingWeaponDominio_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Dominio_3" id="KeqingWeaponDominio_3"> <span id="KeqingWeaponDominio_3_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Dominio_4" id="KeqingWeaponDominio_4"> <span id="KeqingWeaponDominio_4_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Dominio_5" id="KeqingWeaponDominio_5"> <span id="KeqingWeaponDominio_5_Quant"></span><br></div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Comum_Item_2a4_2" id="KeqingWeaponComum_Item_2a4_2"> <span id="KeqingWeaponComum_Item_2a4_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Comum_Item_2a4_3" id="KeqingWeaponComum_Item_2a4_3"> <span id="KeqingWeaponComum_Item_2a4_3_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Comum_Item_2a4_4" id="KeqingWeaponComum_Item_2a4_4"> <span id="KeqingWeaponComum_Item_2a4_4_Quant"></span></div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <b>Own/Need</b><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Comum_Item_1a3_1" id="KeqingWeaponComum_Item_1a3_1"> <span id="KeqingWeaponComum_Item_1a3_1_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Comum_Item_1a3_2" id="KeqingWeaponComum_Item_1a3_2"> <span id="KeqingWeaponComum_Item_1a3_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneSword.png" style="width:35px" alt="Comum_Item_1a3_3" id="KeqingWeaponComum_Item_1a3_3"> <span id="KeqingWeaponComum_Item_1a3_3_Quant"></span><br></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <div class="row" >
+            <hr>
+            <h1>Builds</h1>
+            <hr>
+            <h4>This is Keqing Base Stats</h4>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr repeat(8, 2fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Ascension</div>
+                <div style="border: solid black 1px;">0</div>
+                <div style="border: solid black 1px;">1</div>
+                <div style="border: solid black 1px;">2</div>
+                <div style="border: solid black 1px;">3</div>
+                <div style="border: solid black 1px;">4</div>
+                <div style="border: solid black 1px;">5</div>
+                <div style="border: solid black 1px;">6</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Level</div>
+                <div style="border: solid black 1px;">1</div>
+                <div style="border: solid black 1px;">20</div>
+                <div style="border: solid black 1px;">20</div>
+                <div style="border: solid black 1px;">40</div>
+                <div style="border: solid black 1px;">40</div>
+                <div style="border: solid black 1px;">50</div>
+                <div style="border: solid black 1px;">50</div>
+                <div style="border: solid black 1px;">60</div>
+                <div style="border: solid black 1px;">60</div>
+                <div style="border: solid black 1px;">70</div>
+                <div style="border: solid black 1px;">70</div>
+                <div style="border: solid black 1px;">80</div>
+                <div style="border: solid black 1px;">80</div>
+                <div style="border: solid black 1px;">90</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">HP</div>
+                <div style="border: solid black 1px;">983</div>
+                <div style="border: solid black 1px;">2634</div>
+                <div style="border: solid black 1px;">3512</div>
+                <div style="border: solid black 1px;">5268</div>
+                <div style="border: solid black 1px;">5889</div>
+                <div style="border: solid black 1px;">6776</div>
+                <div style="border: solid black 1px;">7604</div>
+                <div style="border: solid black 1px;">8500</div>
+                <div style="border: solid black 1px;">9121</div>
+                <div style="border: solid black 1px;">10025</div>
+                <div style="border: solid black 1px;">10647</div>
+                <div style="border: solid black 1px;">11561</div>
+                <div style="border: solid black 1px;">12182</div>
+                <div style="border: solid black 1px;">13105</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">ATK</div>
+                <div style="border: solid black 1px;">26</div>
+                <div style="border: solid black 1px;">66</div>
+                <div style="border: solid black 1px;">88</div>
+                <div style="border: solid black 1px;">130</div>
+                <div style="border: solid black 1px;">145</div>
+                <div style="border: solid black 1px;">167</div>
+                <div style="border: solid black 1px;">188</div>
+                <div style="border: solid black 1px;">209</div>
+                <div style="border: solid black 1px;">225</div>
+                <div style="border: solid black 1px;">247</div>
+                <div style="border: solid black 1px;">262</div>
+                <div style="border: solid black 1px;">285</div>
+                <div style="border: solid black 1px;">300</div>
+                <div style="border: solid black 1px;">323</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">DEF</div>
+                <div style="border: solid black 1px;">63</div>
+                <div style="border: solid black 1px;">162</div>
+                <div style="border: solid black 1px;">215</div>
+                <div style="border: solid black 1px;">321</div>
+                <div style="border: solid black 1px;">359</div>
+                <div style="border: solid black 1px;">413</div>
+                <div style="border: solid black 1px;">464</div>
+                <div style="border: solid black 1px;">519</div>
+                <div style="border: solid black 1px;">556</div>
+                <div style="border: solid black 1px;">612</div>
+                <div style="border: solid black 1px;">649</div>
+                <div style="border: solid black 1px;">705</div>
+                <div style="border: solid black 1px;">743</div>
+                <div style="border: solid black 1px;">800</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">CRIT DMG%</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">9.6%</div>
+                <div style="border: solid black 1px;">9.6%</div>
+                <div style="border: solid black 1px;">19.2%</div>
+                <div style="border: solid black 1px;">19.2%</div>
+                <div style="border: solid black 1px;">19.2%</div>
+                <div style="border: solid black 1px;">19.2%</div>
+                <div style="border: solid black 1px;">28.8%</div>
+                <div style="border: solid black 1px;">28.8%</div>
+                <div style="border: solid black 1px;">38.4%</div>
+                <div style="border: solid black 1px;">38.4%</div>
+            </div>
+        </div>
+        <br>
+        <div class="row" >
+            <h4>This is Keqing Normal Attack Stats</h4>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Attack Speed</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">Lv 1</div>
+                <div style="border: solid black 1px;">Lv 2</div>
+                <div style="border: solid black 1px;">Lv 3</div>
+                <div style="border: solid black 1px;">Lv 4</div>
+                <div style="border: solid black 1px;">Lv 5</div>
+                <div style="border: solid black 1px;">Lv 6</div>
+                <div style="border: solid black 1px;">Lv 7</div>
+                <div style="border: solid black 1px;">Lv 8</div>
+                <div style="border: solid black 1px;">Lv 9</div>
+                <div style="border: solid black 1px;">Lv 10</div>
+                <div style="border: solid black 1px;">Lv 11</div>
+                <div style="border: solid black 1px;">Lv 12</div>
+                <div style="border: solid black 1px;">Lv 13</div>
+                <div style="border: solid black 1px;">Lv 14</div>
+                <div style="border: solid black 1px;">Lv 15</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">1-Hit Damage</div>
+                <div style="border: solid black 1px;">0.33s (20/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">41%</div>
+                <div style="border: solid black 1px;">44.4%</div>
+                <div style="border: solid black 1px;">47.7%</div>
+                <div style="border: solid black 1px;">52.5%</div>
+                <div style="border: solid black 1px;">55.8%</div>
+                <div style="border: solid black 1px;">59.6%</div>
+                <div style="border: solid black 1px;">64.9%</div>
+                <div style="border: solid black 1px;">70.1%</div>
+                <div style="border: solid black 1px;">75.4%</div>
+                <div style="border: solid black 1px;">81.1%</div>
+                <div style="border: solid black 1px;">86.8%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">2-Hit Damage</div>
+                <div style="border: solid black 1px;">0.3s (18/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">41%</div>
+                <div style="border: solid black 1px;">44.4%</div>
+                <div style="border: solid black 1px;">47.7%</div>
+                <div style="border: solid black 1px;">52.5%</div>
+                <div style="border: solid black 1px;">55.8%</div>
+                <div style="border: solid black 1px;">59.6%</div>
+                <div style="border: solid black 1px;">64.9%</div>
+                <div style="border: solid black 1px;">70.1%</div>
+                <div style="border: solid black 1px;">75.4%</div>
+                <div style="border: solid black 1px;">81.1%</div>
+                <div style="border: solid black 1px;">86.8%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">3-Hit Damage</div>
+                <div style="border: solid black 1px;">0.5s (30/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">54.4%</div>
+                <div style="border: solid black 1px;">58.9%</div>
+                <div style="border: solid black 1px;">63.3%</div>
+                <div style="border: solid black 1px;">69.6%</div>
+                <div style="border: solid black 1px;">74.1%</div>
+                <div style="border: solid black 1px;">79.1%</div>
+                <div style="border: solid black 1px;">86.1%</div>
+                <div style="border: solid black 1px;">93.1%</div>
+                <div style="border: solid black 1px;">100%</div>
+                <div style="border: solid black 1px;">108%</div>
+                <div style="border: solid black 1px;">115%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">4-Hit Damage (2 hits)</div>
+                <div style="border: solid black 1px;">1.17s (70/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">31.5% + 34.4%</div>
+                <div style="border: solid black 1px;">34.0% + 37.2%</div>
+                <div style="border: solid black 1px;">36.6% + 40.0%</div>
+                <div style="border: solid black 1px;">40.3% + 44.0%</div>
+                <div style="border: solid black 1px;">42.8% + 46.8%</div>
+                <div style="border: solid black 1px;">45.8% + 50.0%</div>
+                <div style="border: solid black 1px;">49.8% + 54.4%</div>
+                <div style="border: solid black 1px;">53.8% + 58.8%</div>
+                <div style="border: solid black 1px;">57.8% + 63.2%</div>
+                <div style="border: solid black 1px;">62.2% + 68.0%</div>
+                <div style="border: solid black 1px;">66.6% + 72.8%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">5-Hit Damage</div>
+                <div style="border: solid black 1px;">1s (60/60 fps)</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">67%</div>
+                <div style="border: solid black 1px;">72.4%</div>
+                <div style="border: solid black 1px;">77.9%</div>
+                <div style="border: solid black 1px;">85.7%</div>
+                <div style="border: solid black 1px;">91.1%</div>
+                <div style="border: solid black 1px;">97.4%</div>
+                <div style="border: solid black 1px;">106%</div>
+                <div style="border: solid black 1px;">115%</div>
+                <div style="border: solid black 1px;">123%</div>
+                <div style="border: solid black 1px;">132%</div>
+                <div style="border: solid black 1px;">142%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+                <div style="border: solid black 1px;">?%</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr 2fr repeat(16, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Total</div>
+                <div style="border: solid black 1px;">3.3s (198/60 fps)</div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 6fr 8fr 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div >
+                    <h4>Elemental Skill</h4>
+                    <div style="grid-template-columns: repeat(2, 3fr); display: grid;">
+                        <div>
+                            Cooldown:<br>
+                            Particles:<br><br>
+                            Energy Recharge:
+                        </div>
+                        <div>
+                            7.5s (Press)<br>
+                            2 Electro Particles (Press) +1 Electro Particle <br>for hiting enemies affected by Electro (Constellation 2)<br>
+                            6 (on field) 3.6 (out field) +3 (on field) 1.8 (out field) (Constellation 2)
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4>Elemental Burst</h4>
+                    <div style="grid-template-columns: 1fr 1fr; display: grid;">
+                        <div>
+                            Cooldown: 12s<br>
+                            Energy Cost: 40 <br>
+                            Duration: Instantaneous <br><br>
+                        </div>
+                        <div class="text-left">
+                            Modifiers to get Energy<br>
+                            Ascension 4: When casting Elemental Burst (Starward Sword), Keqing's CRIT Rate is increased by 15%, and her Energy Recharge is increased by 15%. This effect lasts for 8s.<br>
+                            Constellation 2: When Keqing's Normal and Charged Attack's hit enemies affected by Electro, they have a 50% chance of producing an Electro Elemental Particle. This effect can only occur once every 5s.<br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <h4><b> Role</b></h4>
+            <div style="grid-template-columns: 1fr 10fr 1fr 10fr 1fr 10fr 1fr 10fr 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Description:</b><br>
+                    
+                    
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>This build has 3 variations:</b><br>
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Flower:</b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <br>
+                    1) HP (always)<br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Feather:</b><br>
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <br>
+                    1) ATK (always)<br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Hourglass:</b><br>
+                    <img src="Image/Set_Hourglass_.png" style="width:50px">
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Goblet:</b><br>
+                    <img src="Image/Set_Goblet_.png" style="width:50px">
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Crown:</b><br>
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) 
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Weapons:</b><br>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <h4><b>Other builds, videos or links below</b></h4>
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/j8dcj9/quick_tldr_dps_guidebuild_for_keqing/">Keqing Guide by 2Board_ from Reddit <br>Version 1.0<br><img src="Image/Keqing.png" style="width:100px"></a>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/jlrme9/quick_tldr_team_comp_guide_for_keqing/">Keqing Team Guide by 2Board_ from Reddit <br>Version 1.0<br><img src="Image/Keqing.png" style="width:100px"></a>
+        </div>
+            
+        <br>
+        <br>
+        
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <div><!-- Div Vazia --></div>
+            <a href="https://youtu.be/7Q-N1uXPC1M?list=PL2zJhEtG0TYyR_3AUjBvEZKgYrPrOF2C0"> Character Guide by NotCasuals from You Tube <br>Version 1.0<br><img src="https://i.ytimg.com/vi/7Q-N1uXPC1M/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBnNx9ErdKAyvNRVFy4WN1k3SAooA"></a>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/jon2bi/keqing_build_45_electro_and_physical/">Keqing Build AR45+ Gobelyn from Reddit <br>Version 1.0<br><img src="https://i.redd.it/9pix45n6jgx51.png" width="100%"></a>
+            <a href="https://docs.google.com/document/d/1trRf3ttEbz8yHz6XgrDjDTAynCqt1B-6AMcMIzmpIRM/edit#">Keqing Build AR45+ Gobelyn from Google Docs <br>Version 1.1<br><img src="https://i.imgur.com/5xHEgg0.png" width="100%"></a>
+        </div>
+
+        <br>
+        <br>
+              
+		</section>
+		<footer class="container-fluid text-center" style="background-color:#333;color:#fff">
+			<b>Made by Fabiano Médice<br>2020</b>
+    </footer>
+
+    <script>
+      ConfereUsuario()
+      Ler_BancoDeDadosQuantidades()
+      Ler_BancoDeDadosChar()
+      Atualiza_Valores_Char("Keqing",1);
+    </script>
+
+	</body>
+</html>

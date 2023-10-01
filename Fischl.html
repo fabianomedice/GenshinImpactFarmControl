@@ -1,0 +1,780 @@
+<!DOCTYPE html> 
+
+<html lang="en" style="scroll-behavior: smooth;">
+	<head>
+		<!-- Titulo da aba-->
+		<title> 
+			Genshin Impact Farm Helper
+		</title>
+		<!-- Metadados -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="Fabiano Médice">
+		<meta name="description" content="Controle de Informações de farm de Genshin Impact">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="JS/banco_de_dados.js"></script>
+        <script src="JS/chars.js"></script>
+        <script src="JS/login.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <!-- bootstrap 3.0 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <style>
+                /* 
+                Conserta o link levar para embaixo do nav
+                Solução do site http://nicolasgallagher.com/jump-links-and-viewport-positioning/
+                */
+                #Albedo::before, #Amber::before, #Barbara::before, #Beidou::before, #Bennett::before, #Chongyun::before, #Diluc::before, #Diona::before, #Fischl::before, #Ganyu::before, #Jean::before, #Kaeya::before, #Keqing::before, #Klee::before, #Lisa::before, #Mona::before, #Ningguang::before, #Noelle::before, #Qiqi::before, #Razor::before, #Sucrose::before, #Tartaglia::before, #Traveler::before, #Venti::before, #Xiangling::before, #Xingqiu::before
+                {
+                    content: "";
+                    display: block;
+                    height: 180px;
+                    margin: -180px 0 0;
+                }
+                /*CSS responsível para diferentes tamanhos de tela*/
+                /*Aparece para adicionar um vazio embaixo da foto*/
+                @media screen and (max-width: 1196px) 
+                {
+                    .DivArrumadora
+                    {
+                        display: inline;
+                    }
+                }
+                /*Some pois a foto ocupa esse vazio*/
+                @media screen and (min-width: 1197px) 
+                {
+                    .DivArrumadora
+                    {
+                        display: none;
+                    }
+                }
+        </style>
+	</head>
+	<body>
+		<header style="position:sticky; top:0; z-index:1">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li><a href="backpack.html">Backpack</a></li>
+              <li class="active"><a href="chars.html">Characters</a></li>
+              <!--<li><a href="weapons.html">Weapons</a></li>-->
+              <li><a href="farm.html">Complete Farm Sheet</a></li>
+              <li><a href="index.html">About</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a>Please help us maintain this site</a></li>
+              <li><a href="https://streamlabs.com/mrbadgerbr/tip" style="padding:0px"><img src="Image/PayPal.png" style="height:50px" alt="PayPal"></a></li>
+              <li><a><br></a></li>
+              <li><a href="https://pag.ae/7WB124EQp" style="padding:0px"><img src="Image/PagSeguro.png" style="height:50px" alt="PagSeguro"></a></li>
+              <li><a><br></a></li>
+              <li id="LoginOption"><a onclick=AbreLogin()><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              <li id="LoginUser" style="display: none;"> <form id="FormLogin" method="POST" action="PHP/register.php"><input type="text" placeholder="Enter Email" name="email" id="LoginEmail" > <br> <input type="password" placeholder="Enter Password" name="password" id="LoginPassword" ></form></li>
+              <li id="LoginButton" style="display: none;"><button onclick=FazLogin() style="width:70px"> Log in </button><br><input type="submit" value="Register" form="FormLogin" style="width:70px"></li>
+              <li id="ForgetPasswordButton" style="display: none;"><span style="width: 3px;height: 21px; display: inline-block;"></span> <input type="checkbox" id="RememberMe" onclick=LembrarLogin()> <b style="color: white;">Remember me</b> <br><button onclick='location.href="PHP/resetpassword.php"'> Reset Password </button></li>
+              <li id="RegisterUser" style="display: none;"></li>
+              <li id="LogoutButton" style="display: none;"><a style="color: black;"><button onclick=DesfazLogin() style="width:70px"> Log out </button></a></li>
+            </ul>
+          </div>
+        </div>
+        <div style="background-color:#080808;color:#fff"> 
+          <div class="container text-center">
+            <h1>Characters - Fischl</h1>      
+          </div>
+        </div>
+          <!-- Navegador para os chars-->
+          <nav>
+            <ul class=" navbar-nav" style="list-style-type:none;">
+                <li><a href="Albedo.html"><img src="Image/Albedo.png" style="width:50px" alt="Albedo"></a></li>
+                <li><a href="Amber.html"><img src="Image/Amber.png" style="width:50px" alt="Amber"></a></li>
+                <li><a href="Barbara.html"><img src="Image/Barbara.png" style="width:50px" alt="Barbara"></a></li>
+                <li><a href="Beidou.html"><img src="Image/Beidou.png" style="width:50px" alt="Beidou"></a></li>
+                <li><a href="Bennett.html"><img src="Image/Bennett.png" style="width:50px" alt="Bennett"></a></li>
+                <li><a href="Chongyun.html"><img src="Image/Chongyun.png" style="width:50px" alt="Chongyun"></a></li>
+                <li><a href="Diluc.html"><img src="Image/Diluc.png" style="width:50px" alt="Diluc"></a></li>
+                <li><a href="Diona.html"><img src="Image/Diona.png" style="width:50px" alt="Diona"></a></li>
+                <li><a href="Fischl.html"><img src="Image/Fischl.png" style="width:50px" alt="Fischl"></a></li>
+                <li><a href="Ganyu.html"><img src="Image/Ganyu.png" style="width:50px" alt="Ganyu"></a></li>
+                <li><a href="Jean.html"><img src="Image/Jean.png" style="width:50px" alt="Jean"></a></li>
+                <li><a href="Kaeya.html"><img src="Image/Kaeya.png" style="width:50px" alt="Kaeya"></a></li>
+                <li><a href="Keqing.html"><img src="Image/Keqing.png" style="width:50px" alt="Keqing"></a></li>
+                <li><a href="Klee.html"><img src="Image/Klee.png" style="width:50px" alt="Klee"></a></li>
+                <li><a href="Lisa.html"><img src="Image/Lisa.png" style="width:50px" alt="Lisa"></a></li>
+                <li><a href="Mona.html"><img src="Image/Mona.png" style="width:50px" alt="Mona"></a></li>
+                <li><a href="Ningguang.html"><img src="Image/Ningguang.png" style="width:50px" alt="Ningguang"></a></li>
+                <li><a href="Noelle.html"><img src="Image/Noelle.png" style="width:50px" alt="Noelle"></a></li>
+                <li><a href="Qiqi.html"><img src="Image/Qiqi.png" style="width:50px" alt="Qiqi"></a></li>
+                <li><a href="Razor.html"><img src="Image/Razor.png" style="width:50px" alt="Razor"></a></li>
+                <li><a href="Sucrose.html"><img src="Image/Sucrose.png" style="width:50px" alt="Sucrose"></a></li>
+                <li><a href="Tartaglia.html"><img src="Image/Tartaglia.png" style="width:50px" alt="Tartaglia"></a></li>
+                <li><a href="Traveler.html"><img src="Image/Traveler(Anemo).png" style="width:50px" alt="Traveler"></a></li>
+                <li><a href="Venti.html"><img src="Image/Venti.png" style="width:50px" alt="Venti"></a></li>
+                <li><a href="Xiangling.html"><img src="Image/Xiangling.png" style="width:50px" alt="Xiangling"></a></li>
+                <li><a href="Xingqiu.html"><img src="Image/Xingqiu.png" style="width:50px" alt="Xingqiu"></a></li>
+                <li><a href="Xinyan.html"><img src="Image/Xinyan.png" style="width:50px" alt="Xinyan"></a></li>
+                <li><a href="Zhongli.html"><img src="Image/Zhongli.png" style="width:50px" alt="Zhongli"></a></li>
+            </ul>
+          </nav>
+      </nav>
+    </header>    
+		<br>
+		<section >
+      <form id="chars"> 
+        <!-- Criado o formulario-->
+      </form>
+
+      <div class="container-fluid bg-3 text-center">    
+        <div class="row" id="Fischl">
+            <div class="col-sm-3" >
+                <img src="Image/Fischl_Card.jpg" class="img-responsive img-thumbnail mx-auto" style="max-height: 800px;" alt="Fischl">
+            </div>
+            <div class="col-sm-9" >
+
+                <div class="row" >
+                    <div class="col-sm-2" >
+                        <input type="checkbox" id="FischlOwn" name="Fischl_Own" value=True form="chars" onchange="Confirma_Personagem('Fischl')">
+                        <label for="FischlOwn">I have this char</label>
+                    </div>
+                    <div class="col-sm-3" >
+                        <b>Ascension Level</b><br>
+                        <input type="radio" form="chars" id="FischlAscension0" name="FischlAscension" value=0 onchange="Atualiza_char_Ascension_Level('Fischl',0)">
+                        <label for="FischlAscension0">0 </label>
+                        <input type="radio" form="chars" id="FischlAscension1" name="FischlAscension" value=1 onchange="Atualiza_char_Ascension_Level('Fischl',1)">
+                        <label for="FischlAscension1">1 </label>
+                        <input type="radio" form="chars" id="FischlAscension2" name="FischlAscension" value=2 onchange="Atualiza_char_Ascension_Level('Fischl',2)">
+                        <label for="FischlAscension2">2 </label>
+                        <input type="radio" form="chars" id="FischlAscension3" name="FischlAscension" value=3 onchange="Atualiza_char_Ascension_Level('Fischl',3)">
+                        <label for="FischlAscension3">3 </label>
+                        <input type="radio" form="chars" id="FischlAscension4" name="FischlAscension" value=4 onchange="Atualiza_char_Ascension_Level('Fischl',4)">
+                        <label for="FischlAscension4">4 </label>
+                        <input type="radio" form="chars" id="FischlAscension5" name="FischlAscension" value=5 onchange="Atualiza_char_Ascension_Level('Fischl',5)">
+                        <label for="FischlAscension5">5 </label>
+                        <input type="radio" form="chars" id="FischlAscension6" name="FischlAscension" value=6 onchange="Atualiza_char_Ascension_Level('Fischl',6)">
+                        <label for="FischlAscension6">6 </label>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Attack</b><br>
+                        <select id="FischlTalentAtk" form="chars" name="Fischl_TalentAtk" onchange="Atualiza_talento('Fischl','Atk')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Elemental Skill</b><br>
+                        <select id="FischlTalentElementalSkill" form="chars" name="Fischl_TalentElementalSkill" onchange="Atualiza_talento('Fischl','ElementalSkill')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" >
+                        <b>Talent Lv - Elemental Burst</b><br>
+                        <select id="FischlTalentElementalBurst" form="chars" name="Fischl_ElementalBurst" onchange="Atualiza_talento('Fischl','ElementalBurst')">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row" >
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Electro2.png" style="width:35px" alt="Electro2"> <span id="FischlElement2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Electro3.png" style="width:35px" alt="Electro3"> <span id="FischlElement3"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Electro4.png" style="width:35px" alt="Electro4"> <span id="FischlElement4"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/Electro5.png" style="width:35px" alt="Electro5"> <span id="FischlElement5"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/BossElectro.png" style="width:35px" alt="BossElectro"> <span id="FischlBoss"></span><br>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2" >
+                            <b>Own/Need</b>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <img src="Image/SmallLampGrass.png" style="width:35px" alt="Small Lamp Grass"> <span id="FischlLocal_Specialty"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/HilichurlArrowheads1.png" style="width:35px" alt="HilichurlArrowheads1"> <span id="FischlComum_Item1"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/HilichurlArrowheads2.png" style="width:35px" alt="HilichurlArrowheads2"> <span id="FischlComum_Item2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/HilichurlArrowheads3.png" style="width:35px" alt="HilichurlArrowheads3"> <span id="FischlComum_Item3"></span><br>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Ballad2.png" style="width:35px" alt="Ballad2"> <span id="FischlTalent2"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Ballad3.png" style="width:35px" alt="Ballad3"> <span id="FischlTalent3"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/Ballad4.png" style="width:35px" alt="Ballad4"> <span id="FischlTalent4"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/SpiritLocketofBoreas.png" style="width:35px" alt="Spirit Locket of Boreas"> <span id="FischlBossTalent"></span><br>
+                        </div>
+                        <div class="col-sm-2 text-left" >
+                            <img src="Image/CrownofInsight.png" style="width:35px" alt="Crown of Insight"> <span id="FischlCrownofInsight"></span>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row" >
+                    <div class="col-sm-2" id="FischlAscension1Div">
+                        <b>Ascension 1</b><br>
+                        <img src="Image/Electro2.png" style="width:50px" alt="Electro2"> x01<br>
+                        <img src="Image/SmallLampGrass.png" style="width:50px" alt="Small Lamp Grass"> x03 <br>
+                        <img src="Image/HilichurlArrowheads1.png" style="width:50px" alt="HilichurlArrowheads1"> x03
+                    </div>
+                    <div class="col-sm-2" id="FischlAscension2Div">
+                        <b>Ascension 2</b><br>
+                        <img src="Image/Electro3.png" style="width:50px" alt="Electro3"> x03<br>
+                        <img src="Image/BossElectro.png" style="width:50px" alt="BossElectro"> x02<br>
+                        <img src="Image/SmallLampGrass.png" style="width:50px" alt="Small Lamp Grass"> x10 <br>
+                        <img src="Image/HilichurlArrowheads1.png" style="width:50px" alt="HilichurlArrowheads1"> x15
+                    </div>
+                    <div class="col-sm-2" id="FischlAscension3Div">
+                        <b>Ascension 3</b><br>
+                        <img src="Image/Electro3.png" style="width:50px" alt="Electro3"> x06<br>
+                        <img src="Image/BossElectro.png" style="width:50px" alt="BossElectro"> x04<br>
+                        <img src="Image/SmallLampGrass.png" style="width:50px" alt="Small Lamp Grass"> x20 <br>
+                        <img src="Image/HilichurlArrowheads2.png" style="width:50px" alt="HilichurlArrowheads2"> x12
+                    </div>
+                    <div class="col-sm-2" id="FischlAscension4Div">
+                        <b>Ascension 4</b><br>
+                        <img src="Image/Electro4.png" style="width:50px" alt="Electro4"> x03<br>
+                        <img src="Image/BossElectro.png" style="width:50px" alt="BossElectro"> x08<br>
+                        <img src="Image/SmallLampGrass.png" style="width:50px" alt="Small Lamp Grass"> x30 <br>
+                        <img src="Image/HilichurlArrowheads2.png" style="width:50px" alt="HilichurlArrowheads2"> x18
+                    </div>
+                    <div class="col-sm-2" id="FischlAscension5Div">
+                        <b>Ascension 5</b><br>
+                        <img src="Image/Electro4.png" style="width:50px" alt="Electro4"> x06<br>
+                        <img src="Image/BossElectro.png" style="width:50px" alt="BossElectro"> x12<br>
+                        <img src="Image/SmallLampGrass.png" style="width:50px" alt="Small Lamp Grass"> x45 <br>
+                        <img src="Image/HilichurlArrowheads3.png" style="width:50px" alt="HilichurlArrowheads3"> x12
+                    </div>
+                    <div class="col-sm-2" id="FischlAscension6Div">
+                        <b>Ascension 6</b><br>
+                        <img src="Image/Electro5.png" style="width:50px" alt="Electro5"> x06<br>
+                        <img src="Image/BossElectro.png" style="width:50px" alt="BossElectro"> x20<br>
+                        <img src="Image/SmallLampGrass.png" style="width:50px" alt="Small Lamp Grass"> x60 <br>
+                        <img src="Image/HilichurlArrowheads3.png" style="width:50px" alt="HilichurlArrowheads3"> x24
+                    </div>
+                </div>
+                <br>
+                <div class="row" ><br></div>
+            </div>
+            <div class="col-sm-3 DivArrumadora" >
+                <!--Div Arrumadora de padrão-->
+            </div>
+            <div class="col-sm-1" id="FischlTalent2Div">
+                <b>Talent Lv 2</b><br>
+                <img src="Image/Ballad2.png" style="width:50px" alt="Ballad2"> x3 / Talent <br>
+                <img src="Image/HilichurlArrowheads1.png" style="width:50px" alt="HilichurlArrowheads1"> x6 / Talent
+            </div>
+            <div class="col-sm-1" id="FischlTalent3Div">
+                <b>Talent Lv 3</b><br>
+                <img src="Image/Ballad3.png" style="width:50px" alt="Ballad3"> x2 / Talent <br>
+                <img src="Image/HilichurlArrowheads2.png" style="width:50px" alt="HilichurlArrowheads2"> x3 / Talent
+            </div>
+            <div class="col-sm-1" id="FischlTalent4Div">
+                <b>Talent Lv 4</b><br>
+                <img src="Image/Ballad3.png" style="width:50px" alt="Ballad3"> x4 / Talent <br>
+                <img src="Image/HilichurlArrowheads2.png" style="width:50px" alt="HilichurlArrowheads2"> x4 / Talent
+            </div>
+            <div class="col-sm-1" id="FischlTalent5Div">
+                <b>Talent Lv 5</b><br>
+                <img src="Image/Ballad3.png" style="width:50px" alt="Ballad3"> x6 / Talent <br>
+                <img src="Image/HilichurlArrowheads2.png" style="width:50px" alt="HilichurlArrowheads2"> x6 / Talent
+            </div>
+            <div class="col-sm-1" id="FischlTalent6Div">
+                <b>Talent Lv 6</b><br>
+                <img src="Image/Ballad3.png" style="width:50px" alt="Ballad3"> x9 / Talent <br>
+                <img src="Image/HilichurlArrowheads2.png" style="width:50px" alt="HilichurlArrowheads2"> x9 / Talent
+            </div>
+            <div class="col-sm-1" id="FischlTalent7Div">
+                <b>Talent Lv 7</b><br>
+                <img src="Image/Ballad4.png" style="width:50px" alt="Ballad4"> x4 / Talent <br>
+                <img src="Image/HilichurlArrowheads3.png" style="width:50px" alt="HilichurlArrowheads3"> x4 / Talent<br>
+                <img src="Image/SpiritLocketofBoreas.png" style="width:50px" alt="SpiritLocketofBoreas"> x1 / Talent
+            </div>
+            <div class="col-sm-1" id="FischlTalent8Div">
+                <b>Talent Lv 8</b><br>
+                <img src="Image/Ballad4.png" style="width:50px" alt="Ballad4"> x6 / Talent <br>
+                <img src="Image/HilichurlArrowheads3.png" style="width:50px" alt="HilichurlArrowheads3"> x6 / Talent <br>
+                <img src="Image/SpiritLocketofBoreas.png" style="width:50px" alt="SpiritLocketofBoreas"> x1 / Talent
+            </div>
+            <div class="col-sm-1" id="FischlTalent9Div">
+                <b>Talent Lv 9</b><br>
+                <img src="Image/Ballad4.png" style="width:50px" alt="Ballad4"> x12 / Talent <br>
+                <img src="Image/HilichurlArrowheads3.png" style="width:50px" alt="HilichurlArrowheads3"> x09 / Talent <br>
+                <img src="Image/SpiritLocketofBoreas.png" style="width:50px" alt="SpiritLocketofBoreas"> x02 / Talent
+            </div>
+            <div class="col-sm-1" id="FischlTalent10Div">
+                <b>Talent Lv 10</b><br>
+                <img src="Image/Ballad4.png" style="width:50px" alt="Ballad4"> x16 / Talent <br>
+                <img src="Image/HilichurlArrowheads3.png" style="width:50px" alt="HilichurlArrowheads3"> x12 / Talent <br>
+                <img src="Image/SpiritLocketofBoreas.png" style="width:50px" alt="SpiritLocketofBoreas"> x02 / Talent<br>
+                <img src="Image/CrownofInsight.png" style="width:50px" alt="Crown of Insight"> x01 / Talent<br>
+            </div>
+
+            <div class="col-sm-3" >
+                <!--Div Arrumadora de padrão-->
+            </div>
+            <div class="col-sm-9" >
+                <div class="col-sm-2" >
+                    <label for="FischlWeapon">Choose a weapon (Bows):</label>
+                    <select id="FischlWeapon" form="chars" name="Fischl_Weapon" onchange="Atualiza_weapon('Fischl')">
+                        <option value="NoneBow">None</option>
+                        <!--<option value="AlleyHunter">Alley Hunter</option>-->
+                        <option value="AmosBow">Amos' Bow</option>
+                        <option value="BlackcliffWarbow">Blackcliff Warbow</option>
+                        <option value="CompoundBow">Compound Bow</option>
+                        <!--<option value="EbonyBow">Ebony Bow</option>-->
+                        <option value="FavoniusWarbow">Favonius Warbow</option>
+                        <option value="Messenger">Messenger</option>
+                        <option value="PrototypeCrescent">Prototype Crescent</option>
+                        <option value="RavenBow">Raven Bow</option>
+                        <option value="RecurveBow">Recurve Bow</option>
+                        <option value="RoyalBow">Royal Bow</option>
+                        <option value="Rust">Rust</option>
+                        <option value="SacrificialBow">Sacrificial Bow</option>
+                        <option value="SharpshootersOath">Sharpshooter's Oath</option>
+                        <option value="SkywardHarp">Skyward Harp</option>
+                        <option value="Slingshot">Slingshot</option>
+                        <option value="TheStringless">The Stringless</option>
+                        <option value="TheViridescentHunt">The Viridescent Hunt</option>
+                    </select>
+                    <br>
+                    <b>Weapon Ascension Level</b><br>
+                    <input type="radio" form="chars" id="FischlWeaponAscension0" name="FischlWeaponAscension" value=0 onchange="Atualiza_weapon_Ascension_Level('Fischl',0)">
+                    <label for="FischlWeaponAscension0">0 </label>
+                    <input type="radio" form="chars" id="FischlWeaponAscension1" name="FischlWeaponAscension" value=1 onchange="Atualiza_weapon_Ascension_Level('Fischl',1)">
+                    <label for="FischlWeaponAscension1">1 </label>
+                    <input type="radio" form="chars" id="FischlWeaponAscension2" name="FischlWeaponAscension" value=2 onchange="Atualiza_weapon_Ascension_Level('Fischl',2)">
+                    <label for="FischlWeaponAscension2">2 </label>
+                    <input type="radio" form="chars" id="FischlWeaponAscension3" name="FischlWeaponAscension" value=3 onchange="Atualiza_weapon_Ascension_Level('Fischl',3)">
+                    <label for="FischlWeaponAscension3">3 </label>
+                    <input type="radio" form="chars" id="FischlWeaponAscension4" name="FischlWeaponAscension" value=4 onchange="Atualiza_weapon_Ascension_Level('Fischl',4)">
+                    <label for="FischlWeaponAscension4">4 </label>
+                    <input type="radio" form="chars" id="FischlWeaponAscension5" name="FischlWeaponAscension" value=5 onchange="Atualiza_weapon_Ascension_Level('Fischl',5)">
+                    <label for="FischlWeaponAscension5">5 </label>
+                    <input type="radio" form="chars" id="FischlWeaponAscension6" name="FischlWeaponAscension" value=6 onchange="Atualiza_weapon_Ascension_Level('Fischl',6)">
+                    <label for="FischlWeaponAscension6">6 </label>
+                    <br>
+                    <img src="Image/NoneBow.png" class="img-responsive img-thumbnail mx-auto" style="width:130px" alt="NoneBow" id="FischlWeaponImage">
+                    <br>
+                </div>
+                <div class="col-sm-10" >
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" ><!--Div Vazia--><br></div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Dominio_2" id="FischlWeaponDominio_2"> <span id="FischlWeaponDominio_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Dominio_3" id="FischlWeaponDominio_3"> <span id="FischlWeaponDominio_3_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Dominio_4" id="FischlWeaponDominio_4"> <span id="FischlWeaponDominio_4_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Dominio_5" id="FischlWeaponDominio_5"> <span id="FischlWeaponDominio_5_Quant"></span><br></div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <!--Div Vazia-->
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Comum_Item_2a4_2" id="FischlWeaponComum_Item_2a4_2"> <span id="FischlWeaponComum_Item_2a4_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Comum_Item_2a4_3" id="FischlWeaponComum_Item_2a4_3"> <span id="FischlWeaponComum_Item_2a4_3_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Comum_Item_2a4_4" id="FischlWeaponComum_Item_2a4_4"> <span id="FischlWeaponComum_Item_2a4_4_Quant"></span></div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm-2 text-left">
+                            <b>Own/Need</b><br>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Comum_Item_1a3_1" id="FischlWeaponComum_Item_1a3_1"> <span id="FischlWeaponComum_Item_1a3_1_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Comum_Item_1a3_2" id="FischlWeaponComum_Item_1a3_2"> <span id="FischlWeaponComum_Item_1a3_2_Quant"></span><br></div>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <div><img src="Image/NoneBow.png" style="width:35px" alt="Comum_Item_1a3_3" id="FischlWeaponComum_Item_1a3_3"> <span id="FischlWeaponComum_Item_1a3_3_Quant"></span><br></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <div class="row" >
+            <hr>
+            <h1>Builds</h1>
+            <hr>
+            <h4>This is Fischl Base Stats</h4>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr repeat(8, 2fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Ascension</div>
+                <div style="border: solid black 1px;">0</div>
+                <div style="border: solid black 1px;">1</div>
+                <div style="border: solid black 1px;">2</div>
+                <div style="border: solid black 1px;">3</div>
+                <div style="border: solid black 1px;">4</div>
+                <div style="border: solid black 1px;">5</div>
+                <div style="border: solid black 1px;">6</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">Level</div>
+                <div style="border: solid black 1px;">1</div>
+                <div style="border: solid black 1px;">20</div>
+                <div style="border: solid black 1px;">20</div>
+                <div style="border: solid black 1px;">40</div>
+                <div style="border: solid black 1px;">40</div>
+                <div style="border: solid black 1px;">50</div>
+                <div style="border: solid black 1px;">50</div>
+                <div style="border: solid black 1px;">60</div>
+                <div style="border: solid black 1px;">60</div>
+                <div style="border: solid black 1px;">70</div>
+                <div style="border: solid black 1px;">70</div>
+                <div style="border: solid black 1px;">80</div>
+                <div style="border: solid black 1px;">80</div>
+                <div style="border: solid black 1px;">90</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">HP</div>
+                <div style="border: solid black 1px;">770</div>
+                <div style="border: solid black 1px;">1979</div>
+                <div style="border: solid black 1px;">2555</div>
+                <div style="border: solid black 1px;">3827</div>
+                <div style="border: solid black 1px;">4236</div>
+                <div style="border: solid black 1px;">4872</div>
+                <div style="border: solid black 1px;">5418</div>
+                <div style="border: solid black 1px;">6054</div>
+                <div style="border: solid black 1px;">6463</div>
+                <div style="border: solid black 1px;">7099</div>
+                <div style="border: solid black 1px;">7508</div>
+                <div style="border: solid black 1px;">8144</div>
+                <div style="border: solid black 1px;">8553</div>
+                <div style="border: solid black 1px;">?</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">ATK</div>
+                <div style="border: solid black 1px;">21</div>
+                <div style="border: solid black 1px;">53</div>
+                <div style="border: solid black 1px;">68</div>
+                <div style="border: solid black 1px;">102</div>
+                <div style="border: solid black 1px;">113</div>
+                <div style="border: solid black 1px;">130</div>
+                <div style="border: solid black 1px;">144</div>
+                <div style="border: solid black 1px;">161</div>
+                <div style="border: solid black 1px;">172</div>
+                <div style="border: solid black 1px;">189</div>
+                <div style="border: solid black 1px;">200</div>
+                <div style="border: solid black 1px;">216</div>
+                <div style="border: solid black 1px;">227</div>
+                <div style="border: solid black 1px;">?</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">DEF</div>
+                <div style="border: solid black 1px;">50</div>
+                <div style="border: solid black 1px;">128</div>
+                <div style="border: solid black 1px;">165</div>
+                <div style="border: solid black 1px;">247</div>
+                <div style="border: solid black 1px;">274</div>
+                <div style="border: solid black 1px;">315</div>
+                <div style="border: solid black 1px;">350</div>
+                <div style="border: solid black 1px;">391</div>
+                <div style="border: solid black 1px;">418</div>
+                <div style="border: solid black 1px;">459</div>
+                <div style="border: solid black 1px;">485</div>
+                <div style="border: solid black 1px;">526</div>
+                <div style="border: solid black 1px;">553</div>
+                <div style="border: solid black 1px;">?</div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 2fr repeat(14, 1fr) 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div style="border: solid black 1px;">ATK%</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">-</div>
+                <div style="border: solid black 1px;">6%</div>
+                <div style="border: solid black 1px;">6%</div>
+                <div style="border: solid black 1px;">12%</div>
+                <div style="border: solid black 1px;">12%</div>
+                <div style="border: solid black 1px;">12%</div>
+                <div style="border: solid black 1px;">12%</div>
+                <div style="border: solid black 1px;">18%</div>
+                <div style="border: solid black 1px;">18%</div>
+                <div style="border: solid black 1px;">24%</div>
+                <div style="border: solid black 1px;">24%</div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div style="grid-template-columns: 1fr 6fr 8fr 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div >
+                    <h4>Elemental Skill</h4>
+                    <div style="grid-template-columns: repeat(2, 3fr); display: grid;">
+                        <div>
+                            Cooldown:<br>
+                            Duration:<br>
+                            Particles:<br>
+                            Energy Recharge:
+                        </div>
+                        <div>
+                            25s (Press)<br>
+                            10s <br>
+                            1 Electro Particle per Oz hit (1 Hit/second) (Press to put Oz)<br>
+                            3 (on field) 1.8 (out field)
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4>Elemental Burst</h4>
+                    <div style="grid-template-columns: 1fr 1fr; display: grid;">
+                        <div>
+                            Cooldown: 15s<br>
+                            Energy Cost: 60 <br>
+                            Duration: Instantaneous and reset Elemental Skill duration. <br><br>
+                        </div>
+                        <div class="text-left">
+                            Modifiers to get Energy<br>
+                            Constellation 6: Extends the duration of Oz's presence on the field by 2s.<br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <h4><b> Role</b></h4>
+            <div style="grid-template-columns: 1fr 10fr 1fr 10fr 1fr 10fr 1fr 10fr 1fr; display: grid;">
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Description:</b><br>
+                    
+                    
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>This build has 3 variations:</b><br>
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                    <br>
+                    <b> <br> Set: 4x </b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Flower:</b><br>
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <img src="Image/Set_Flower_.png" style="width:50px"> 
+                    <br>
+                    1) HP (always)<br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Feather:</b><br>
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <img src="Image/Set_Feather_.png" style="width:50px"> 
+                    <br>
+                    1) ATK (always)<br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Hourglass:</b><br>
+                    <img src="Image/Set_Hourglass_.png" style="width:50px">
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <img src="Image/Set_Hourglass_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Goblet:</b><br>
+                    <img src="Image/Set_Goblet_.png" style="width:50px">
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <img src="Image/Set_Goblet_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) <br>
+                    <b>Crown:</b><br>
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <img src="Image/Set_Crown_.png" style="width:50px"> 
+                    <br>
+                    1) <br>
+                    2) <br>
+                    3) <br>
+                    4) 
+                </div>
+                <div><!-- Div Vazia --></div>
+                <div class="text-left">
+                    <b>Weapons:</b><br>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <h4><b>Other builds, videos or links below</b></h4>
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/j7pr1c/quick_tldr_enabler_guidebuild_for_fischl/">Fischl Guide by 2Board_ from Reddit <br>Version 1.0<br><img src="Image/Fischl.png" style="width:100px"></a>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/jkn1ec/quick_tldr_team_comp_guide_for_fishcl/">Fischl Team Guide by 2Board_ from Reddit <br>Version 1.0<br><img src="Image/Fischl.png" style="width:100px"></a>
+        </div>
+            
+        <br>
+        <br>
+
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/jnt5up/make_oz_carry_your_team_with_this_fischl_dps/">Fischl DPS Support Guide by Not-Casuals from Reddit <br>Version 1.0<br><img src="Image/Fischl.png" style="width:100px"></a>
+            <a href="https://youtu.be/t_Bo8Qgi3CI?list=PL2zJhEtG0TYyR_3AUjBvEZKgYrPrOF2C0">Fischl Character Guide by Not-Casuals from You Tube <br>Version 1.0<br><img src="https://i.ytimg.com/vi/t_Bo8Qgi3CI/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLAHnLNXNVeBSjsR3M_nvFMoZWI4pw"></a>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://youtu.be/y9NHP1bxEo8?t=1156">COMPLETE SUPPORT GUIDE FOR EVERY CHARACTER by Zy0x from Youtube <br>Version 1.2<br><img src="https://i.ytimg.com/vi/y9NHP1bxEo8/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDsZZekgCZllXSBK7JTd0n_a-1NCA"></a>
+            <a href="https://www.youtube.com/watch?v=BIiVBcDugA8">WHY FISCHL IS THE MOST OVERPOWERED SUPPORT by Not-Casuals from You Tube <br>Version 1.1<br><img src="https://i.ytimg.com/vi/BIiVBcDugA8/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDaY4-3MSGpa7W9ZJcCch5EUY3yNg"></a>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/jpsv98/phys_dps_fischl_build/">Fischl Physical DPS by WeeduTiin from Reddit <br>Version 1.0<br><img src="https://preview.redd.it/zkfigmcb8ux51.png?width=960&crop=smart&auto=webp&s=c80d0ac019b0cb83eeb883503da33aea87665c03" width="100%"></a>
+        
+        </div>
+            
+        <br>
+        <br>
+
+        <div class="text-center" style='grid-template-columns: 1fr 5fr 5fr 1fr; display: grid'>
+            <div><!-- Div Vazia --></div>
+            <a href="https://www.reddit.com/r/Genshin_Impact/comments/k9erp2/fischl_build_ar45/"> Fischl Build AR45+ by Gobelyn from Reddit <br>Version 1.1<br><img src="https://preview.redd.it/pxtdfwnzh1461.png?width=960&crop=smart&auto=webp&s=fa52305744a661022bc2a49a9813e18afada362c" width="100%"></a>
+            <a href="https://docs.google.com/document/d/1trRf3ttEbz8yHz6XgrDjDTAynCqt1B-6AMcMIzmpIRM/edit#">Fischl Build AR45+ by Gobelyn from Google Docs <br>Version 1.2<br><img src="https://i.imgur.com/nCBcpnc.png" width="100%"></a>
+        </div>
+
+        <br>
+        <br>
+              
+		</section>
+		<footer class="container-fluid text-center" style="background-color:#333;color:#fff">
+			<b>Made by Fabiano Médice<br>2020</b>
+    </footer>
+
+    <script>
+      ConfereUsuario()
+      Ler_BancoDeDadosQuantidades()
+      Ler_BancoDeDadosChar()
+      Atualiza_Valores_Char("Fischl",1);
+    </script>
+
+	</body>
+</html>
